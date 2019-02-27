@@ -1,5 +1,5 @@
-- Giwoo G Lee
-Dev Ops Engineer
+- Giwoo G Lee (@gglee89)
+    - Dev Ops Engineer
 
-- Jake Hazelton
-Full Stack Engineer
+- Jake Hazelton (@jhazelton1)
+    - Full Stack Engineer
