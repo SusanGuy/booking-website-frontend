@@ -1,4 +1,4 @@
-# Booking Website: Frontend
+# Booking Website: BackEnd
 
 Front End portion of the booking website. This is an attempt to develop a MVP (Minimum viable product) prototype for the Business School pitch event on May 2019 at the University of Mississippi.
 
@@ -15,6 +15,10 @@ Front End portion of the booking website. This is an attempt to develop a MVP (M
 store.js // Redux Thunk (with Args)
 index.js
 ```
+
+# Project Architecture
+
+![booking app-architecture](https://user-images.githubusercontent.com/16644017/53531619-42778280-3ab9-11e9-88b9-b50b4b151840.jpg)
 
 # Technology Stack
 

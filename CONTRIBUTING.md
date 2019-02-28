@@ -1,6 +1,7 @@
 ## Contributing
 
-- **Giwoo G Lee (@gglee89)** - **Role:** Dev Ops Engineer
-  <br>
-- **Jake Hazelton (@jhazelton1)**
-  - **Role:** Full Stack Engineer
+- **Giwoo G Lee (@gglee89)**
+  - **Role:** Dev Ops Engineer
+    <br>
+- **Susan Subedi (@ssubedi1)**
+  - **Role:** Back End Engineer
