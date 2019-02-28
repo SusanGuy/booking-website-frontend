@@ -1,5 +1,6 @@
 variables:
-  S3_BUCKET_PRODUCTION: "giwoolee"
+  S3_BUCKET_PRODUCTION: "BookingApp"
+  S3_KEY_PRODUCTION: "frontend"
 
 deploy production:
   stage: build
@@ -9,7 +10,7 @@ deploy production:
   - yarn test
   - yarn build
   - pip install awscli
-  - aws s3 cp ./build/ s3://$S3_BUCKET_PRODUCTION/ --recursive --include "*"
+  - aws s3 cp ./build/ s3://$S3_BUCKET_PRODUCTION/$S3_KEY_PRODUCTION --recursive --include "*"
   - echo "Deploying"
   artifacts:
       paths:
