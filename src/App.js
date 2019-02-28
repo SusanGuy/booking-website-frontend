@@ -8,9 +8,12 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch('http://130.74.166.217:5000/user', {
-      method: 'GET',
-    })
+    fetch(
+      'http://bookingapp-dev.ptewmmpyuh.ca-central-1.elasticbeanstalk.com/user',
+      {
+        method: 'GET',
+      }
+    )
       .then(res => {
         return res.json();
       })
