@@ -15,7 +15,7 @@ class App extends PureComponent {
       this.setState({
         isFullyLoaded: true,
       });
-    }, 3000);
+    }, 1000);
   }
 
   render() {

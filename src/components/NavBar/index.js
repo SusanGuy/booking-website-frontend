@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// Styles
+import './navbar.css';
+
 const NavBar = () => {
   return (
-    <nav>
+    <nav className="NavBar">
       <div className="nav-wrapper">
-        <Link to="/" className="brand-logo">
-          Logo
+        <Link to="/" className="NavBar--logo">
+          <span>Heritage</span>
+          <span>Hunting</span>
         </Link>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li>
