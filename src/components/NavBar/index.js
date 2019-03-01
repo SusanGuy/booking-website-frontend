@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import classnames from 'classnames';
 
 // Styles
 import './navbar.css';
@@ -11,44 +12,47 @@ import icons from '../../shared/icons';
 import Consumer from '../../context/ConfigProvider';
 
 const NavBar = () => {
+  const navBarMenuClasses = classnames({
+    'NavBar--menu': true,
+  });
+
   return (
     <nav className="NavBar">
       <div className="NavBar-wrapper">
         <Consumer>
           {({ mobileMenuExpanded, setMobileMenuExpanded }) => (
-            <div
-              onClick={() => setMobileMenuExpanded(!mobileMenuExpanded)}
-              className="NavBar--logo"
-            >
-              <img src={icons.ecoHome} alt="logo-eco" />
-              <i className="material-icons">
-                {mobileMenuExpanded ? 'expand_less' : 'expand_more'}
-              </i>
-            </div>
+            <React.Fragment>
+              <div
+                onClick={() => setMobileMenuExpanded(!mobileMenuExpanded)}
+                className="NavBar--logo"
+              >
+                <img src={icons.ecoHome} alt="logo-eco" />
+                <i
+                  className={['material-icons']
+                    .concat(mobileMenuExpanded ? 'expanded' : '')
+                    .join(' ')}
+                >
+                  expand_more
+                </i>
+              </div>
+              <ul
+                className={navBarMenuClasses.concat(
+                  mobileMenuExpanded ? ' expanded' : ' hide-on-med-and-down'
+                )}
+              >
+                <li>
+                  <Link to="/property">Property</Link>
+                </li>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link to="/about">About Us</Link>
+                </li>
+              </ul>
+            </React.Fragment>
           )}
         </Consumer>
-        <ul id="nav-mobile" className="NavBar--menu hide-on-med-and-down">
-          <li>
-            <Link to="/property">Property</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/about">About Us</Link>
-          </li>
-        </ul>
-        {/* <ul id="nav-mobile" className="NavBar--menu hide-on-med-and-up">
-          <li>
-            <Link to="/property">Property</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/about">About Us</Link>
-          </li>
-        </ul> */}
       </div>
     </nav>
   );

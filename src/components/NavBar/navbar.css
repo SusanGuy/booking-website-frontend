@@ -23,6 +23,7 @@
     font-weight: bold;
     height: 64px;
     justify-content: center;
+    z-index: 10;
 }
 
 .NavBar--logo span {
@@ -34,6 +35,23 @@
     height: 70%;
 }
 
+.NavBar--logo:hover {
+    cursor: pointer;
+}
+
+.NavBar--logo i {
+    transition: all 500ms ease-in-out;
+}
+
+.NavBar--logo i.expanded {
+    transform: rotate(180deg);
+}
+
+.NavBar--menu {
+    display: flex;
+    transition: all 2ms ease-in-out;
+}
+
 .NavBar--menu li {
     padding: 0 10px;
 }
@@ -41,6 +59,24 @@
 .NavBar--menu a:hover {
     background: rgba(0, 0, 0, 0);
     border-bottom: 2px solid var(--theme-white);
+    cursor: pointer;
+}
+
+.NavBar--menu.expanded {
+    background-color: var(--theme-main);
+    height: 100vh;
+    flex-direction: column;
+    left: 0;
+    opacity: 0.5;
+    padding-top: 100px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+}
+
+.NavBar--menu.expanded a:hover {
+    border-bottom: none;
 }
 
 /****************************************
