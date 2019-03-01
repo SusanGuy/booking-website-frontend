@@ -1,53 +1,28 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { PureComponent } from 'react';
 import './App.css';
 
-class App extends Component {
+// Components
+import Routes from './routes';
+import PreLoader from './components/PreLoader';
+
+class App extends PureComponent {
   state = {
-    users: [],
+    isFullyLoaded: false,
   };
 
   componentDidMount() {
-    fetch(
-      'http://bookingapp-dev.ptewmmpyuh.ca-central-1.elasticbeanstalk.com/user',
-      {
-        method: 'GET',
-      }
-    )
-      .then(res => {
-        return res.json();
-      })
-      .then(result => {
-        this.setState({
-          users: result,
-        });
-      })
-      .catch(err => {
-        console.log('ERROR: ', err);
+    setTimeout(() => {
+      this.setState({
+        isFullyLoaded: true,
       });
+    }, 3000);
   }
 
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+    const { isFullyLoaded } = this.state;
 
-          {this.state.users.map(user => {
-            return (
-              <a
-                key={user.ID}
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {user.Name}
-              </a>
-            );
-          })}
-        </header>
-      </div>
+    return (
+      <div className="App">{!isFullyLoaded ? <PreLoader /> : <Routes />}</div>
     );
   }
 }
