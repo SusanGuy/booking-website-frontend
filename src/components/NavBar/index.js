@@ -7,12 +7,12 @@ import './navbar.css';
 const NavBar = () => {
   return (
     <nav className="NavBar">
-      <div className="nav-wrapper">
+      <div className="NavBar-wrapper">
         <Link to="/" className="NavBar--logo">
           <span>Heritage</span>
           <span>Hunting</span>
         </Link>
-        <ul id="nav-mobile" className="right hide-on-med-and-down">
+        <ul id="nav-mobile" className="hide-on-med-and-down">
           <li>
             <Link to="/property">Property</Link>
           </li>

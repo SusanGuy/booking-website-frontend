@@ -1,14 +1,17 @@
 import React from 'react';
 
-// Assets
+// Styles
 import './hero.css';
+
+// Assets
 import backgrounds from '../../shared/backgrounds';
 
 const Hero = () => {
   return (
-    <div className="Hero">
-      <img src={backgrounds.bg0} alt="forest" />
-    </div>
+    <div
+      className="Hero"
+      style={{ backgroundImage: `url(${backgrounds.bg0})` }}
+    />
   );
 };
 

@@ -5,6 +5,14 @@
     top: 0;
 }
 
+.NavBar-wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
 .NavBar--logo {
     align-items: center;
     display: flex;
@@ -12,10 +20,11 @@
     font-size: 12px;
     font-style: italic;
     font-weight: bold;
+    height: 64px;
     justify-content: center;
-    width: 100%;
 }
 
 .NavBar--logo span {
-    height: 20px;
+    line-height: 20px;
+    padding: 0 10px;
 }
