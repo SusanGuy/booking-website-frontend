@@ -15,6 +15,7 @@
 
 .NavBar--logo {
     align-items: center;
+    color: var(--theme-main);
     display: flex;
     flex-direction: column;
     font-size: 12px;
@@ -27,4 +28,17 @@
 .NavBar--logo span {
     line-height: 20px;
     padding: 0 10px;
+}
+
+.NavBar--logo img {
+    height: 70%;
+}
+
+.NavBar--menu li {
+    padding: 0 10px;
+}
+
+.NavBar--menu a:hover {
+    background: rgba(0, 0, 0, 0);
+    border-bottom: 2px solid var(--theme-white);
 }

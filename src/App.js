@@ -1,30 +1,15 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import './App.css';
 
 // Components
 import Routes from './routes';
-import PreLoader from './components/PreLoader';
 
-class App extends PureComponent {
-  state = {
-    isFullyLoaded: false,
-  };
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        isFullyLoaded: true,
-      });
-    }, 1000);
-  }
-
-  render() {
-    const { isFullyLoaded } = this.state;
-
-    return (
-      <div className="App">{!isFullyLoaded ? <PreLoader /> : <Routes />}</div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <div className="App">
+      <Routes />
+    </div>
+  );
+};
 
 export default App;

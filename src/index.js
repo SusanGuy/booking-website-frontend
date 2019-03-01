@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Assets
+import './theme.css';
 import './index.css';
 import './assets/css/materialize.css';
 
