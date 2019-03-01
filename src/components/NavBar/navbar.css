@@ -15,9 +15,9 @@
 
 .NavBar--logo {
     align-items: center;
-    color: var(--theme-main);
+    color: var(--theme-white);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     font-size: 12px;
     font-style: italic;
     font-weight: bold;
@@ -41,4 +41,13 @@
 .NavBar--menu a:hover {
     background: rgba(0, 0, 0, 0);
     border-bottom: 2px solid var(--theme-white);
+}
+
+/****************************************
+ * For Tablet and Desktop Devices (more than 400px) *
+ ****************************************/
+@media only screen and (min-width: 993px) {
+    .NavBar--logo i {
+        visibility: hidden;
+    }
 }
