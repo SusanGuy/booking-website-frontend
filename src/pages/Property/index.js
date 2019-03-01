@@ -1,7 +1,14 @@
 import React from 'react';
 
+// Layout
+import ContentLayout from '../../layout/Content';
+
 const Property = () => {
-  return <div>Property</div>;
+  return (
+    <ContentLayout>
+      <div className="Home">Property</div>
+    </ContentLayout>
+  );
 };
 
 export default Property;

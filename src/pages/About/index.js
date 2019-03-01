@@ -1,17 +1,17 @@
 import React from 'react';
 
 // Styles
-import './home.css';
+import './about.css';
 
 // Layout
 import ContentLayout from '../../layout/Content';
 
-const Home = () => {
+const About = () => {
   return (
     <ContentLayout>
-      <div className="Home">Home</div>
+      <div className="About">About</div>
     </ContentLayout>
   );
 };
 
-export default Home;
+export default About;

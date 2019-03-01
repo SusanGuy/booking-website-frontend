@@ -1,17 +1,17 @@
 import React from 'react';
 
 // Styles
-import './home.css';
+import './login.css';
 
 // Layout
 import ContentLayout from '../../layout/Content';
 
-const Home = () => {
+const Login = () => {
   return (
     <ContentLayout>
-      <div className="Home">Home</div>
+      <div className="Login">Login</div>
     </ContentLayout>
   );
 };
 
-export default Home;
+export default Login;
