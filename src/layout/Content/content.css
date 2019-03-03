@@ -1,7 +1,7 @@
 .Content {
     align-items: center;
-    color: var(--theme-white);
+    /* color: var(--theme-white); */
     display: flex;
     height: 100vh;
-    justify-content: center;
+    justify-content: center; 
 }
