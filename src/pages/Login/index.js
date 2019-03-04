@@ -15,7 +15,7 @@ const Div = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  z-index: 3;
+  z-index: 1;
 `;
 const Close = styled.span`
   background-color: white;

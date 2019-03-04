@@ -2,7 +2,6 @@
     background-size: cover;
     background-position: 50%;
     height: 100vh;
-    z-index: 0;
 }
 
 .MenuContent--hover-alpha {
@@ -11,5 +10,4 @@
     opacity: 0.4;
     position: absolute;
     width: 100%;
-    z-index: 1;
 }
