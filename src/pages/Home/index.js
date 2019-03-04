@@ -10,14 +10,57 @@ import 'react-dates/lib/css/_datepicker.css';
 import ContentLayout from '../../layout/Content';
 
 class Home extends React.PureComponent {
-  state = {
-    startDate: null,
-    endDate: null,
-    focusedInput: '',
-    fieldFocusedInput: {
-      location: false,
-      date: false,
-    },
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      startDate: null,
+      endDate: null,
+      focusedInput: null,
+      fieldFocusedInput: {
+        location: false,
+        date: false,
+        guests: false,
+      },
+    };
+
+    this.locationRef = React.createRef();
+    this.dateRef = React.createRef();
+    this.guestsRef = React.createRef();
+    this.locationInputRef = React.createRef();
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickIcon);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickIcon);
+  }
+
+  handleClickIcon = event => {
+    if (this.locationRef !== event.target) {
+      this.setState({
+        ...this.state,
+        fieldFocusedInput: {
+          location: false,
+        },
+      });
+    } else if (this.datesRef !== event.target) {
+      this.setState({
+        ...this.state,
+        fieldFocusedInput: {
+          date: false,
+        },
+      });
+    } else if (this.guestsRef !== event.target) {
+      this.setState({
+        ...this.state,
+        fieldFocusedInput: {
+          guests: false,
+        },
+      });
+    }
   };
 
   inputFocus = input => {
@@ -26,13 +69,20 @@ class Home extends React.PureComponent {
       fieldFocusedInput: {
         location: input === 'location' ? true : false,
         date: input === 'date' ? true : false,
+        guests: input === 'guests' ? true : false,
       },
     });
+
+    if (input === 'location') {
+      this.locationInputRef.focus();
+    } else if (input === 'date') {
+      this.setState({ focusedInput: 'startDate' });
+    }
   };
 
   render() {
     const {
-      fieldFocusedInput: { location, date },
+      fieldFocusedInput: { location, date, guests },
     } = this.state;
 
     return (
@@ -46,6 +96,7 @@ class Home extends React.PureComponent {
           <div className="Home--search-location">
             <div className="Home--fields col s12">
               <div
+                ref={input => (this.locationRef = input)}
                 className={[
                   'input-field',
                   'location',
@@ -56,12 +107,14 @@ class Home extends React.PureComponent {
               >
                 <div className="label">WHERE</div>
                 <input
+                  ref={input => (this.locationInputRef = input)}
                   placeholder="Fishing at Will Clay's sunny lake"
                   type="text"
                   className="input-text"
                 />
               </div>
               <div
+                ref={dateRef => (this.dateRef = dateRef)}
                 className={[
                   'input-field',
                   'date',
@@ -85,7 +138,16 @@ class Home extends React.PureComponent {
                   } // PropTypes.func.isRequired,
                 />
               </div>
-              <div className="input-field with-label">
+              <div
+                ref={guestsRef => (this.guestsRef = guestsRef)}
+                className={[
+                  'input-field',
+                  'guests',
+                  'with-label',
+                  guests ? 'focused' : '',
+                ].join(' ')}
+                onClick={() => this.inputFocus('guests')}
+              >
                 <div className="label">GUESTS</div>
                 <div className="input-text">1 Guest</div>
               </div>
