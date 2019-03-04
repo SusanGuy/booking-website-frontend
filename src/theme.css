@@ -1,4 +1,6 @@
 :root {
     --theme-main: #04eaa6;
     --theme-white: #fff;
+    --theme-black: #000;
+    --theme-font-size: 16px;
 }

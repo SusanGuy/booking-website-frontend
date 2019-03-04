@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import classnames from 'classnames';
 
 // Styles
 import './navbar.css';
@@ -12,10 +11,6 @@ import icons from '../../shared/icons';
 import Consumer from '../../context/ConfigProvider';
 
 const NavBar = () => {
-  const navBarMenuClasses = classnames({
-    'NavBar--menu': true,
-  });
-
   return (
     <nav className="NavBar">
       <div className="NavBar-wrapper">
@@ -35,10 +30,17 @@ const NavBar = () => {
                   expand_more
                 </i>
               </div>
+              <div
+                className={[
+                  'NavBar--menu--mobile-bg',
+                  mobileMenuExpanded ? 'expanded' : '',
+                ].join(' ')}
+              />
               <ul
-                className={navBarMenuClasses.concat(
-                  mobileMenuExpanded ? ' expanded' : ' hide-on-med-and-down'
-                )}
+                className={[
+                  'NavBar--menu',
+                  mobileMenuExpanded ? 'expanded' : 'hide-on-med-and-down',
+                ].join(' ')}
               >
                 <li>
                   <Link to="/property">Property</Link>

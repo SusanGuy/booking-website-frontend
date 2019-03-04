@@ -13,8 +13,9 @@ const MenuContent = ({ children }) => {
   return (
     <div
       className="MenuContent"
-      style={{ backgroundImage: `url(${backgrounds.bg0})` }}
+      style={{ backgroundImage: `url(${backgrounds.landscape})` }}
     >
+      <div className="MenuContent--hover-alpha" />
       <NavBar />
       {children}
     </div>

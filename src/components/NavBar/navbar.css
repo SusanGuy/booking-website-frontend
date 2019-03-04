@@ -3,14 +3,21 @@
     box-shadow: none;
     position: absolute;
     top: 0;
+    z-index: 2;
 }
 
 .NavBar-wrapper {
-    align-items: center;
+    align-items: flex-start;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    padding: 0 20px;
+}
+
+@media screen and (min-width: 992px) {
+    .NavBar-wrapper {
+        flex-direction: row;
+        padding: 0 20px;
+    }
 }
 
 .NavBar--logo {
@@ -21,9 +28,17 @@
     font-size: 12px;
     font-style: italic;
     font-weight: bold;
-    height: 64px;
+    height: 80px;
+    line-height: 80px;
     justify-content: center;
+    padding: 0 20px;
     z-index: 10;
+}
+
+@media screen and (min-width: 992px) {
+    .NavBar--logo {
+        padding: 0px;
+    }
 }
 
 .NavBar--logo span {
@@ -32,7 +47,7 @@
 }
 
 .NavBar--logo img {
-    height: 70%;
+    height: 50%;
 }
 
 .NavBar--logo:hover {
@@ -49,11 +64,18 @@
 
 .NavBar--menu {
     display: flex;
-    transition: all 2ms ease-in-out;
+    height: 0px;
+    transition: all 2s ease-in-out;
 }
 
 .NavBar--menu li {
     padding: 0 10px;
+}
+
+.NavBar--menu a {
+    font-size: var(--theme-font-size);
+    height: 80px;
+    line-height: 80px;
 }
 
 .NavBar--menu a:hover {
@@ -63,20 +85,33 @@
 }
 
 .NavBar--menu.expanded {
-    background-color: var(--theme-main);
-    height: 100vh;
     flex-direction: column;
-    left: 0;
-    opacity: 0.5;
-    padding-top: 100px;
+    height: 100vh;
     position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 9;
+    top: 100px;
+    width: 100vw;
+    z-index: 0;
 }
 
-.NavBar--menu.expanded a:hover {
-    border-bottom: none;
+.NavBar--menu--mobile-bg {
+    background-color: var(--theme-main);
+    bottom: 0;
+    height: 100%;
+    flex-direction: column;
+    left: 0;
+    padding-top: 100px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    transition-duration: 0.2s !important;
+    transition-property: -ms-transform, -webkit-transform, transform !important;
+    transition-timing-function: ease-out !important;
+    transform: translateY(-100%);
+}
+
+.NavBar--menu--mobile-bg.expanded {
+    transform: translateY(0px) !important;
 }
 
 /****************************************

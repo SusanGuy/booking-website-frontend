@@ -5,9 +5,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { GoogleLogin } from 'react-google-login';
 
-// Styles
-import './login.css';
-
 // Layout
 import ContentLayout from '../../layout/Content';
 
@@ -18,6 +15,7 @@ const Div = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  z-index: 3;
 `;
 const Close = styled.span`
   background-color: white;
