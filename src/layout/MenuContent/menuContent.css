@@ -4,6 +4,12 @@
     height: 100vh;
 }
 
+.MenuContent.collapsed {
+    background-size: contain;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
 .MenuContent--hover-alpha {
     background-color: var(--theme-black);
     height: 100vh;

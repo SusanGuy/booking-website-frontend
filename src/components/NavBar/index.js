@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import windowSize from 'react-window-size';
 
 // Styles
 import './navbar.css';
@@ -13,12 +12,11 @@ import Consumer from '../../context/ConfigProvider';
 
 class NavBar extends React.PureComponent {
   render() {
-    const isMobileWidth = this.props.windowWidth <= 992;
     return (
       <nav className="NavBar">
         <div className="NavBar-wrapper">
           <Consumer>
-            {({ mobileMenuExpanded, setMobileMenuExpanded }) => (
+            {({ mobileMenuExpanded, setMobileMenuExpanded, isMobileWidth }) => (
               <React.Fragment>
                 {isMobileWidth ? (
                   <div
@@ -94,4 +92,4 @@ class NavBar extends React.PureComponent {
   }
 }
 
-export default windowSize(NavBar);
+export default NavBar;

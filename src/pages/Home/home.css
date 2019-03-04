@@ -80,6 +80,7 @@
 .Home--fields .input-field.with-label {
     align-items: flex-start;
     flex-direction: column;
+    padding-left: 15px;
 }
 
 .Home--fields input {
