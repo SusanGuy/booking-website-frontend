@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import GoogleButton from './GoogleButton/index';
 import { GoogleLogin } from 'react-google-login';
 
 // Styles
@@ -28,8 +27,6 @@ const Close = styled.span`
 const HR = styled.hr`
   margin: 20px 0 20px 0;
 `;
-
-const HRText = styled.p``;
 
 const NAVLink = styled(NavLink)`
   color: black;
