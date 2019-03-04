@@ -15,7 +15,7 @@ import Consumer from '../../context/ConfigProvider';
 const MenuContent = ({ children }) => {
   return (
     <Consumer>
-      {isMobileWidth => (
+      {({ isMobileWidth }) => (
         <div
           className={['MenuContent', isMobileWidth ? 'collapsed' : ''].join(
             ' '

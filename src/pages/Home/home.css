@@ -1,13 +1,15 @@
 .Home {
     display: flex;
     flex-direction: column;
+    padding: 20px;
     position: relative;
 }
 
 @media (min-width: 744px) {
     .Home {
-        width: 712px !important;
         margin: auto !important;
+        padding: 0px;
+        width: 712px !important;
     }
 }
 
@@ -29,8 +31,15 @@
     animation-timing-function: linear;
     animation-fill-mode: forwards;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
+}
+
+@media (min-width: 992px) {
+    .Home--search-location {
+        flex-direction: row;
+        margin: 0px;
+    }
 }
 
 .Home--search-location .button-field {
@@ -38,10 +47,24 @@
     background: var(--theme-red);
     border-radius: 5px;
     box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65);
+    cursor: pointer;
     display: flex;
     justify-content: center;
-    margin-left: 15px;
-    width: 76px;
+    margin: 0;
+    width: 100%;
+    transform: scale(1);
+    transition: all 300ms ease-in-out;
+}
+
+.Home--search-location .button-field:hover {
+    transform: scale(1.05);
+}
+
+@media (min-width: 992px) {
+    .Home--search-location .button-field {
+        margin-left: 15px;
+        width: 76px;
+    }
 }
 
 .Home--search-location .button-field i {
@@ -57,7 +80,17 @@
     box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65) !important;
     display: flex;
     flex: 1;
-    flex-direction: row;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+@media (min-width: 992px) {
+    .Home--fields {
+        display: flex;
+        flex-direction: row;
+        margin: 0px;
+        width: 100%;
+    }
 }
 
 .Home--fields .input-field {
@@ -68,6 +101,26 @@
     margin: 0;
     padding-top: 16px;
     padding-bottom: 14px;
+    width: 100%;
+}
+
+.Home--fields .input-field:last-child {
+    border: none !important;
+}
+
+.Home--fields .input-field.location {
+    width: 100%;
+    transition: width 300ms ease-in-out;
+}
+
+@media (min-width: 992px) {
+    .Home--fields .input-field.location {
+        width: 55% !important;
+    }
+
+    .Home--fields .input-field.location.focused {
+        width: 60% !important;
+    }
 }
 
 .input-field i {
@@ -77,17 +130,35 @@
     padding: 0 20px;
 }
 
+.Home--fields .input-field.date {
+    width: 100%;
+    transition: width 300ms ease-in-out;
+}
+
+@media (min-width: 992px) {
+    .Home--fields .input-field.date {
+        width: 35% !important;
+    }
+}
+
 .Home--fields .input-field.with-label {
     align-items: flex-start;
     flex-direction: column;
-    padding-left: 15px;
+    padding: 16px 15px 14px;
+    width: 100%;
+    transition: width 300ms ease-in-out;
+}
+
+@media (min-width: 992px) {
+    .Home--fields .input-field.with-label {
+        width: 15%;
+    }
 }
 
 .Home--fields input {
     border-bottom: none !important;
     color: var(--theme-text-placeholder-color);
     font-family: var(--theme-font-family);
-    font-weight: 600 !important;
     font-size: 18px !important;
     margin: 0px !important;
     text-overflow: ellipsis !important;
@@ -99,9 +170,25 @@
 }
 
 .Home--fields .input-text {
+    border: 1px solid var(--theme-border) !important;
+    box-sizing: border-box !important;
     color: var(--theme-text-placeholder-color);
     cursor: pointer;
     font-size: 18px !important;
+    height: inherit !important;
+    line-height: 27px;
+    padding: 10px !important;
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .Home--fields .input-text {
+        border: none !important;
+        color: var(--theme-text-placeholder-color);
+        cursor: pointer;
+        font-size: 18px !important;
+        padding: 0px !important;
+    }
 }
 
 .Home--fields .label {
@@ -119,4 +206,25 @@
         opacity: 1;
         transform: translateY(0px);
     }
+}
+
+.input-field .DateInput {
+    width: inherit;
+}
+
+#end_date {
+    text-align: right !important;
+}
+
+.input-field .DateInput_input {
+    cursor: pointer;
+    height: inherit !important;
+}
+
+.input-field .DateRangePickerInput {
+    align-items: center;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
