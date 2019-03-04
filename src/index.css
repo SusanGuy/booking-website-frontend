@@ -3,8 +3,8 @@ html, body {
 }
 
 body {
-    font-family: 'Roboto', 'Open Sans', sans-serif;
-    font-weight: 600;
+    font-family: var(--theme-font-family);
+    font-weight: 400;
     margin: 0;
     overflow: hidden;
     padding: 0;
@@ -14,4 +14,24 @@ body {
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: var(--theme-text-placeholder-color);
+    font-weight: 400 !important;
+}
+
+input::-moz-placeholder { /* Firefox 19+ */
+    color: var(--theme-text-placeholder-color);
+    font-weight: 400 !important;
+}
+
+input:-ms-input-placeholder { /* IE 10+ */
+    color: var(--theme-text-placeholder-color);
+    font-weight: 400 !important;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+    color: var(--theme-text-placeholder-color);
+    font-weight: 400 !important;
 }

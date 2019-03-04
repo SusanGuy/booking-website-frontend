@@ -1,4 +1,121 @@
 .Home {
     display: flex;
+    flex-direction: column;
     position: relative;
+}
+
+@media (min-width: 744px) {
+    .Home {
+        width: 712px !important;
+        margin: auto !important;
+    }
+}
+
+@media (min-width: 1128px) {
+    .Home {
+        width: 980px !important;
+    }
+}
+
+.Home h1 {
+    color: var(--theme-white);
+    font-size: var(--theme-font-size-header);
+    font-weight: 700;
+}
+
+.Home--search-location {
+    animation-name: fadeInSlideDown;
+    animation-duration: 500ms;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.Home--search-location .button-field {
+    align-items: center;
+    background: var(--theme-red);
+    border-radius: 5px;
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    margin-left: 15px;
+    width: 76px;
+}
+
+.Home--search-location .button-field i {
+    color: var(--theme-white);
+    font-size: 44px;
+    font-weight: bold;
+}
+
+.Home--fields {
+    align-items: center;
+    background-color: var(--theme-white);
+    border-radius: 5px;
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65) !important;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+}
+
+.Home--fields .input-field {
+    align-items: center;
+    border-right: 1px solid #ebebeb !important;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding-top: 16px;
+    padding-bottom: 14px;
+}
+
+.input-field i {
+    height: 45px;
+    vertical-align: middle;
+    line-height: 45px;
+    padding: 0 20px;
+}
+
+.Home--fields .input-field.with-label {
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.Home--fields input {
+    border-bottom: none !important;
+    color: var(--theme-text-placeholder-color);
+    font-family: var(--theme-font-family);
+    font-weight: 600 !important;
+    font-size: 18px !important;
+    margin: 0px !important;
+    text-overflow: ellipsis !important;
+}
+
+.Home--fields input:active, .Home--fields input:focus {
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+.Home--fields .input-text {
+    color: var(--theme-text-placeholder-color);
+    cursor: pointer;
+    font-size: 18px !important;
+}
+
+.Home--fields .label {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+@keyframes fadeInSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
