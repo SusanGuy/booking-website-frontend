@@ -1,0 +1,34 @@
+.Guests--fields--dropdown {
+    background-color: var(--theme-white);
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65);
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+}
+
+.Guests--fields--dropdown-item {
+    box-sizing: content-box;
+    justify-content: space-between;
+    padding: 0;
+    width: 100%;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    text-overflow: ellipsis;
+}
+
+.Guests--fields--dropdown-item div {
+    padding: 15px;
+}
+
+.Guests--fields--dropdown-image {
+    height: 25px;
+    padding: 15px;
+    margin-right: 0;
+    z-index: 5;
+}
+
+.Guests--fields--dropdown-image:hover {
+    background: var(--theme-border);
+}

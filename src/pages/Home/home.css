@@ -77,11 +77,16 @@
 .Home--fields {
     align-items: center;
     background-color: var(--theme-white);
-    border-radius: 5px;
     display: flex;
     flex: 1;
     flex-direction: column;
     margin-bottom: 15px;
+}
+
+@media (min-width: 442px) {
+    .Home--fields {
+        border-radius: 5px;
+    }
 }
 
 @media (min-width: 992px) {
@@ -113,6 +118,7 @@
     margin: 0;
     padding-top: 16px;
     padding-bottom: 14px;
+    position: relative;
     width: 100%;
 }
 
@@ -121,7 +127,6 @@
 }
 
 .Home--fields .input-field.location {
-    border-radius: 5px;
     width: 100%;
     transition: width 300ms ease-in-out;
 }
@@ -129,6 +134,7 @@
 @media (min-width: 992px) {
     .Home--fields .input-field.location {
         border: 1px solid var(--theme-white);
+        border-radius: 5px;
         transform: translateZ(0);
         backface-visibility: hidden;
         position: relative;
@@ -162,6 +168,33 @@
     vertical-align: middle;
     line-height: 45px;
     padding: 0 20px;
+}
+
+.Home--fields--dropdown {
+    background-color: var(--theme-white);
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65);
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+}
+
+.Home--fields--dropdown-item {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    padding: 15px;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+
+.location .Home--fields--dropdown-item:hover {
+    background-color: var(--theme-border);
+}
+
+.Home--fields--dropdown-image {
+    height: 20px;
+    margin-right: 10px;
 }
 
 .Home--fields .input-field.date {
@@ -212,7 +245,6 @@
         transform: translateZ(0);
         backface-visibility: hidden;
         position: relative;
-        overflow: hidden;
         width: 15% !important;
     }
 
@@ -228,8 +260,30 @@
         height: 4px;
     }
 
-    .Home--fields .input-field.guests.focused:before {
+    .guests.focused:before {
         right: 0;
+    }
+
+    .guests .Home--fields--dropdown-item {
+        box-sizing: content-box;
+        justify-content: space-between;
+        padding: 0;
+        width: 100%;
+    }
+
+    .guests .Home--fields--dropdown-item div {
+      padding: 15px;
+    }
+
+    .guests .Home--fields--dropdown-image {
+        height: 25px;
+        padding: 15px;
+        margin-right: 0;
+        z-index: 5;
+    }
+
+    .guests .Home--fields--dropdown-image:hover {
+        background: var(--theme-border);
     }
 }
 

@@ -1,12 +1,13 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import styled from 'styled-components'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import { GoogleLogin } from 'react-google-login'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import { GoogleLogin } from 'react-google-login';
+import KEYS from '../../config';
 
 // Layout
-import ContentLayout from '../../layout/Content'
+import ContentLayout from '../../layout/Content';
 
 const Div = styled.div`
   border-radius: 1.5%;
@@ -23,7 +24,7 @@ const Div = styled.div`
     width: 90%;
     height: 50%;
   }
-`
+`;
 const Close = styled.div`
   background-color: white;
   color: black;
@@ -31,7 +32,7 @@ const Close = styled.div`
   top: 1px;
   left: 1px;
   margin: 10px;
-`
+`;
 
 const HRWrap = styled.div`
   display: flex;
@@ -39,21 +40,21 @@ const HRWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-`
+`;
 const HRDiv = styled.div`
   width: 100%;
-`
-const HR = styled.hr``
+`;
+const HR = styled.hr``;
 
 const HRDivText = styled.div`
   padding: 0px 10px 0px 10px;
-`
-const HRText = styled.p``
+`;
+const HRText = styled.p``;
 
 const NAVLink = styled(NavLink)`
   color: black;
   padding: 10px;
-`
+`;
 const StyledGoogleLogin = styled(GoogleLogin)`
   display: flex;
   justify-content: center;
@@ -63,15 +64,10 @@ const StyledGoogleLogin = styled(GoogleLogin)`
   &:hover {
     background-color: cornflowerblue;
   }
-`
-
-const config = {
-  GOOGLE_CLIENT_ID:
-    '1047753473052-ecs3jgoau4l0j5s686hbourbg0rs99si.apps.googleusercontent.com'
-}
+`;
 
 const googleResponse = response => {
-  console.log('response', response)
+  console.log('response', response);
   /* const tokenBlob = new Blob(
     [JSON.stringify({ access_token: response.accessToken }, null, 2)],
     { type: 'application/json' }
@@ -90,24 +86,24 @@ const googleResponse = response => {
       }
     });
   }); */
-}
+};
 
 const onFailure = response => {
-  console.log('failure:', response)
-}
+  console.log('failure:', response);
+};
 
 const Login = () => {
   return (
     <ContentLayout>
-      <Div className='Login'>
+      <Div className="Login">
         <Close>
-          <NAVLink to='/'>X</NAVLink>
+          <NAVLink to="/">X</NAVLink>
         </Close>
         <Form>
           <Form.Group>
-            <StyledGoogleLogin
-              clientId={config.GOOGLE_CLIENT_ID}
-              buttonText='Login'
+            <GoogleLogin
+              clientId={KEYS.dev.GOOGLE_CLIENT_ID}
+              buttonText="Login"
               onSuccess={googleResponse}
               onFailure={onFailure}
             />
@@ -124,10 +120,10 @@ const Login = () => {
             </HRDiv>
           </HRWrap>
           <Form.Group>
-            <Form.Control type='email' placeholder='Enter Email' />
+            <Form.Control type="email" placeholder="Enter Email" />
           </Form.Group>
           <Form.Group>
-            <Form.Control type='password' placeholder='Password' />
+            <Form.Control type="password" placeholder="Password" />
           </Form.Group>
           <Form.Group>
             <Button style={{ width: '100%', margin: '10px 0 10px 0' }}>
@@ -135,7 +131,7 @@ const Login = () => {
             </Button>
           </Form.Group>
           <Form.Group>
-            <NavLink to='/signup'>
+            <NavLink to="/signup">
               <Button style={{ width: '100%', margin: '10px 0 10px 0' }}>
                 Signup
               </Button>
@@ -144,7 +140,7 @@ const Login = () => {
         </Form>
       </Div>
     </ContentLayout>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

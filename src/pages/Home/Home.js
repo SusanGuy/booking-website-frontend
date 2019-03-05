@@ -6,17 +6,28 @@ import './home.css';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 
+// Assets
+import icons from '../../shared/icons';
+
 // Layout
 import ContentLayout from '../../layout/Content';
 
 // ContextAPI
 import Consumer from '../../context/ConfigProvider';
 
+const iconMap = {
+  establishment: icons.pushPin,
+  locality: icons.mapsAndFlags,
+  others: icons.tree,
+};
+
 class Home extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
+      where: '',
+      guestsCount: 1,
       startDate: null,
       endDate: null,
       focusedInput: null,
@@ -44,10 +55,42 @@ class Home extends React.PureComponent {
   }
 
   handleClickIcon = event => {
+    let className = event.target.className;
+    let dropdownItemClassName = 'Home--fields--dropdown-item';
+    let dropdownImageClassName = 'Home--fields--dropdown-image';
+
+    // TOOD:  Update this Workaround section
+    //        Find a better way to update the state
+    if (className === dropdownItemClassName) {
+      let where = event.target.querySelector('div').innerHTML;
+      console.log('where', where);
+      this.setState({
+        where,
+      });
+    } else if (className === dropdownImageClassName) {
+      let guestsCount = event.target;
+
+      if (guestsCount.alt === 'minus') {
+        this.setState(prevState => ({
+          guestsCount:
+            prevState.guestsCount <= 1 ? 1 : prevState.guestsCount - 1,
+        }));
+      } else {
+        this.setState(prevState => ({
+          guestsCount: prevState.guestsCount + 1,
+        }));
+      }
+    }
+
+    if ([dropdownImageClassName].includes(event.target.className)) {
+      return;
+    }
+
     if (this.locationRef !== event.target) {
       this.setState({
         ...this.state,
         fieldFocusedInput: {
+          ...this.fieldFocusedInput,
           location: false,
         },
       });
@@ -55,6 +98,7 @@ class Home extends React.PureComponent {
       this.setState({
         ...this.state,
         fieldFocusedInput: {
+          ...this.fieldFocusedInput,
           date: false,
         },
       });
@@ -62,6 +106,7 @@ class Home extends React.PureComponent {
       this.setState({
         ...this.state,
         fieldFocusedInput: {
+          ...this.fieldFocusedInput,
           guests: false,
         },
       });
@@ -85,10 +130,47 @@ class Home extends React.PureComponent {
     }
   };
 
+  handleWhere = e => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    let where = e.target.value;
+
+    this.setState({
+      ...this.state,
+      where,
+    });
+
+    this.props.fetchAutoComplete(where);
+  };
+
+  decreaseGuestsCount = e => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      guestsCount: prevState.guestsCount + 1,
+    }));
+  };
+
+  increaseGuestsCount = e => {
+    e.preventDefault();
+    this.setState(
+      prevState => {
+        return {
+          guestsCount:
+            prevState.guestsCount <= 0 ? 0 : prevState.guestsCount + 1,
+        };
+      },
+      () => console.log('this.state.guestsCount: ' + this.state.guestsCount)
+    );
+  };
+
   render() {
     const {
+      where,
+      guestsCount,
       fieldFocusedInput: { location, date, guests },
     } = this.state;
+    const { places } = this.props;
 
     return (
       <ContentLayout>
@@ -103,7 +185,7 @@ class Home extends React.PureComponent {
               <div className="Home--search-location">
                 <div className="Home--fields col s12">
                   <div
-                    ref={input => (this.locationRef = input)}
+                    ref={input => (this.locationInputRef = input)}
                     className={[
                       'input-field',
                       'location',
@@ -114,11 +196,36 @@ class Home extends React.PureComponent {
                   >
                     <div className="label">WHERE</div>
                     <input
-                      ref={input => (this.locationInputRef = input)}
                       placeholder="Fishing at Will Clay's sunny lake"
                       type="text"
+                      value={where}
+                      onChange={e => this.handleWhere(e)}
                       className="input-text"
                     />
+                    {location && (
+                      <div className="Home--fields--dropdown">
+                        {places.length > 0 &&
+                          places.map(({ name, type }) => {
+                            return (
+                              <div
+                                key={name}
+                                className="Home--fields--dropdown-item"
+                              >
+                                <img
+                                  src={
+                                    iconMap[type]
+                                      ? iconMap[type]
+                                      : iconMap['others']
+                                  }
+                                  className="Home--fields--dropdown-image"
+                                  alt="ico"
+                                />
+                                <div>{name}</div>
+                              </div>
+                            );
+                          })}
+                      </div>
+                    )}
                   </div>
                   <div
                     ref={dateRef => (this.dateRef = dateRef)}
@@ -201,7 +308,24 @@ class Home extends React.PureComponent {
                     onClick={() => this.inputFocus('guests')}
                   >
                     <div className="label">GUESTS</div>
-                    <div className="input-text">1 Guest</div>
+                    <div className="input-text">{`${guestsCount} Guest`}</div>
+                    {guests && (
+                      <div className="Home--fields--dropdown">
+                        <div className="Home--fields--dropdown-item">
+                          <img
+                            src={icons.minus}
+                            alt="minus"
+                            className="Home--fields--dropdown-image"
+                          />
+                          <div>{guestsCount}</div>
+                          <img
+                            src={icons.plus}
+                            alt="plus"
+                            className="Home--fields--dropdown-image"
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="button-field">
