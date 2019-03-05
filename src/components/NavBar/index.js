@@ -10,12 +10,36 @@ import icons from '../../shared/icons';
 // ContextAPI
 import Consumer from '../../context/ConfigProvider';
 
+const NavBarLink = ({ to, onClick, title }) => {
+  return (
+    <li>
+      <Link to={to} onClick={onClick}>
+        {title}
+      </Link>
+    </li>
+  );
+};
+
+const logout = ({ setAuthenticated, setToken, setUser }) => {
+  setAuthenticated(false);
+  setToken('');
+  setUser(null);
+};
+
 const NavBar = () => {
   return (
     <nav className="NavBar">
       <div className="NavBar-wrapper">
         <Consumer>
-          {({ mobileMenuExpanded, setMobileMenuExpanded, isMobileWidth }) => (
+          {({
+            mobileMenuExpanded,
+            setMobileMenuExpanded,
+            isMobileWidth,
+            authenticated,
+            setAuthenticated,
+            setToken,
+            setUser,
+          }) => (
             <React.Fragment>
               {isMobileWidth ? (
                 <div
@@ -48,39 +72,37 @@ const NavBar = () => {
                   mobileMenuExpanded ? 'expanded' : 'hide-on-med-and-down',
                 ].join(' ')}
               >
-                <li>
+                <NavBarLink
+                  to="/property"
+                  title="Property"
+                  onClick={() =>
+                    isMobileWidth && setMobileMenuExpanded(!mobileMenuExpanded)
+                  }
+                />
+                <NavBarLink
+                  to="/about"
+                  title="About"
+                  onClick={() =>
+                    isMobileWidth && setMobileMenuExpanded(!mobileMenuExpanded)
+                  }
+                />
+                {authenticated ? (
                   <Link
-                    to="/property"
-                    onClick={() =>
-                      isMobileWidth &&
-                      setMobileMenuExpanded(!mobileMenuExpanded)
-                    }
+                    to="/"
+                    onClick={() => logout(setAuthenticated, setToken, setUser)}
                   >
-                    Property
+                    Logout
                   </Link>
-                </li>
-                <li>
-                  <Link
+                ) : (
+                  <NavBarLink
                     to="/login"
+                    title="Login"
                     onClick={() =>
                       isMobileWidth &&
                       setMobileMenuExpanded(!mobileMenuExpanded)
                     }
-                  >
-                    Login
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/about"
-                    onClick={() =>
-                      isMobileWidth &&
-                      setMobileMenuExpanded(!mobileMenuExpanded)
-                    }
-                  >
-                    About Us
-                  </Link>
-                </li>
+                  />
+                )}
               </ul>
             </React.Fragment>
           )}

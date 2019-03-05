@@ -7,6 +7,9 @@ import Property from './pages/Property';
 import Login from './pages/Login';
 import About from './pages/About';
 
+// ContextAPI
+import Consumer from './context/ConfigProvider';
+
 const Routes = () => {
   return (
     <Switch>

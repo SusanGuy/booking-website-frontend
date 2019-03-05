@@ -5,9 +5,16 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { GoogleLogin } from 'react-google-login';
 import KEYS from '../../config';
+import { Redirect } from 'react-router-dom';
 
 // Layout
 import ContentLayout from '../../layout/Content';
+
+// ContextAPI
+import Consumer from '../../context/ConfigProvider';
+
+// Services
+import { authenticateWithGoogle } from '../../services/api';
 
 const Div = styled.div`
   border-radius: 1.5%;
@@ -56,30 +63,21 @@ const NAVLink = styled(NavLink)`
   padding: 10px;
 `;
 
-const googleResponse = response => {
-  console.log('response', response);
-  /* const tokenBlob = new Blob(
-    [JSON.stringify({ access_token: response.accessToken }, null, 2)],
-    { type: 'application/json' }
-  );
-  const options = {
-    method: 'POST',
-    body: tokenBlob,
-    mode: 'cors',
-    cache: 'default',
-  };
-  fetch('http://localhost:5000/auth/google', options).then(r => {
+const googleResponse = ({ response, setUser, setToken, setAuthenticated }) => {
+  authenticateWithGoogle(response.accessToken).then(r => {
     const token = r.headers.get('x-auth-token');
     r.json().then(user => {
       if (token) {
-        this.setState({ isAuthenticated: true, user, token });
+        setUser(user);
+        setToken(token);
+        setAuthenticated(true);
       }
     });
-  }); */
+  });
 };
 
 const onFailure = response => {
-  console.log('failure:', response);
+  console.log(response);
 };
 
 const Login = () => {
@@ -89,45 +87,62 @@ const Login = () => {
         <Close>
           <NAVLink to="/">X</NAVLink>
         </Close>
-        <Form>
-          <Form.Group>
-            <GoogleLogin
-              clientId={KEYS.dev.GOOGLE_CLIENT_ID}
-              buttonText="Login"
-              onSuccess={googleResponse}
-              onFailure={onFailure}
-            />
-          </Form.Group>
-          <HRWrap>
-            <HRDiv>
-              <HR />
-            </HRDiv>
-            <HRDivText>
-              <HRText>Or</HRText>
-            </HRDivText>
-            <HRDiv>
-              <HR />
-            </HRDiv>
-          </HRWrap>
-          <Form.Group>
-            <Form.Control type="email" placeholder="Enter Email" />
-          </Form.Group>
-          <Form.Group>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-          <Form.Group>
-            <Button style={{ width: '100%', margin: '10px 0 10px 0' }}>
-              Login
-            </Button>
-          </Form.Group>
-          <Form.Group>
-            <NavLink to="/signup">
-              <Button style={{ width: '100%', margin: '10px 0 10px 0' }}>
-                Signup
-              </Button>
-            </NavLink>
-          </Form.Group>
-        </Form>
+        <Consumer>
+          {({ authenticated, setAuthenticated, setUser, setToken }) => {
+            if (authenticated) {
+              return <Redirect to={{ pathname: '/' }} />;
+            }
+
+            return (
+              <Form>
+                <Form.Group>
+                  <GoogleLogin
+                    clientId={KEYS.dev.GOOGLE_CLIENT_ID}
+                    buttonText="Login"
+                    onSuccess={response =>
+                      googleResponse({
+                        response,
+                        setAuthenticated,
+                        setUser,
+                        setToken,
+                      })
+                    }
+                    onFailure={onFailure}
+                  />
+                </Form.Group>
+                <HRWrap>
+                  <HRDiv>
+                    <HR />
+                  </HRDiv>
+                  <HRDivText>
+                    <HRText>Or</HRText>
+                  </HRDivText>
+                  <HRDiv>
+                    <HR />
+                  </HRDiv>
+                </HRWrap>
+                <Form.Group>
+                  <Form.Control type="email" placeholder="Enter Email" />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Control type="password" placeholder="Password" />
+                </Form.Group>
+                <Form.Group>
+                  <Button style={{ width: '100%', margin: '10px 0 10px 0' }}>
+                    Login
+                  </Button>
+                </Form.Group>
+                <Form.Group>
+                  <NavLink to="/signup">
+                    <Button style={{ width: '100%', margin: '10px 0 10px 0' }}>
+                      Signup
+                    </Button>
+                  </NavLink>
+                </Form.Group>
+              </Form>
+            );
+          }}
+        </Consumer>
       </Div>
     </ContentLayout>
   );

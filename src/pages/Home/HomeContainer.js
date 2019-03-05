@@ -3,20 +3,16 @@ import React from 'react';
 // Components
 import Home from './Home.js';
 
+// Services
+import { fetchGooglePlaces } from '../../services/api';
+
 class HomeContainer extends React.Component {
   state = {
     places: [],
   };
 
   fetchAutoComplete = input => {
-    fetch('http://130.74.160.59:5000/google/places/autocomplete', {
-      method: 'POST',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ place: input }),
-    })
+    fetchGooglePlaces('autocomplete', input)
       .then(response => response.json())
       .then(({ predictions, status }) => {
         if (status === 'OK') {
