@@ -74,7 +74,7 @@ const NavBar = () => {
               >
                 <NavBarLink
                   to="/host/wildlife"
-                  title="Host a Wildlife"
+                  title="Host Wildlife"
                   onClick={() =>
                     isMobileWidth && setMobileMenuExpanded(!mobileMenuExpanded)
                   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { SingleDatePicker, DateRangePicker } from 'react-dates';
+import { withRouter } from 'react-router-dom';
 
 // Styles
 import './home.css';
@@ -161,6 +162,16 @@ class Home extends React.PureComponent {
         };
       },
       () => console.log('this.state.guestsCount: ' + this.state.guestsCount)
+    );
+  };
+
+  renderQuery = () => {
+    const { where, guestsCount, startDate, endDate } = this.state;
+
+    const query = where.replace(',', '-').replace(' ', '--');
+
+    this.props.history.push(
+      `/s/${query}/all?query=${where}&checkin=${startDate}&checkout=${endDate}&guests=${guestsCount}`
     );
   };
 
@@ -328,7 +339,10 @@ class Home extends React.PureComponent {
                     )}
                   </div>
                 </div>
-                <div className="button-field">
+                <div
+                  className="button-field"
+                  onClick={() => this.renderQuery()}
+                >
                   <i className="material-icons">search</i>
                 </div>
               </div>
@@ -340,4 +354,4 @@ class Home extends React.PureComponent {
   }
 }
 
-export default Home;
+export default withRouter(Home);
