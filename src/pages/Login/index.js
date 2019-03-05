@@ -55,16 +55,6 @@ const NAVLink = styled(NavLink)`
   color: black;
   padding: 10px;
 `;
-const StyledGoogleLogin = styled(GoogleLogin)`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin: 20px 0 20px 0;
-
-  &:hover {
-    background-color: cornflowerblue;
-  }
-`;
 
 const googleResponse = response => {
   console.log('response', response);
