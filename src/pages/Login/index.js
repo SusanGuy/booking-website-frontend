@@ -1,43 +1,44 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import { GoogleLogin } from 'react-google-login';
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import styled from 'styled-components'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import { GoogleLogin } from 'react-google-login'
 
 // Layout
-import ContentLayout from '../../layout/Content';
+import ContentLayout from '../../layout/Content'
 
 const Div = styled.div`
   background-color: white;
-
+  min-width: 30%;
+  max-width: 90%;
   padding: 3vmin;
   display: flex;
   flex-direction: column;
   justify-content: center;
   z-index: 1;
-`;
+`
 const Close = styled.span`
   background-color: white;
   color: black;
   margin: 20px 0 40px 0;
-`;
+`
 const HR = styled.hr`
   margin: 20px 0 20px 0;
-`;
+`
 
 const NAVLink = styled(NavLink)`
   color: black;
   padding: 10px;
-`;
+`
 
 const config = {
   GOOGLE_CLIENT_ID:
-    '1047753473052-ecs3jgoau4l0j5s686hbourbg0rs99si.apps.googleusercontent.com',
-};
+    '1047753473052-ecs3jgoau4l0j5s686hbourbg0rs99si.apps.googleusercontent.com'
+}
 
 const googleResponse = response => {
-  console.log('response', response);
+  console.log('response', response)
   /* const tokenBlob = new Blob(
     [JSON.stringify({ access_token: response.accessToken }, null, 2)],
     { type: 'application/json' }
@@ -56,34 +57,34 @@ const googleResponse = response => {
       }
     });
   }); */
-};
+}
 
 const onFailure = response => {
-  console.log('failure:', response);
-};
+  console.log('failure:', response)
+}
 
 const Login = () => {
   return (
     <ContentLayout>
-      <Div className="Login">
+      <Div className='Login'>
         <Close>
-          <NAVLink to="/">X</NAVLink>
+          <NAVLink to='/'>X</NAVLink>
         </Close>
         <Form>
           <Form.Group>
             <GoogleLogin
               clientId={config.GOOGLE_CLIENT_ID}
-              buttonText="Login"
+              buttonText='Login'
               onSuccess={googleResponse}
               onFailure={onFailure}
             />
           </Form.Group>
           <HR />
           <Form.Group>
-            <Form.Control type="email" placeholder="Enter Email" />
+            <Form.Control type='email' placeholder='Enter Email' />
           </Form.Group>
           <Form.Group>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control type='password' placeholder='Password' />
           </Form.Group>
           <Form.Group>
             <Button style={{ width: '100%', margin: '10px 0 10px 0' }}>
@@ -98,7 +99,7 @@ const Login = () => {
         </Form>
       </Div>
     </ContentLayout>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
