@@ -1,12 +1,15 @@
-.MenuContent {
-    background-size: contain;
+.MenuContent-bg {
+    background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
+    height: 40%;
+    position: absolute;
+    z-index: 0;
+    width: 100%;
 }
 
 @media (min-width: 442px) {
-    .MenuContent {
-        background-size: cover;
+    .MenuContent-bg {
         background-position: 50%;
         height: 100vh;
     }
@@ -18,6 +21,7 @@
     opacity: 0.4;
     position: absolute;
     width: 100%;
+    z-index: 0;
 }
 
 @media (min-width: 442px) {

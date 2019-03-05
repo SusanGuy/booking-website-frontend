@@ -11,11 +11,13 @@ import NavBar from '../../components/NavBar';
 
 const MenuContent = ({ children }) => {
   return (
-    <div
-      className="MenuContent"
-      style={{ backgroundImage: `url(${backgrounds.landscape})` }}
-    >
+    <div className="MenuContent">
+      <div
+        className="MenuContent-bg"
+        style={{ backgroundImage: `url(${backgrounds.landscape})` }}
+      />
       <div className="MenuContent--hover" />
+
       <NavBar />
       {children}
     </div>
