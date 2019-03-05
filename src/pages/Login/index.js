@@ -9,27 +9,60 @@ import { GoogleLogin } from 'react-google-login'
 import ContentLayout from '../../layout/Content'
 
 const Div = styled.div`
+  border-radius: 1.5%;
+  width: 45%;
+  height: 45%;
   background-color: white;
-  min-width: 30%;
-  max-width: 90%;
   padding: 3vmin;
   display: flex;
   flex-direction: column;
   justify-content: center;
   z-index: 1;
+  position: relative;
+  @media only screen and (max-width: 800px) {
+    width: 90%;
+    height: 50%;
+  }
 `
-const Close = styled.span`
+const Close = styled.div`
   background-color: white;
   color: black;
-  margin: 20px 0 40px 0;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  margin: 10px;
 `
-const HR = styled.hr`
-  margin: 20px 0 20px 0;
+
+const HRWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `
+const HRDiv = styled.div`
+  width: 100%;
+`
+const HR = styled.hr``
+
+const HRDivText = styled.div`
+  padding: 0px 10px 0px 10px;
+`
+const HRText = styled.p``
 
 const NAVLink = styled(NavLink)`
   color: black;
   padding: 10px;
+`
+const StyledGoogleLogin = styled(GoogleLogin)`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 20px 0 20px 0;
+
+  &:hover {
+    background-color: cornflowerblue;
+  }
 `
 
 const config = {
@@ -72,14 +105,24 @@ const Login = () => {
         </Close>
         <Form>
           <Form.Group>
-            <GoogleLogin
+            <StyledGoogleLogin
               clientId={config.GOOGLE_CLIENT_ID}
               buttonText='Login'
               onSuccess={googleResponse}
               onFailure={onFailure}
             />
           </Form.Group>
-          <HR />
+          <HRWrap>
+            <HRDiv>
+              <HR />
+            </HRDiv>
+            <HRDivText>
+              <HRText>Or</HRText>
+            </HRDivText>
+            <HRDiv>
+              <HR />
+            </HRDiv>
+          </HRWrap>
           <Form.Group>
             <Form.Control type='email' placeholder='Enter Email' />
           </Form.Group>
@@ -92,9 +135,11 @@ const Login = () => {
             </Button>
           </Form.Group>
           <Form.Group>
-            <Button style={{ width: '100%', margin: '10px 0 10px 0' }}>
-              Signup
-            </Button>
+            <NavLink to='/signup'>
+              <Button style={{ width: '100%', margin: '10px 0 10px 0' }}>
+                Signup
+              </Button>
+            </NavLink>
           </Form.Group>
         </Form>
       </Div>
