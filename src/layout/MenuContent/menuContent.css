@@ -1,19 +1,28 @@
 .MenuContent {
-    background-size: cover;
-    background-position: 50%;
-    height: 100vh;
-}
-
-.MenuContent.collapsed {
     background-size: contain;
     background-position: top;
     background-repeat: no-repeat;
 }
 
-.MenuContent--hover-alpha {
-    background-image: linear-gradient(to bottom, var(--theme-black), #f06d06);
-    height: 100vh;
+@media (min-width: 442px) {
+    .MenuContent {
+        background-size: cover;
+        background-position: 50%;
+        height: 100vh;
+    }
+}
+
+.MenuContent--hover {
+    background-image: linear-gradient(to bottom, var(--theme-black), var(--theme-white));
+    height: 40%;
     opacity: 0.4;
     position: absolute;
     width: 100%;
+}
+
+@media (min-width: 442px) {
+    .MenuContent--hover {
+        background-image: linear-gradient(to bottom, var(--theme-black), #f06d06);
+        height: 100vh;
+    }
 }

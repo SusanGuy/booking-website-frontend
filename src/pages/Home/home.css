@@ -1,28 +1,35 @@
 .Home {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 0px;
     position: relative;
-}
-
-@media (min-width: 744px) {
-    .Home {
-        margin: auto !important;
-        padding: 0px;
-        width: 712px !important;
-    }
+    margin-top: -30px;
 }
 
 @media (min-width: 1128px) {
     .Home {
+        margin: auto !important;
         width: 980px !important;
     }
 }
 
 .Home h1 {
     color: var(--theme-white);
-    font-size: var(--theme-font-size-header);
+    font-size: 30px;
     font-weight: 700;
+    padding: 0 20px;
+}
+
+@media (min-width: 450px) {
+    .Home h1 {
+        padding: 0;
+    }
+}
+
+@media (min-width: 992px) {
+    .Home h1 {
+        font-size: var(--theme-font-size-header);
+    }
 }
 
 .Home--search-location {
@@ -46,22 +53,16 @@
     align-items: center;
     background: var(--theme-red);
     border-radius: 5px;
-    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65);
     cursor: pointer;
     display: flex;
     justify-content: center;
-    margin: 0;
-    width: 100%;
-    transform: scale(1);
-    transition: all 300ms ease-in-out;
-}
-
-.Home--search-location .button-field:hover {
-    transform: scale(1.05);
+    margin: 0 auto;
+    width: 90%;
 }
 
 @media (min-width: 992px) {
     .Home--search-location .button-field {
+        box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65);
         margin-left: 15px;
         width: 76px;
     }
@@ -77,7 +78,6 @@
     align-items: center;
     background-color: var(--theme-white);
     border-radius: 5px;
-    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65) !important;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -86,11 +86,23 @@
 
 @media (min-width: 992px) {
     .Home--fields {
+        box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65) !important;
         display: flex;
         flex-direction: row;
         margin: 0px;
         width: 100%;
     }
+}
+
+.Home--SingleDatePicker {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.Home--DatePicker {
+    display: flex;
+    flex-direction: column;
 }
 
 .Home--fields .input-field {
@@ -109,13 +121,14 @@
 }
 
 .Home--fields .input-field.location {
-    border: 1px solid var(--theme-white);
+    border-radius: 5px;
     width: 100%;
     transition: width 300ms ease-in-out;
 }
 
 @media (min-width: 992px) {
     .Home--fields .input-field.location {
+        border: 1px solid var(--theme-white);
         transform: translateZ(0);
         backface-visibility: hidden;
         position: relative;
@@ -224,7 +237,7 @@
     align-items: flex-start;
     flex-direction: column;
     height: 100%;
-    padding: 16px 15px 14px;
+    padding: 16px 20px 14px;
     width: 100%;
     transition: width 300ms ease-in-out;
 }
@@ -244,19 +257,28 @@
     text-overflow: ellipsis !important;
 }
 
-.Home--fields input:active, .Home--fields input:focus {
-    border-bottom: none !important;
+.Home--fields input:active,
+.Home--fields input:focus {
+    border-bottom: 1px solid var(--theme-border) !important;
     box-shadow: none !important;
+}
+
+@media (min-width: 992px) {
+    .Home--fields input:active,
+    .Home--fields input:focus {
+        border-bottom: none !important;
+        box-shadow: none !important;
+    }
 }
 
 .Home--fields .input-text {
     border: 1px solid var(--theme-border) !important;
+    border-radius: 5px !important;
     box-sizing: border-box !important;
     color: var(--theme-text-placeholder-color);
     cursor: pointer;
     font-size: 18px !important;
-    height: inherit !important;
-    line-height: 27px;
+    height: 50px !important;
     padding: 10px !important;
     width: 100%;
 }
@@ -267,6 +289,8 @@
         color: var(--theme-text-placeholder-color);
         cursor: pointer;
         font-size: 18px !important;
+        height: inherit !important;
+        line-height: 27px;
         padding: 0px !important;
     }
 }
@@ -274,6 +298,7 @@
 .Home--fields .label {
     font-size: 12px;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 @keyframes fadeInSlideDown {
@@ -301,6 +326,30 @@
     height: inherit !important;
 }
 
+.input-field .SingleDatePicker,
+.input-field .DateRangePicker {
+    border: 1px solid var(--theme-border);
+    border-radius: 5px !important;
+    box-sizing: border-box !important;
+    color: var(--theme-text-placeholder-color);
+    cursor: pointer;
+    font-size: 18px !important;
+    height: 50px !important;
+    line-height: 27px;
+    padding: 10px;
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .input-field .SingleDatePicker,
+    .input-field .DateRangePicker {
+        border: none;
+        height: inherit !important;
+        padding: 0px;
+    }
+}
+
+.input-field .DateInput,
 .input-field .DateRangePickerInput {
     align-items: center;
     border: none;
