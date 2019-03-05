@@ -3,20 +3,17 @@ import { Route, Switch } from 'react-router';
 
 // Component
 import Home from './pages/Home/HomeContainer';
-import Property from './pages/Property';
 import Login from './pages/Login';
 import About from './pages/About';
-
-// ContextAPI
-import Consumer from './context/ConfigProvider';
+import AuthenticatedPages from './pages/AuthenticatedPages';
 
 const Routes = () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/property" component={Property} />
       <Route path="/login" component={Login} />
       <Route path="/about" component={About} />
+      <Route component={AuthenticatedPages} />
     </Switch>
   );
 };

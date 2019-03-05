@@ -18,7 +18,7 @@ class HomeContainer extends React.Component {
         if (status === 'OK') {
           let places = [];
           predictions.map(prediction => {
-            places.push({
+            return places.push({
               name: prediction.description,
               type: prediction.types[0],
             });
