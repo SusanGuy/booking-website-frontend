@@ -5,15 +5,21 @@
     white-space: normal;
 }
 
+@media (min-width: 442px) {
+  .Experience {
+      width: 50%;
+  }
+}
+
 @media (min-width: 678px) {
     .Experience {
-        width: 50%;
+        width: 33.3%;
     }
 }
 
 @media (min-width: 992px) {
     .Experience {
-        width: 33.3%;
+        width: 25%;
     }
 }
 
