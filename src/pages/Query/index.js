@@ -6,18 +6,10 @@ import ContentLayout from '../../layout/Content';
 // Styles
 import './query.css';
 
-// Context API
-import ConfigContext from '../../context/ConfigProvider';
-
-const Query = ({ match }) => {
+const Query = () => {
   return (
-    <ContentLayout>
-      <ConfigContext.Consumer>
-        {({ setTheme }) => {
-          setTheme('white');
-          return <div className="Query" />;
-        }}
-      </ConfigContext.Consumer>
+    <ContentLayout theme="white">
+      <div className="Query" />;
     </ContentLayout>
   );
 };

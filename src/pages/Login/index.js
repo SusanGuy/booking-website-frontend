@@ -65,15 +65,13 @@ const NAVLink = styled(NavLink)`
   padding: 10px;
 `;
 
-const googleResponse = ({ response, setUser, setToken, setAuthenticated }) => {
+const googleResponse = ({ response, setUser }) => {
   authenticateWithGoogle(response.accessToken).then(r => {
     const token = r.headers.get('x-auth-token');
     r.json().then(user => {
       if (token) {
         setUser(user);
-        setToken(token);
         storeUserCredentials(token);
-        setAuthenticated(true);
       }
     });
   });

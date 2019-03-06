@@ -165,12 +165,10 @@ class Home extends React.PureComponent {
     );
   };
 
-  renderQuery = ({ setTheme }) => {
+  renderQuery = () => {
     const { where, guestsCount, startDate, endDate } = this.state;
 
     const query = where.replace(/[, ]+/g, '-').trim();
-
-    setTheme('white');
 
     this.props.history.push(
       `/s/${query}/all?query=${where}&checkin=${startDate}&checkout=${endDate}&guests=${guestsCount}`
@@ -194,8 +192,7 @@ class Home extends React.PureComponent {
             experience
           </h1>
           <ConfigContext.Consumer>
-            {({ isMobileWidth, setTheme }) => {
-              setTheme('main');
+            {({ isMobileWidth }) => {
               return (
                 <div className="Home--search-location">
                   <div className="Home--fields col s12">
@@ -345,7 +342,7 @@ class Home extends React.PureComponent {
                   </div>
                   <div
                     className="button-field"
-                    onClick={() => this.renderQuery({ setTheme })}
+                    onClick={() => this.renderQuery()}
                   >
                     <i className="material-icons">search</i>
                   </div>
