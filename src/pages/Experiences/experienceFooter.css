@@ -1,0 +1,60 @@
+.ExperienceFooter {
+    background-color: var(--theme-white);
+    bottom: 0;
+    border-top: 1px solid var(--theme-border);
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65);
+    display: flex;
+    height: 69px;
+    justify-content: space-between;
+    left: 0;
+    padding: 0 48px;
+    position: fixed;
+    right: 0;
+    width: 100vw;
+}
+
+.ExperienceFooter--profile {
+    align-items: center;
+    display: flex;
+}
+
+.ExperienceFooter--profile img {
+    height: 50px;
+}
+
+.ExperienceFooter--description-reviews {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-left: 15px;
+}
+
+.ExperienceFooter--description-reviews i {
+    font-size: 16px;
+    height: 18px;
+}
+
+.ExperienceFooter--description-reviews i,
+.ExperienceFooter--description-reviews-rate {
+    color: var(--theme-main);
+    font-weight: bold;
+}
+
+.ExperienceFooter--description-reviews-number {
+    color: var(--theme-text-placeholder-color);
+    margin-left: 10px;
+}
+
+.ExperienceFooter--callToAction {
+    align-items: center;
+    display: flex;
+}
+
+.ExperienceFooter--callToAction--price {
+    margin-right: 15px;
+}
+
+.ExperienceFooter--callToAction--button {
+    border-radius: 5px;
+    width: 250px;
+}

@@ -8,7 +8,7 @@ import ExperienceCard from './ExperienceCard';
 
 const Wrapper = ({ title, subtitle, experiences }) => {
   // Pick ranndomized 4 options
-  const randomNumber = Math.floor(Math.random() * experiences.length - 4);
+  const randomNumber = Math.floor(Math.random() * experiences.length - 8);
   const randomizedExperiences = experiences
     .slice(randomNumber, randomNumber + 8)
     .map(experience => experience);

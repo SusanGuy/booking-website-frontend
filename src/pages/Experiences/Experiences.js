@@ -6,8 +6,11 @@ import CustomBackgroundLayout from '../../layout/CustomBackground';
 
 // Components
 import ExperienceItem from './ExperienceItem';
+import ExperienceFooter from './ExperienceFooter';
 
-const Experiences = ({ experience }) => {
+const Experiences = ({ match, experience }) => {
+  console.log('match', match);
+
   return (
     <ContentLayout theme="white">
       <CustomBackgroundLayout
@@ -16,6 +19,7 @@ const Experiences = ({ experience }) => {
         paddingVertical={10}
       >
         <ExperienceItem {...experience} />
+        <ExperienceFooter {...experience} />
       </CustomBackgroundLayout>
     </ContentLayout>
   );
