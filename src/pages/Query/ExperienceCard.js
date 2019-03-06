@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // Assets
-import icons from '../../shared/icons';
 import './experienceCard.css';
 
 const ExperienceCard = ({ image, category, title, price, rating, reviews }) => {
