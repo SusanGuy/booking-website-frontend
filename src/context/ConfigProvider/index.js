@@ -7,8 +7,6 @@ const ConfigContext = createContext();
 const ConfigProvider = windowSize(({ children, windowWidth }) => {
   // State resposible to toggle the mobile version of the Menu
   const [mobileMenuExpanded, setMobileMenuExpanded] = useState(false);
-  const [token, setToken] = useState('');
-  const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState(false);
   const [theme, setTheme] = useState('main');
 
@@ -22,12 +20,8 @@ const ConfigProvider = windowSize(({ children, windowWidth }) => {
         setTheme,
         mobileMenuExpanded,
         setMobileMenuExpanded,
-        authenticated,
-        setAuthenticated,
         user,
         setUser,
-        token,
-        setToken,
         isMobileWidth,
       }}
     >

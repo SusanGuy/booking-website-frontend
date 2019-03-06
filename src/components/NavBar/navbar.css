@@ -84,10 +84,11 @@
 }
 
 .NavBar--menu.inverted a {
+  border-bottom: 2px solid rgba(0,0,0,0);
     color: var(--theme-black);
 }
 
-.NavBar--menu.inverted li:hover {
+.NavBar--menu.inverted a:hover {
     border-bottom: 2px solid var(--theme-black);
     cursor: pointer;
 }

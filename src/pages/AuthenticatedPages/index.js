@@ -2,16 +2,16 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 // Context API
-import Consumer from '../../context/ConfigProvider';
+import AuthProvider from '../../context/AuthProvider';
 
 // Page
 import HostWildLife from '../Host/Wildlife';
 
 const AuthenticatedPages = () => {
   return (
-    <Consumer>
-      {({ isAuthenticated }) => {
-        if (!isAuthenticated) {
+    <AuthProvider.Consumer>
+      {({ user }) => {
+        if (!user) {
           return <Redirect to="/login" />;
         }
 
@@ -21,7 +21,7 @@ const AuthenticatedPages = () => {
           </Switch>
         );
       }}
-    </Consumer>
+    </AuthProvider.Consumer>
   );
 };
 

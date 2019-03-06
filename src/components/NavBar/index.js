@@ -21,9 +21,7 @@ const NavBarLink = ({ to, onClick, title }) => {
   );
 };
 
-const logout = ({ setAuthenticated, setToken, setUser }) => {
-  setAuthenticated(false);
-  setToken('');
+const logout = setUser => {
   setUser(null);
 };
 
@@ -38,13 +36,9 @@ const NavBar = () => {
               setMobileMenuExpanded,
               theme,
               isMobileWidth,
-              authenticated,
-              setAuthenticated,
               setToken,
             }) => {
               const isWhiteTheme = theme === 'white';
-
-              console.log('NavBar user', user);
 
               return (
                 <div
@@ -108,12 +102,7 @@ const NavBar = () => {
                       />
                       {user ? (
                         <li>
-                          <Link
-                            to="/"
-                            onClick={() =>
-                              logout(setAuthenticated, setToken, setUser)
-                            }
-                          >
+                          <Link to="/" onClick={() => logout(setUser)}>
                             <img
                               src={
                                 user.profile_pic ? user.profile_pic : icons.user
