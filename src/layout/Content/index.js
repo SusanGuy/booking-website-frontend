@@ -12,7 +12,15 @@ const Content = ({ children, theme }) => {
       {({ setTheme }) => {
         setTheme(theme);
 
-        return <div className="Content">{children}</div>;
+        return (
+          <div
+            className={['Content', theme === 'white' ? '' : 'inverted'].join(
+              ' '
+            )}
+          >
+            {children}
+          </div>
+        );
       }}
     </ConfigProvider>
   );
