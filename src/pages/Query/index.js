@@ -2,6 +2,7 @@ import React from 'react';
 
 // Layout
 import ContentLayout from '../../layout/Content';
+import CustomBackgroundLayout from '../../layout/CustomBackground';
 
 // Styles
 import './query.css';
@@ -15,14 +16,14 @@ const Query = ({ match }) => {
 
   return (
     <ContentLayout theme="white">
-      <div className="Query">
+      <CustomBackgroundLayout theme="white">
         <WrapperContainer
           title={`Explore ${location}`}
           subtitle="Book activities led by local hosts on your next trip"
         />
         <WrapperContainer endpoint="property" title="Popular experiences" />
         <WrapperContainer endpoint="property" title="Where to fish" />
-      </div>
+      </CustomBackgroundLayout>
     </ContentLayout>
   );
 };

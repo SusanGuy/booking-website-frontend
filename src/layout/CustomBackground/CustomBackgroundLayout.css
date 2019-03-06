@@ -1,0 +1,12 @@
+.CustomBackgroundLayout {
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 1;
+}
+
+@media (max-width: 450px) {
+    .CustomBackgroundLayout {
+        padding: 20px 10px;
+    }
+}

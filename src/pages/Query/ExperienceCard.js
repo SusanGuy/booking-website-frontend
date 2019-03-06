@@ -4,11 +4,19 @@ import { Link } from 'react-router-dom';
 // Assets
 import './experienceCard.css';
 
-const ExperienceCard = ({ image, category, title, price, rating, reviews }) => {
+const ExperienceCard = ({
+  id,
+  image,
+  category,
+  title,
+  price,
+  rating,
+  reviews,
+}) => {
   return (
     <div className="Experience">
       <div style={{ padding: 8 }}>
-        <Link to="/">
+        <Link to={`/experiences/${id}`}>
           <div
             className="Experience--image"
             style={{ backgroundImage: `url(${image})` }}

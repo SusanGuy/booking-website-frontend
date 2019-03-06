@@ -1,0 +1,96 @@
+.ExperienceItem {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.ExperienceItem--image-container {
+    height: 650px;
+    width: calc(33.3333% - 5px);
+}
+
+.ExperienceItem--image {
+    background-size: cover;
+    background-position: 50%;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.ExperienceItem--content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.ExperienceItem--content--title {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.ExperienceItem--content--details {
+    margin: 10px 0px;
+}
+
+.ExperienceItem--content--details div {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin: 5px 0;
+}
+
+.ExperienceItem i {
+    width: 40px;
+}
+
+.ExperienceItem--content--booknow {
+    align-items: center;
+    border-bottom: 1px solid var(--theme-border);
+    border-top: 1px solid var(--theme-border);
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    padding: 30px 0px;
+    margin: 20px 0px;
+}
+
+.ExperienceItem--content--about-host {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.ExperienceItem--content--about-host-profile {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    width: 20%;
+}
+
+.ExperienceItem--content--about-host-profile-pic img {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.ExperienceItem--content--about-host-profile-name,
+.ExperienceItem--content--about-host-profile-link {
+    text-align: center;
+}
+
+.ExperienceItem--content--about-host-profile-link {
+    color: var(--theme-main);
+    cursor: pointer;
+}
+
+.ExperienceItem--content--about-host-description {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.ExperienceItem--content--about-host-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
