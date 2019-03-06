@@ -5,6 +5,7 @@ import pushPin from '../assets/icon/flaticon/push-pin.svg';
 import plus from '../assets/icon/flaticon/plus.svg';
 import minus from '../assets/icon/flaticon/minus.svg';
 import user from '../assets/icon/flaticon/user.svg';
+import star from '../assets/icon/flaticon/star.svg';
 
 export default {
   ecoHome,
@@ -14,4 +15,5 @@ export default {
   plus,
   minus,
   user,
+  star,
 };

@@ -3,8 +3,9 @@ const url =
     ? 'http://localhost:5000'
     : 'http://bookingapp-dev.ptewmmpyuh.ca-central-1.elasticbeanstalk.com';
 
-function request(endpoint, options) {
+export function request(endpoint, options) {
   return fetch(`${url}${endpoint}`, {
+    method: 'POST',
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
@@ -18,7 +19,6 @@ function request(endpoint, options) {
 
 export function validateToken(token) {
   const options = {
-    method: 'POST',
     body: JSON.stringify({ token }),
   };
 
@@ -32,7 +32,6 @@ export function authenticateWithGoogle(accessToken) {
   );
 
   const options = {
-    method: 'POST',
     body: tokenBlob,
   };
 
@@ -41,11 +40,6 @@ export function authenticateWithGoogle(accessToken) {
 
 export function fetchGooglePlaces(endpoint, input) {
   const options = {
-    method: 'POST',
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-    },
     body: JSON.stringify({ place: input }),
   };
 

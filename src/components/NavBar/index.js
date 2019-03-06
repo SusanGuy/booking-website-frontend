@@ -57,9 +57,11 @@ const NavBar = () => {
                       >
                         <img src={icons.ecoHome} alt="logo-eco" />
                         <i
-                          className={['material-icons']
-                            .concat(mobileMenuExpanded ? 'expanded' : '')
-                            .join(' ')}
+                          className={[
+                            'material-icons',
+                            mobileMenuExpanded ? 'expanded' : '',
+                            isWhiteTheme ? 'inverted' : '',
+                          ].join(' ')}
                         >
                           expand_more
                         </i>

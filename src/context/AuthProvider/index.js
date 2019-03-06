@@ -19,10 +19,10 @@ class AuthProvider extends React.Component {
       })
       .then(res => res.json())
       .then(result => {
-        console.log('result.data[0]', result.data[0]);
         this.setUser(result.data[0]);
       })
       .catch(err => {
+        // TOODO: Gracefully handle authenticated user
         console.log('User not authenticated. ', err);
       });
   }
@@ -39,8 +39,6 @@ class AuthProvider extends React.Component {
       state: { user },
       props: { children },
     } = this;
-
-    console.log('user', user);
 
     return (
       <AuthContext.Provider

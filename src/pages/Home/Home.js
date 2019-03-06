@@ -168,7 +168,7 @@ class Home extends React.PureComponent {
   renderQuery = () => {
     const { where, guestsCount, startDate, endDate } = this.state;
 
-    const query = where.replace(/[, ]+/g, '-').trim();
+    const query = where.replace(/[, ]+/g, '--').trim();
 
     this.props.history.push(
       `/s/${query}/all?query=${where}&checkin=${startDate}&checkout=${endDate}&guests=${guestsCount}`

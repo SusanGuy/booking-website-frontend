@@ -8,10 +8,15 @@
     color: var(--theme-black);
     font-size: 24px;
     font-weight: 800;
+    margin: 0 0 10px;
+}
+
+.Wrapper--subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 0 20px;
 }
 
 .Wrapper--content {
-    background-color: var(--theme-border);
-    height: 150px;
-    margin-top: 8px;
+    margin: 8px -8px;
 }

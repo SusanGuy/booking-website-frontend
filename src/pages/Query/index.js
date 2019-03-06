@@ -7,15 +7,21 @@ import ContentLayout from '../../layout/Content';
 import './query.css';
 
 // Components
-import Wrapper from './Wrapper';
+import WrapperContainer from './WrapperContainer';
 
-const Query = () => {
+const Query = ({ match }) => {
+  const query = match.params.region.split('--');
+  const [location] = query;
+
   return (
     <ContentLayout theme="white">
       <div className="Query">
-        <Wrapper title="Explore" />
-        <Wrapper title="Popular Experiences" />
-        <Wrapper title="Where to stay" />
+        <WrapperContainer
+          title={`Explore ${location}`}
+          subtitle="Book activities led by local hosts on your next trip"
+        />
+        <WrapperContainer endpoint="property" title="Popular experiences" />
+        <WrapperContainer endpoint="property" title="Where to fish" />
       </div>
     </ContentLayout>
   );
