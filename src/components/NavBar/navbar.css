@@ -18,6 +18,10 @@
         flex-direction: row;
         padding: 0 20px;
     }
+
+    .NavBar-wrapper.inverted {
+        border-bottom: 1px solid var(--theme-border);
+    }
 }
 
 .NavBar--logo {
@@ -63,8 +67,10 @@
 }
 
 .NavBar--menu {
+    align-items: center;
     display: flex;
-    height: 0px;
+    height: 80px;
+    line-height: 80px;
 }
 
 .NavBar--menu li {
@@ -72,21 +78,31 @@
 }
 
 .NavBar--menu a {
+    align-items: center;
+    display: flex;
     font-size: var(--theme-font-size);
-    height: 80px;
-    line-height: 80px;
+}
+
+.NavBar--menu.inverted a {
+    color: var(--theme-black);
+}
+
+.NavBar--menu.inverted li:hover {
+    border-bottom: 2px solid var(--theme-black);
+    cursor: pointer;
 }
 
 @media screen and (min-width: 992px) {
     .NavBar--menu a {
+        border-bottom: 2px solid rgba(0, 0, 0, 0);
         font-size: var(--theme-font-desktop-size);
     }
-}
 
-.NavBar--menu a:hover {
-    background: rgba(0, 0, 0, 0);
-    border-bottom: 2px solid var(--theme-white);
-    cursor: pointer;
+    .NavBar--menu a:hover {
+        background-color: rgba(0, 0, 0, 0);
+        border-bottom: 2px solid var(--theme-white);
+        cursor: pointer;
+    }
 }
 
 .NavBar--menu.expanded {
@@ -117,6 +133,13 @@
 
 .NavBar--menu--mobile-bg.expanded {
     transform: translateY(0px) !important;
+}
+
+.NavBar--menu--profile-image {
+    border-radius: 20px;
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65);
+    height: 30px;
+    margin-right: 10px;
 }
 
 /****************************************

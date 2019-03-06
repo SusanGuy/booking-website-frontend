@@ -11,10 +11,12 @@ import { Redirect } from 'react-router-dom';
 import ContentLayout from '../../layout/Content';
 
 // ContextAPI
-import Consumer from '../../context/ConfigProvider';
+import ConfigProvider from '../../context/ConfigProvider';
+import AuthProvider from '../../context/AuthProvider';
 
 // Services
 import { authenticateWithGoogle } from '../../services/api';
+import { storeUserCredentials } from '../../services/localStorage';
 
 const Div = styled.div`
   border-radius: 1.5%;
@@ -70,6 +72,7 @@ const googleResponse = ({ response, setUser, setToken, setAuthenticated }) => {
       if (token) {
         setUser(user);
         setToken(token);
+        storeUserCredentials(token);
         setAuthenticated(true);
       }
     });
@@ -87,62 +90,70 @@ const Login = () => {
         <Close>
           <NAVLink to="/">X</NAVLink>
         </Close>
-        <Consumer>
-          {({ authenticated, setAuthenticated, setUser, setToken }) => {
-            if (authenticated) {
-              return <Redirect to={{ pathname: '/' }} />;
-            }
+        <AuthProvider.Consumer>
+          {({ setUser }) => (
+            <ConfigProvider.Consumer>
+              {({ authenticated, setAuthenticated, setToken }) => {
+                if (authenticated) {
+                  return <Redirect to={{ pathname: '/' }} />;
+                }
 
-            return (
-              <Form>
-                <Form.Group>
-                  <GoogleLogin
-                    clientId={KEYS.dev.GOOGLE_CLIENT_ID}
-                    buttonText="Login"
-                    onSuccess={response =>
-                      googleResponse({
-                        response,
-                        setAuthenticated,
-                        setUser,
-                        setToken,
-                      })
-                    }
-                    onFailure={onFailure}
-                  />
-                </Form.Group>
-                <HRWrap>
-                  <HRDiv>
-                    <HR />
-                  </HRDiv>
-                  <HRDivText>
-                    <HRText>Or</HRText>
-                  </HRDivText>
-                  <HRDiv>
-                    <HR />
-                  </HRDiv>
-                </HRWrap>
-                <Form.Group>
-                  <Form.Control type="email" placeholder="Enter Email" />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Control type="password" placeholder="Password" />
-                </Form.Group>
-                <Form.Group>
-                  <Button style={{ width: '100%', margin: '10px 0 10px 0' }}>
-                    Login
-                  </Button>
-                </Form.Group>
-                <Form.Group>
-                  <NavLink to="/signup">
-                    <Button style={{ width: '100%', margin: '10px 0 10px 0' }}>
-                      Signup
-                    </Button>
-                  </NavLink>
-                </Form.Group>
-              </Form>
-            );
-          }}
-        </Consumer>
+                return (
+                  <Form>
+                    <Form.Group>
+                      <GoogleLogin
+                        clientId={KEYS.dev.GOOGLE_CLIENT_ID}
+                        buttonText="Login"
+                        onSuccess={response =>
+                          googleResponse({
+                            response,
+                            setAuthenticated,
+                            setUser,
+                            setToken,
+                          })
+                        }
+                        onFailure={onFailure}
+                      />
+                    </Form.Group>
+                    <HRWrap>
+                      <HRDiv>
+                        <HR />
+                      </HRDiv>
+                      <HRDivText>
+                        <HRText>Or</HRText>
+                      </HRDivText>
+                      <HRDiv>
+                        <HR />
+                      </HRDiv>
+                    </HRWrap>
+                    <Form.Group>
+                      <Form.Control type="email" placeholder="Enter Email" />
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Control type="password" placeholder="Password" />
+                    </Form.Group>
+                    <Form.Group>
+                      <Button
+                        style={{ width: '100%', margin: '10px 0 10px 0' }}
+                      >
+                        Login
+                      </Button>
+                    </Form.Group>
+                    <Form.Group>
+                      <NavLink to="/signup">
+                        <Button
+                          style={{ width: '100%', margin: '10px 0 10px 0' }}
+                        >
+                          Signup
+                        </Button>
+                      </NavLink>
+                    </Form.Group>
+                  </Form>
+                );
+              }}
+            </ConfigProvider.Consumer>
+          )}
+        </AuthProvider.Consumer>
       </Div>
     </ContentLayout>
   );

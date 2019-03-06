@@ -4,6 +4,7 @@ import mapsAndFlags from '../assets/icon/flaticon/maps-and-flags.svg';
 import pushPin from '../assets/icon/flaticon/push-pin.svg';
 import plus from '../assets/icon/flaticon/plus.svg';
 import minus from '../assets/icon/flaticon/minus.svg';
+import user from '../assets/icon/flaticon/user.svg';
 
 export default {
   ecoHome,
@@ -12,4 +13,5 @@ export default {
   pushPin,
   plus,
   minus,
+  user,
 };

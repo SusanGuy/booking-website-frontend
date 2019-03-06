@@ -154,7 +154,6 @@
     }
 
     .Home--fields .input-field.location.focused {
-        /* border: 1px solid var(--theme-main) !important; */
         width: 60% !important;
     }
 
@@ -272,7 +271,7 @@
     }
 
     .guests .Home--fields--dropdown-item div {
-      padding: 15px;
+        padding: 15px;
     }
 
     .guests .Home--fields--dropdown-image {

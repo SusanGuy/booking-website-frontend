@@ -2,7 +2,7 @@ import React, { useState, createContext } from 'react';
 import windowSize from 'react-window-size';
 
 // ContextAPI
-const { Provider, Consumer } = createContext();
+const ConfigContext = createContext();
 
 const ConfigProvider = windowSize(({ children, windowWidth }) => {
   // State resposible to toggle the mobile version of the Menu
@@ -10,13 +10,16 @@ const ConfigProvider = windowSize(({ children, windowWidth }) => {
   const [token, setToken] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState(false);
+  const [theme, setTheme] = useState('main');
 
   // Validate is screen width is less than 992px
   const isMobileWidth = windowWidth <= 992;
 
   return (
-    <Provider
+    <ConfigContext.Provider
       value={{
+        theme,
+        setTheme,
         mobileMenuExpanded,
         setMobileMenuExpanded,
         authenticated,
@@ -29,10 +32,10 @@ const ConfigProvider = windowSize(({ children, windowWidth }) => {
       }}
     >
       {children}
-    </Provider>
+    </ConfigContext.Provider>
   );
 });
 
 export { ConfigProvider };
 
-export default Consumer;
+export default ConfigContext;

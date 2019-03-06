@@ -8,7 +8,8 @@ import './navbar.css';
 import icons from '../../shared/icons';
 
 // ContextAPI
-import Consumer from '../../context/ConfigProvider';
+import ConfigContext from '../../context/ConfigProvider';
+import AuthContext from '../../context/AuthProvider';
 
 const NavBarLink = ({ to, onClick, title }) => {
   return (
@@ -29,85 +30,118 @@ const logout = ({ setAuthenticated, setToken, setUser }) => {
 const NavBar = () => {
   return (
     <nav className="NavBar">
-      <div className="NavBar-wrapper">
-        <Consumer>
-          {({
-            mobileMenuExpanded,
-            setMobileMenuExpanded,
-            isMobileWidth,
-            authenticated,
-            setAuthenticated,
-            setToken,
-            setUser,
-          }) => (
-            <React.Fragment>
-              {isMobileWidth ? (
+      <AuthContext.Consumer>
+        {({ user, setUser }) => (
+          <ConfigContext.Consumer>
+            {({
+              mobileMenuExpanded,
+              setMobileMenuExpanded,
+              theme,
+              isMobileWidth,
+              authenticated,
+              setAuthenticated,
+              setToken,
+            }) => {
+              const isWhiteTheme = theme === 'white';
+
+              console.log('NavBar user', user);
+
+              return (
                 <div
-                  onClick={() => setMobileMenuExpanded(!mobileMenuExpanded)}
-                  className="NavBar--logo"
+                  className={[
+                    'NavBar-wrapper',
+                    isWhiteTheme ? 'inverted' : '',
+                  ].join(' ')}
                 >
-                  <img src={icons.ecoHome} alt="logo-eco" />
-                  <i
-                    className={['material-icons']
-                      .concat(mobileMenuExpanded ? 'expanded' : '')
-                      .join(' ')}
-                  >
-                    expand_more
-                  </i>
+                  <React.Fragment>
+                    {isMobileWidth ? (
+                      <div
+                        onClick={() =>
+                          setMobileMenuExpanded(!mobileMenuExpanded)
+                        }
+                        className="NavBar--logo"
+                      >
+                        <img src={icons.ecoHome} alt="logo-eco" />
+                        <i
+                          className={['material-icons']
+                            .concat(mobileMenuExpanded ? 'expanded' : '')
+                            .join(' ')}
+                        >
+                          expand_more
+                        </i>
+                      </div>
+                    ) : (
+                      <Link to="/" className="NavBar--logo">
+                        <img src={icons.ecoHome} alt="logo-eco" />
+                      </Link>
+                    )}
+                    <div
+                      className={[
+                        'NavBar--menu--mobile-bg',
+                        mobileMenuExpanded ? 'expanded' : '',
+                      ].join(' ')}
+                    />
+                    <ul
+                      className={[
+                        'NavBar--menu',
+                        isWhiteTheme ? 'inverted' : '',
+                        mobileMenuExpanded
+                          ? 'expanded'
+                          : 'hide-on-med-and-down',
+                      ].join(' ')}
+                    >
+                      <NavBarLink
+                        to="/host/wildlife"
+                        title="Host Wildlife"
+                        onClick={() =>
+                          isMobileWidth &&
+                          setMobileMenuExpanded(!mobileMenuExpanded)
+                        }
+                      />
+                      <NavBarLink
+                        to="/about"
+                        title="About"
+                        onClick={() =>
+                          isMobileWidth &&
+                          setMobileMenuExpanded(!mobileMenuExpanded)
+                        }
+                      />
+                      {user ? (
+                        <li>
+                          <Link
+                            to="/"
+                            onClick={() =>
+                              logout(setAuthenticated, setToken, setUser)
+                            }
+                          >
+                            <img
+                              src={
+                                user.profile_pic ? user.profile_pic : icons.user
+                              }
+                              alt="profile-img"
+                              className="NavBar--menu--profile-image"
+                            />
+                            <div>{`${user.first_name} ${user.last_name}`}</div>
+                          </Link>
+                        </li>
+                      ) : (
+                        <NavBarLink
+                          to="/login"
+                          title="Login"
+                          onClick={() =>
+                            isMobileWidth &&
+                            setMobileMenuExpanded(!mobileMenuExpanded)
+                          }
+                        />
+                      )}
+                    </ul>
+                  </React.Fragment>
                 </div>
-              ) : (
-                <Link to="/" className="NavBar--logo">
-                  <img src={icons.ecoHome} alt="logo-eco" />
-                </Link>
-              )}
-              <div
-                className={[
-                  'NavBar--menu--mobile-bg',
-                  mobileMenuExpanded ? 'expanded' : '',
-                ].join(' ')}
-              />
-              <ul
-                className={[
-                  'NavBar--menu',
-                  mobileMenuExpanded ? 'expanded' : 'hide-on-med-and-down',
-                ].join(' ')}
-              >
-                <NavBarLink
-                  to="/host/wildlife"
-                  title="Host Wildlife"
-                  onClick={() =>
-                    isMobileWidth && setMobileMenuExpanded(!mobileMenuExpanded)
-                  }
-                />
-                <NavBarLink
-                  to="/about"
-                  title="About"
-                  onClick={() =>
-                    isMobileWidth && setMobileMenuExpanded(!mobileMenuExpanded)
-                  }
-                />
-                {authenticated ? (
-                  <Link
-                    to="/"
-                    onClick={() => logout(setAuthenticated, setToken, setUser)}
-                  >
-                    Logout
-                  </Link>
-                ) : (
-                  <NavBarLink
-                    to="/login"
-                    title="Login"
-                    onClick={() =>
-                      isMobileWidth &&
-                      setMobileMenuExpanded(!mobileMenuExpanded)
-                    }
-                  />
-                )}
-              </ul>
-            </React.Fragment>
-          )}
-        </Consumer>
-      </div>
+              );
+            }}
+          </ConfigContext.Consumer>
+        )}
+      </AuthContext.Consumer>
     </nav>
   );
 };

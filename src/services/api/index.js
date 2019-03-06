@@ -6,10 +6,23 @@ const url =
 function request(endpoint, options) {
   return fetch(`${url}${endpoint}`, {
     headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
       ...options.headers,
     },
+    mode: 'cors',
+    cache: 'default',
     ...options,
   });
+}
+
+export function validateToken(token) {
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({ token }),
+  };
+
+  return request('/auth/verify', options);
 }
 
 export function authenticateWithGoogle(accessToken) {
@@ -20,12 +33,7 @@ export function authenticateWithGoogle(accessToken) {
 
   const options = {
     method: 'POST',
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
     body: tokenBlob,
-    mode: 'cors',
-    cache: 'default',
   };
 
   return request('/auth/google', options);

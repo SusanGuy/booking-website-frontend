@@ -6,13 +6,16 @@ import Routes from './routes';
 
 // Context
 import { ConfigProvider } from './context/ConfigProvider';
+import { AuthProvider } from './context/AuthProvider';
 
 const App = () => {
   return (
     <Router>
-      <ConfigProvider>
-        <Routes />
-      </ConfigProvider>
+      <AuthProvider>
+        <ConfigProvider>
+          <Routes />
+        </ConfigProvider>
+      </AuthProvider>
     </Router>
   );
 };

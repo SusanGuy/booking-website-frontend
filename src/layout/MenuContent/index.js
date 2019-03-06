@@ -10,11 +10,11 @@ import backgrounds from '../../shared/backgrounds';
 import NavBar from '../../components/NavBar';
 
 // ContextAPI
-import Consumer from '../../context/ConfigProvider';
+import ConfigContext from '../../context/ConfigProvider';
 
 const MenuContent = ({ children }) => {
   return (
-    <Consumer>
+    <ConfigContext.Consumer>
       {({ authenticated }) => (
         <div className="MenuContent">
           <div
@@ -31,7 +31,7 @@ const MenuContent = ({ children }) => {
           {children}
         </div>
       )}
-    </Consumer>
+    </ConfigContext.Consumer>
   );
 };
 

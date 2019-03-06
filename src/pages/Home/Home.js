@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { SingleDatePicker, DateRangePicker } from 'react-dates';
 import { withRouter } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ import icons from '../../shared/icons';
 import ContentLayout from '../../layout/Content';
 
 // ContextAPI
-import Consumer from '../../context/ConfigProvider';
+import ConfigContext from '../../context/ConfigProvider';
 
 const iconMap = {
   establishment: icons.pushPin,
@@ -165,10 +165,12 @@ class Home extends React.PureComponent {
     );
   };
 
-  renderQuery = () => {
+  renderQuery = ({ setTheme }) => {
     const { where, guestsCount, startDate, endDate } = this.state;
 
-    const query = where.replace(',', '-').replace(' ', '--');
+    const query = where.replace(/[, ]+/g, '-').trim();
+
+    setTheme('white');
 
     this.props.history.push(
       `/s/${query}/all?query=${where}&checkin=${startDate}&checkout=${endDate}&guests=${guestsCount}`
@@ -191,163 +193,166 @@ class Home extends React.PureComponent {
             <span style={{ color: 'var(--theme-main)' }}>wildlife</span>{' '}
             experience
           </h1>
-          <Consumer>
-            {({ isMobileWidth }) => (
-              <div className="Home--search-location">
-                <div className="Home--fields col s12">
-                  <div
-                    ref={input => (this.locationInputRef = input)}
-                    className={[
-                      'input-field',
-                      'location',
-                      'with-label',
-                      location ? 'focused' : '',
-                    ].join(' ')}
-                    onClick={() => this.inputFocus('location')}
-                  >
-                    <div className="label">WHERE</div>
-                    <input
-                      placeholder="Fishing at Will Clay's sunny lake"
-                      type="text"
-                      value={where}
-                      onChange={e => this.handleWhere(e)}
-                      className="input-text"
-                    />
-                    {location && (
-                      <div className="Home--fields--dropdown">
-                        {places.length > 0 &&
-                          places.map(({ name, type }) => {
-                            return (
-                              <div
-                                key={name}
-                                className="Home--fields--dropdown-item"
-                              >
-                                <img
-                                  src={
-                                    iconMap[type]
-                                      ? iconMap[type]
-                                      : iconMap['others']
-                                  }
-                                  className="Home--fields--dropdown-image"
-                                  alt="ico"
-                                />
-                                <div>{name}</div>
-                              </div>
-                            );
-                          })}
-                      </div>
-                    )}
+          <ConfigContext.Consumer>
+            {({ isMobileWidth, setTheme }) => {
+              setTheme('main');
+              return (
+                <div className="Home--search-location">
+                  <div className="Home--fields col s12">
+                    <div
+                      ref={input => (this.locationInputRef = input)}
+                      className={[
+                        'input-field',
+                        'location',
+                        'with-label',
+                        location ? 'focused' : '',
+                      ].join(' ')}
+                      onClick={() => this.inputFocus('location')}
+                    >
+                      <div className="label">WHERE</div>
+                      <input
+                        placeholder="Fishing at Will Clay's sunny lake"
+                        type="text"
+                        value={where}
+                        onChange={e => this.handleWhere(e)}
+                        className="input-text"
+                      />
+                      {location && (
+                        <div className="Home--fields--dropdown">
+                          {places.length > 0 &&
+                            places.map(({ name, type }) => {
+                              return (
+                                <div
+                                  key={name}
+                                  className="Home--fields--dropdown-item"
+                                >
+                                  <img
+                                    src={
+                                      iconMap[type]
+                                        ? iconMap[type]
+                                        : iconMap['others']
+                                    }
+                                    className="Home--fields--dropdown-image"
+                                    alt="ico"
+                                  />
+                                  <div>{name}</div>
+                                </div>
+                              );
+                            })}
+                        </div>
+                      )}
+                    </div>
+                    <div
+                      ref={dateRef => (this.dateRef = dateRef)}
+                      className={[
+                        'input-field',
+                        'date',
+                        'with-label',
+                        date ? 'focused' : '',
+                      ].join(' ')}
+                      onClick={() => this.inputFocus('date')}
+                    >
+                      {isMobileWidth ? (
+                        <div className="Home--SingleDatePicker">
+                          <div className="Home--DatePicker">
+                            <div className="label">CHECK IN</div>
+                            <SingleDatePicker
+                              date={this.state.startDate} // momentPropTypes.momentObj or null,
+                              placeholder="mm/dd/yyyy"
+                              id="start_date" // PropTypes.string.isRequired,
+                              onDateChange={date =>
+                                this.setState({ startDate: date })
+                              } // PropTypes.func.isRequired,
+                              numberOfMonths={1}
+                              onFocusChange={({ focused }) =>
+                                this.setState({ startDateIsFocused: focused })
+                              } // PropTypes.func.isRequired,
+                              focused={this.state.startDateIsFocused}
+                              withPortal={true}
+                              noBorder
+                            />
+                          </div>
+                          <div className="Home--DatePicker">
+                            <div className="label">CHECK OUT</div>
+                            <SingleDatePicker
+                              date={this.state.startDate} // momentPropTypes.momentObj or null,
+                              placeholder="mm/dd/yyyy"
+                              id="end_date" // PropTypes.string.isRequired,
+                              onDateChange={date =>
+                                this.setState({ endDate: date })
+                              } // PropTypes.func.isRequired,
+                              numberOfMonths={1}
+                              onFocusChange={({ focused }) =>
+                                this.setState({ endDateIsFocused: focused })
+                              } // PropTypes.func.isRequired,
+                              focused={this.state.endDateIsFocused}
+                              withPortal={true}
+                              noBorder
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        <React.Fragment>
+                          <div className="label">DATES</div>
+                          <DateRangePicker
+                            startDate={this.state.startDate} // momentPropTypes.momentObj or null,
+                            startDatePlaceholderText="Check In"
+                            startDateId="start_date" // PropTypes.string.isRequired,
+                            endDate={this.state.endDate} // momentPropTypes.momentObj or null,
+                            endDatePlaceholderText="Check Out"
+                            endDateId="end_date" // PropTypes.string.isRequired,
+                            onDatesChange={({ startDate, endDate }) =>
+                              this.setState({ startDate, endDate })
+                            } // PropTypes.func.isRequired,
+                            focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                            onFocusChange={focusedInput =>
+                              this.setState({ focusedInput })
+                            } // PropTypes.func.isRequired,
+                          />
+                        </React.Fragment>
+                      )}
+                    </div>
+                    <div
+                      ref={guestsRef => (this.guestsRef = guestsRef)}
+                      className={[
+                        'input-field',
+                        'guests',
+                        'with-label',
+                        guests ? 'focused' : '',
+                      ].join(' ')}
+                      onClick={() => this.inputFocus('guests')}
+                    >
+                      <div className="label">GUESTS</div>
+                      <div className="input-text">{`${guestsCount} Guest`}</div>
+                      {guests && (
+                        <div className="Home--fields--dropdown">
+                          <div className="Home--fields--dropdown-item">
+                            <img
+                              src={icons.minus}
+                              alt="minus"
+                              className="Home--fields--dropdown-image"
+                            />
+                            <div>{guestsCount}</div>
+                            <img
+                              src={icons.plus}
+                              alt="plus"
+                              className="Home--fields--dropdown-image"
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div
-                    ref={dateRef => (this.dateRef = dateRef)}
-                    className={[
-                      'input-field',
-                      'date',
-                      'with-label',
-                      date ? 'focused' : '',
-                    ].join(' ')}
-                    onClick={() => this.inputFocus('date')}
+                    className="button-field"
+                    onClick={() => this.renderQuery({ setTheme })}
                   >
-                    {isMobileWidth ? (
-                      <div className="Home--SingleDatePicker">
-                        <div className="Home--DatePicker">
-                          <div className="label">CHECK IN</div>
-                          <SingleDatePicker
-                            date={this.state.startDate} // momentPropTypes.momentObj or null,
-                            placeholder="mm/dd/yyyy"
-                            id="start_date" // PropTypes.string.isRequired,
-                            onDateChange={date =>
-                              this.setState({ startDate: date })
-                            } // PropTypes.func.isRequired,
-                            numberOfMonths={1}
-                            onFocusChange={({ focused }) =>
-                              this.setState({ startDateIsFocused: focused })
-                            } // PropTypes.func.isRequired,
-                            focused={this.state.startDateIsFocused}
-                            withPortal={true}
-                            noBorder
-                          />
-                        </div>
-                        <div className="Home--DatePicker">
-                          <div className="label">CHECK OUT</div>
-                          <SingleDatePicker
-                            date={this.state.startDate} // momentPropTypes.momentObj or null,
-                            placeholder="mm/dd/yyyy"
-                            id="end_date" // PropTypes.string.isRequired,
-                            onDateChange={date =>
-                              this.setState({ endDate: date })
-                            } // PropTypes.func.isRequired,
-                            numberOfMonths={1}
-                            onFocusChange={({ focused }) =>
-                              this.setState({ endDateIsFocused: focused })
-                            } // PropTypes.func.isRequired,
-                            focused={this.state.endDateIsFocused}
-                            withPortal={true}
-                            noBorder
-                          />
-                        </div>
-                      </div>
-                    ) : (
-                      <React.Fragment>
-                        <div className="label">DATES</div>
-                        <DateRangePicker
-                          startDate={this.state.startDate} // momentPropTypes.momentObj or null,
-                          startDatePlaceholderText="Check In"
-                          startDateId="start_date" // PropTypes.string.isRequired,
-                          endDate={this.state.endDate} // momentPropTypes.momentObj or null,
-                          endDatePlaceholderText="Check Out"
-                          endDateId="end_date" // PropTypes.string.isRequired,
-                          onDatesChange={({ startDate, endDate }) =>
-                            this.setState({ startDate, endDate })
-                          } // PropTypes.func.isRequired,
-                          focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-                          onFocusChange={focusedInput =>
-                            this.setState({ focusedInput })
-                          } // PropTypes.func.isRequired,
-                        />
-                      </React.Fragment>
-                    )}
-                  </div>
-                  <div
-                    ref={guestsRef => (this.guestsRef = guestsRef)}
-                    className={[
-                      'input-field',
-                      'guests',
-                      'with-label',
-                      guests ? 'focused' : '',
-                    ].join(' ')}
-                    onClick={() => this.inputFocus('guests')}
-                  >
-                    <div className="label">GUESTS</div>
-                    <div className="input-text">{`${guestsCount} Guest`}</div>
-                    {guests && (
-                      <div className="Home--fields--dropdown">
-                        <div className="Home--fields--dropdown-item">
-                          <img
-                            src={icons.minus}
-                            alt="minus"
-                            className="Home--fields--dropdown-image"
-                          />
-                          <div>{guestsCount}</div>
-                          <img
-                            src={icons.plus}
-                            alt="plus"
-                            className="Home--fields--dropdown-image"
-                          />
-                        </div>
-                      </div>
-                    )}
+                    <i className="material-icons">search</i>
                   </div>
                 </div>
-                <div
-                  className="button-field"
-                  onClick={() => this.renderQuery()}
-                >
-                  <i className="material-icons">search</i>
-                </div>
-              </div>
-            )}
-          </Consumer>
+              );
+            }}
+          </ConfigContext.Consumer>
         </div>
       </ContentLayout>
     );

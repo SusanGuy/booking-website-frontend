@@ -13,15 +13,15 @@ import MenuContentLayout from './layout/MenuContent';
 
 const Routes = () => {
   return (
-    <Switch>
-      <MenuContentLayout>
+    <MenuContentLayout>
+      <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/about" component={About} />
         <Route path="/s/:region" component={Query} />
         <Route component={AuthenticatedPages} />
-      </MenuContentLayout>
-    </Switch>
+      </Switch>
+    </MenuContentLayout>
   );
 };
 
