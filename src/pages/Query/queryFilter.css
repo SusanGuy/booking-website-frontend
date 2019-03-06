@@ -1,0 +1,12 @@
+.QueryFilter {
+    align-items: center;
+    display: flex;
+    height: 48px;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.QueryFilter a:hover {
+    border: 1px solid var(--theme-main);
+}

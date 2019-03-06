@@ -14,6 +14,7 @@
 }
 
 .NavBar-wrapper.inverted {
+    background-color: var(--theme-white);
     border-bottom: 1px solid var(--theme-border);
 }
 
