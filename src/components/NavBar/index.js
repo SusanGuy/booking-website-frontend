@@ -50,18 +50,11 @@ const NavBar = ({
   }, []);
 
   const handleClickIcon = event => {
-    console.log('event.target', event.target);
-    console.log('event.target.className', event.target.className);
-
     if (event.target.className === 'NavBar--profileMenu--dropdown-item') {
       return;
     }
 
-    console.log('authLoading', authLoading);
-
-    if (!event.target.className) {
-      setProfileMenuExpanded(true);
-    } else {
+    if (event.target.className) {
       setProfileMenuExpanded(false);
     }
   };
@@ -127,7 +120,10 @@ const NavBar = ({
             />
             {user ? (
               <li>
-                <Link to="#">
+                <Link
+                  to="#"
+                  onClick={() => setProfileMenuExpanded(!profileMenuExpanded)}
+                >
                   {authLoading ? (
                     <BeatLoader size={15} color="var(--theme-main)" />
                   ) : (
