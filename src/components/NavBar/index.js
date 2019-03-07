@@ -53,15 +53,6 @@ const NavBar = ({
   }, []);
 
   const handleClickIcon = event => {
-    console.log('event.target.className', event.target.className);
-    if (
-      ['NavBar--profileMenu--dropdown-item', 'DropdownMenuItem'].includes(
-        event.target.className
-      )
-    ) {
-      return;
-    }
-
     if (event.target.className) {
       setProfileMenuExpanded(false);
       setWildLifeExpanded(false);
@@ -141,7 +132,12 @@ const NavBar = ({
               {wildLifeExpanded ? (
                 <div className="NavBar--profileMenu--dropdown">
                   <DropdownMenuItem title="PROPERTIES" iconUrl={icons.field}>
-                    <Link to="#">List your land</Link>
+                    <Link
+                      to="/become-a-host"
+                      onClick={() => setWildLifeExpanded(false)}
+                    >
+                      List your land
+                    </Link>
                     <div>Earn up to $6000 a month hosting in University</div>
                     <Link to="#">Learn about hosting land</Link>
                   </DropdownMenuItem>

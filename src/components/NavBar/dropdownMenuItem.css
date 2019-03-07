@@ -37,10 +37,15 @@
 }
 
 .DropdownMenuItem--item a {
+    color: var(--theme-text-placeholder-color);
     font-weight: bold;
     line-height: 20px;
     margin: 0;
     padding: 0;
+}
+
+.DropdownMenuItem--item a:hover {
+    text-decoration: underline;
 }
 
 .DropdownMenuItem--item div {
