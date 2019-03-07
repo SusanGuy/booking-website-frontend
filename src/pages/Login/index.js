@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useGlobal } from 'reactn';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import Form from 'react-bootstrap/Form';
@@ -7,16 +7,14 @@ import { GoogleLogin } from 'react-google-login';
 import KEYS from '../../config';
 import { Redirect } from 'react-router-dom';
 
+// Actions
+import * as authActions from '../../actions/auth';
+
+// Reducers
+import reducers from '../../reducers';
+
 // Layout
 import ContentLayout from '../../layout/Content';
-
-// ContextAPI
-import ConfigProvider from '../../context/ConfigProvider';
-import AuthProvider from '../../context/AuthProvider';
-
-// Services
-import { authenticateWithGoogle } from '../../services/api';
-import { storeUserCredentials } from '../../services/localStorage';
 
 const Div = styled.div`
   border-radius: 1.5%;
@@ -65,100 +63,72 @@ const NAVLink = styled(NavLink)`
   padding: 10px;
 `;
 
-const googleResponse = ({ response, setUser }) => {
-  authenticateWithGoogle(response.accessToken).then(r => {
-    const token = r.headers.get('x-auth-token');
-    r.json().then(user => {
-      if (token) {
-        setUser(user);
-        storeUserCredentials(token);
-      }
-    });
-  });
-};
-
-const onFailure = response => {
-  console.log(response);
-};
-
 const Login = () => {
+  const [state, dispatch] = useGlobal(reducers);
+
+  const googleResponse = response => {
+    authActions.loginWithGoogleToken({
+      dispatch,
+      accessToken: response.accessToken,
+    });
+  };
+
+  const onFailure = response => {
+    console.log(response);
+  };
+
+  console.log('state', state.user);
+
+  if (state.user) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <ContentLayout>
-      <AuthProvider.Consumer>
-        {({ user, setUser }) => {
-          if (user) {
-            return <Redirect to="/" />;
-          }
-
-          return (
-            <Div className="Login">
-              <Close>
-                <NAVLink to="/">X</NAVLink>
-              </Close>
-              <ConfigProvider.Consumer>
-                {({ authenticated, setAuthenticated, setToken }) => {
-                  if (authenticated) {
-                    return <Redirect to={{ pathname: '/' }} />;
-                  }
-
-                  return (
-                    <Form>
-                      <Form.Group>
-                        <GoogleLogin
-                          clientId={KEYS.dev.GOOGLE_CLIENT_ID}
-                          buttonText="Login"
-                          onSuccess={response =>
-                            googleResponse({
-                              response,
-                              setAuthenticated,
-                              setUser,
-                              setToken,
-                            })
-                          }
-                          onFailure={onFailure}
-                        />
-                      </Form.Group>
-                      <HRWrap>
-                        <HRDiv>
-                          <HR />
-                        </HRDiv>
-                        <HRDivText>
-                          <HRText>Or</HRText>
-                        </HRDivText>
-                        <HRDiv>
-                          <HR />
-                        </HRDiv>
-                      </HRWrap>
-                      <Form.Group>
-                        <Form.Control type="email" placeholder="Enter Email" />
-                      </Form.Group>
-                      <Form.Group>
-                        <Form.Control type="password" placeholder="Password" />
-                      </Form.Group>
-                      <Form.Group>
-                        <Button
-                          style={{ width: '100%', margin: '10px 0 10px 0' }}
-                        >
-                          Login
-                        </Button>
-                      </Form.Group>
-                      <Form.Group>
-                        <NavLink to="/signup">
-                          <Button
-                            style={{ width: '100%', margin: '10px 0 10px 0' }}
-                          >
-                            Signup
-                          </Button>
-                        </NavLink>
-                      </Form.Group>
-                    </Form>
-                  );
-                }}
-              </ConfigProvider.Consumer>
-            </Div>
-          );
-        }}
-      </AuthProvider.Consumer>
+      <Div className="Login">
+        <Close>
+          <NAVLink to="/">X</NAVLink>
+        </Close>
+        <Form>
+          <Form.Group>
+            <GoogleLogin
+              clientId={KEYS.dev.GOOGLE_CLIENT_ID}
+              buttonText="Login"
+              onSuccess={googleResponse}
+              onFailure={onFailure}
+            />
+          </Form.Group>
+          <HRWrap>
+            <HRDiv>
+              <HR />
+            </HRDiv>
+            <HRDivText>
+              <HRText>Or</HRText>
+            </HRDivText>
+            <HRDiv>
+              <HR />
+            </HRDiv>
+          </HRWrap>
+          <Form.Group>
+            <Form.Control type="email" placeholder="Enter Email" />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control type="password" placeholder="Password" />
+          </Form.Group>
+          <Form.Group>
+            <Button style={{ width: '100%', margin: '10px 0 10px 0' }}>
+              Login
+            </Button>
+          </Form.Group>
+          <Form.Group>
+            <NavLink to="/signup">
+              <Button style={{ width: '100%', margin: '10px 0 10px 0' }}>
+                Signup
+              </Button>
+            </NavLink>
+          </Form.Group>
+        </Form>
+      </Div>
     </ContentLayout>
   );
 };

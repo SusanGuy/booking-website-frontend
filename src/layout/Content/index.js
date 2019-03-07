@@ -10,7 +10,9 @@ const Content = ({ children, theme }) => {
   return (
     <ConfigProvider>
       {({ setTheme }) => {
-        setTheme(theme);
+        setTimeout(() => {
+          setTheme(theme);
+        }, 1000);
 
         return (
           <div

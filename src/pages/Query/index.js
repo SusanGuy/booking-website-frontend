@@ -9,7 +9,6 @@ import './query.css';
 
 // Components
 import WrapperContainer from './WrapperContainer';
-import QueryFilter from './QueryFilter';
 
 const Query = ({ match }) => {
   const query = match.params.region.split('--');

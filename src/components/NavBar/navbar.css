@@ -148,11 +148,45 @@
     margin-right: 10px;
 }
 
+.NavBar--profileMenu--dropdown {
+    background: var(--theme-white);
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65);
+    top: 81px;
+    position: absolute;
+    right: 0;
+    width: 300px;
+    animation: fadeIn 300ms ease-in-out forwards;
+}
+
+.NavBar--profileMenu--dropdown-item {
+    border-bottom: 1px solid var(--theme-border);
+    color: var(--theme-black);
+    cursor: pointer;
+    height: 55px;
+    line-height: 55px;
+    margin: 0;
+    padding: 0px 20px;
+}
+
+.NavBar--profileMenu--dropdown-item:hover {
+    background-color: var(--theme-border);
+}
+
 /****************************************
  * For Tablet and Desktop Devices (more than 400px) *
  ****************************************/
 @media only screen and (min-width: 993px) {
     .NavBar--logo i {
         visibility: hidden;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }

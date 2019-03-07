@@ -1,57 +1,34 @@
-import React, { createContext } from 'react';
+import React, { createContext, useEffect, setGlobal, useGlobal } from 'reactn';
 
-// Services
-import { validateToken } from '../../services/api';
-import { validateUserAuthenticationToken } from '../../services/localStorage';
+// Reducer
+import { authInitialState } from '../../reducers/auth';
+import authReducer from '../../reducers/auth';
+
+// Actions
+import * as authActions from '../../actions/auth';
 
 // ContextAPI
 const AuthContext = createContext();
 
-class AuthProvider extends React.Component {
-  state = {
-    user: {},
-  };
+setGlobal({
+  ...authInitialState,
+  mobileMenuExpanded: false,
+  theme: 'main',
+  profileMenu: false,
+});
 
-  componentDidMount() {
-    validateUserAuthenticationToken()
-      .then(token => {
-        return validateToken(token);
-      })
-      .then(res => res.json())
-      .then(result => {
-        this.setUser(result.data[0]);
-      })
-      .catch(err => {
-        // TOODO: Gracefully handle authenticated user
-        console.log('User not authenticated. ', err);
-      });
-  }
+const AuthProvider = ({ children }) => {
+  const [state, dispatch] = useGlobal(authReducer);
 
-  setUser = user => [
-    this.setState({
-      user,
-    }),
-  ];
+  // Analogous to ComponentDidMount
+  useEffect(() => {
+    setTimeout(() => {
+      authActions.login(dispatch);
+    }, 1000);
+  });
 
-  render() {
-    const {
-      setUser,
-      state: { user },
-      props: { children },
-    } = this;
-
-    return (
-      <AuthContext.Provider
-        value={{
-          user,
-          setUser,
-        }}
-      >
-        {children}
-      </AuthContext.Provider>
-    );
-  }
-}
+  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
+};
 
 export { AuthProvider };
 
