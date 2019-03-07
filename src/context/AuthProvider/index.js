@@ -16,6 +16,7 @@ setGlobal({
   mobileMenuExpanded: false,
   theme: 'main',
   profileMenu: false,
+  isMobileWidth: window.innerWidth <= 992,
 });
 
 const AuthProvider = ({ children }) => {

@@ -11,7 +11,7 @@ import reducers from '../../reducers';
 import { useEffect } from 'react';
 
 const Content = ({ children, theme }) => {
-  const [state, dispatch] = useGlobal(reducers);
+  const [, dispatch] = useGlobal(reducers);
 
   useEffect(() => {
     setTimeout(() => {
