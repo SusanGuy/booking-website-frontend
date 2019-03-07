@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { BeatLoader } from 'react-spinners';
@@ -17,6 +17,9 @@ import * as menuActions from '../../actions/menu';
 import * as authSelectors from '../../reducers/auth';
 import * as menuSelectors from '../../reducers/menu';
 import * as themeSelectors from '../../reducers/theme';
+
+// Components
+import DropdownMenuItem from './DropdownMenuItem';
 
 const NavBarLink = ({ to, onClick, title }) => {
   return (
@@ -51,7 +54,11 @@ const NavBar = ({
 
   const handleClickIcon = event => {
     console.log('event.target.className', event.target.className);
-    if (event.target.className === 'NavBar--profileMenu--dropdown-item') {
+    if (
+      ['NavBar--profileMenu--dropdown-item', 'DropdownMenuItem'].includes(
+        event.target.className
+      )
+    ) {
       return;
     }
 
@@ -133,15 +140,19 @@ const NavBar = ({
               </div>
               {wildLifeExpanded ? (
                 <div className="NavBar--profileMenu--dropdown">
-                  <div className="NavBar--profileMenu--dropdown-item">
-                    Edit Profile
-                  </div>
-                  <div className="NavBar--profileMenu--dropdown-item">
-                    Edit Profile 2
-                  </div>
-                  <div className="NavBar--profileMenu--dropdown-item">
-                    Edit Profile 3
-                  </div>
+                  <DropdownMenuItem title="PROPERTIES" iconUrl={icons.field}>
+                    <Link to="#">List your land</Link>
+                    <div>Earn up to $6000 a month hosting in University</div>
+                    <Link to="#">Learn about hosting land</Link>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem
+                    title="EXPERIENCES"
+                    iconUrl={icons.mountainPeak}
+                  >
+                    <Link to="#">Host an experience</Link>
+                    <div>Earn money leading poeple on activities you love</div>
+                  </DropdownMenuItem>
                 </div>
               ) : (
                 <React.Fragment />
