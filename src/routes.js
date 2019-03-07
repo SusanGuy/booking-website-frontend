@@ -13,6 +13,8 @@ import AuthenticatedPages from './pages/AuthenticatedPages';
 import MenuContentLayout from './layout/MenuContent';
 
 const Routes = () => {
+  console.log('rerouting');
+
   return (
     <MenuContentLayout>
       <Switch>

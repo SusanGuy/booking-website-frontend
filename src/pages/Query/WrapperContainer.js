@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 // Components
 import Wrapper from './Wrapper';
@@ -7,23 +7,27 @@ import Wrapper from './Wrapper';
 // Assets
 import mockExperiences from '../../data/experiences';
 
-class WrapperContainer extends React.Component {
-  state = {
-    experiences: [],
+const WrapperContainer = props => {
+  const experiences = useExperiences();
+
+  let combinedProps = {
+    ...props,
+    experiences,
   };
 
-  componentDidMount() {
-    this.setState({ experiences: mockExperiences });
-  }
+  return <Wrapper {...combinedProps} />;
+};
 
-  render() {
-    let combinedProps = {
-      ...this.props,
-      ...this.state,
-    };
+function useExperiences() {
+  const [experiences, setExperiences] = useState([]);
 
-    return <Wrapper {...combinedProps} />;
-  }
+  useEffect(() => {
+    setTimeout(() => {
+      setExperiences(mockExperiences);
+    }, 500);
+  }, []);
+
+  return experiences;
 }
 
 export default WrapperContainer;

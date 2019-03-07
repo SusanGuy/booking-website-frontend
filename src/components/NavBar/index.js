@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { BeatLoader, BounceLoader } from 'react-spinners';
+import { BeatLoader } from 'react-spinners';
 
 // Styles
 import './navbar.css';
@@ -32,14 +32,14 @@ const NavBar = ({
   authLoading,
   isMobileWidth,
   mobileMenuExpanded,
-  profileMenuExpanded,
   user,
   theme,
-  setProfileMenuExpanded,
   setMobileMenuExpanded,
   logout,
 }) => {
   const isWhiteTheme = theme === 'white';
+  const [profileMenuExpanded, setProfileMenuExpanded] = useState(false);
+  const [wildLifeExpanded, setWildLifeExpanded] = useState(false);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickIcon);
@@ -50,13 +50,39 @@ const NavBar = ({
   }, []);
 
   const handleClickIcon = event => {
+    console.log('event.target.className', event.target.className);
     if (event.target.className === 'NavBar--profileMenu--dropdown-item') {
       return;
     }
 
     if (event.target.className) {
       setProfileMenuExpanded(false);
+      setWildLifeExpanded(false);
     }
+  };
+
+  const handleLogoClick = () => {
+    setMobileMenuExpanded(!mobileMenuExpanded);
+  };
+
+  const handleWildLifeMenu = () => {
+    setWildLifeExpanded(!wildLifeExpanded);
+    setProfileMenuExpanded(false);
+    isMobileWidth && setMobileMenuExpanded(false);
+  };
+
+  const handleAboutMenu = () => {
+    isMobileWidth && setMobileMenuExpanded(false);
+  };
+
+  const handleProfileMenu = () => {
+    setProfileMenuExpanded(!profileMenuExpanded);
+    setWildLifeExpanded(false);
+    isMobileWidth && setMobileMenuExpanded(false);
+  };
+
+  const handleLogin = () => {
+    isMobileWidth && setMobileMenuExpanded(!mobileMenuExpanded);
   };
 
   const logoutUser = () => {
@@ -71,10 +97,7 @@ const NavBar = ({
       >
         <React.Fragment>
           {isMobileWidth ? (
-            <div
-              onClick={() => setMobileMenuExpanded(!mobileMenuExpanded)}
-              className="NavBar--logo"
-            >
+            <div onClick={handleLogoClick} className="NavBar--logo">
               <img src={icons.ecoHome} alt="logo-eco" />
               <i
                 className={[
@@ -104,26 +127,31 @@ const NavBar = ({
               mobileMenuExpanded ? 'expanded' : 'hide-on-med-and-down',
             ].join(' ')}
           >
-            <NavBarLink
-              to="/host/wildlife"
-              title="Host Wildlife"
-              onClick={() =>
-                isMobileWidth && setMobileMenuExpanded(!mobileMenuExpanded)
-              }
-            />
-            <NavBarLink
-              to="/about"
-              title="About"
-              onClick={() =>
-                isMobileWidth && setMobileMenuExpanded(!mobileMenuExpanded)
-              }
-            />
+            <li>
+              <div className="NavBar--menu-link" onClick={handleWildLifeMenu}>
+                <div>Host Wildlife</div>
+              </div>
+              {wildLifeExpanded ? (
+                <div className="NavBar--profileMenu--dropdown">
+                  <div className="NavBar--profileMenu--dropdown-item">
+                    Edit Profile
+                  </div>
+                  <div className="NavBar--profileMenu--dropdown-item">
+                    Edit Profile 2
+                  </div>
+                  <div className="NavBar--profileMenu--dropdown-item">
+                    Edit Profile 3
+                  </div>
+                </div>
+              ) : (
+                <React.Fragment />
+              )}
+            </li>
+
+            <NavBarLink to="/about" title="About" onClick={handleAboutMenu} />
             {user ? (
               <li>
-                <Link
-                  to="#"
-                  onClick={() => setProfileMenuExpanded(!profileMenuExpanded)}
-                >
+                <div className="NavBar--menu-link" onClick={handleProfileMenu}>
                   {authLoading ? (
                     <BeatLoader size={15} color="var(--theme-main)" />
                   ) : (
@@ -136,7 +164,7 @@ const NavBar = ({
                       <div>{`${user.first_name} ${user.last_name}`}</div>
                     </React.Fragment>
                   )}
-                </Link>
+                </div>
                 {profileMenuExpanded && (
                   <div className="NavBar--profileMenu--dropdown">
                     <div className="NavBar--profileMenu--dropdown-item">
@@ -165,13 +193,7 @@ const NavBar = ({
                 <BeatLoader size={15} color="var(--theme-main)" />
               </li>
             ) : (
-              <NavBarLink
-                to="/login"
-                title="Login"
-                onClick={() =>
-                  isMobileWidth && setMobileMenuExpanded(!mobileMenuExpanded)
-                }
-              />
+              <NavBarLink to="/login" title="Login" onClick={handleLogin} />
             )}
           </ul>
         </React.Fragment>
@@ -185,14 +207,12 @@ function mapStateToProps(state) {
     authLoading: authSelectors.authLoading(state),
     isMobileWidth: authSelectors.isMobileWidth(state),
     mobileMenuExpanded: menuSelectors.mobileMenuExpanded(state),
-    profileMenuExpanded: menuSelectors.profileMenuExpanded(state),
     user: authSelectors.getUser(state),
     theme: themeSelectors.getTheme(state),
   };
 }
 
 const actionCreators = {
-  setProfileMenuExpanded: menuActions.setProfileMenuExpanded,
   setMobileMenuExpanded: menuActions.setMobileMenuExpanded,
   logout: authActions.logout,
 };

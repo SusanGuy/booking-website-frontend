@@ -1,5 +1,6 @@
 export const MENU_SET_MOBILE_EXPAND = 'menu/MENU_SET_MOBILE_EXPAND';
 export const MENU_SET_PROFILE_EXPAND = 'menu/MENU_SET_PROFILE_EXPAND';
+export const MENU_SET_WILD_LIFE_EXPAND = 'menu/MENU_SET_WILD_LIFE_EXPAND';
 export const MENU_SET_FIXED_BAR = 'menu/MENU_SET_FIXED_BAR';
 
 /**
@@ -21,6 +22,17 @@ export const setMobileMenuExpanded = isExpanded => {
 export const setProfileMenuExpanded = isExpanded => {
   return dispatch => {
     dispatch({ type: MENU_SET_PROFILE_EXPAND, payload: isExpanded });
+  };
+};
+
+/**
+ * Set the state of the Dropdown menu for the WildLife
+ * @param {Boolean} isExpanded
+ * @param {Function} dispatch
+ */
+export const setWildLifeExpanded = isExpanded => {
+  return dispatch => {
+    dispatch({ type: MENU_SET_WILD_LIFE_EXPAND, payload: isExpanded });
   };
 };
 

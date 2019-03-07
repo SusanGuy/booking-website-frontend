@@ -16,7 +16,7 @@ const ExperienceCard = ({
   return (
     <div className="Experience">
       <div style={{ padding: 8 }}>
-        <Link to={`/experiences/${id}`} target="_blank">
+        <Link to={`/experiences/${id}`}>
           <div
             className="Experience--image"
             style={{ backgroundImage: `url(${image})` }}

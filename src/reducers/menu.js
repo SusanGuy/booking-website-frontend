@@ -1,10 +1,12 @@
 import {
+  MENU_SET_WILD_LIFE_EXPAND,
   MENU_SET_MOBILE_EXPAND,
   MENU_SET_PROFILE_EXPAND,
   MENU_SET_FIXED_BAR,
 } from '../actions/menu';
 
 const menuInitialState = {
+  wildLifeExpanded: false,
   mobileMenuExpanded: false,
   profileMenuExpanded: false,
   fixedBar: {
@@ -15,6 +17,11 @@ const menuInitialState = {
 
 const reducer = (state = menuInitialState, action) => {
   switch (action.type) {
+    case MENU_SET_WILD_LIFE_EXPAND:
+      return {
+        ...state,
+        wildLifeExpanded: action.payload,
+      };
     case MENU_SET_MOBILE_EXPAND:
       return {
         ...state,
@@ -43,6 +50,10 @@ const reducer = (state = menuInitialState, action) => {
 
 function select(state) {
   return state.menu;
+}
+
+export function wildLifeExpanded(state) {
+  return select(state).wildLifeExpanded;
 }
 
 export function mobileMenuExpanded(state) {

@@ -1,7 +1,7 @@
 .TopFixedBar {
     align-items: center;
     background-color: var(--theme-red);
-    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.65);
     color: var(--theme-white);
     display: flex;
     flex-direction: row;
@@ -15,7 +15,7 @@
     position: fixed;
     right: 0;
     top: 0;
-    transform: translateY(-100%);
+    transform: translateY(-120%);
     width: 100%;
     z-index: 5;
     transition: transform 500ms ease-in-out;

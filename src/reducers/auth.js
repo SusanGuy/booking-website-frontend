@@ -1,4 +1,9 @@
-import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_SUCCESS } from '../actions/auth';
+import {
+  AUTH_LOGIN,
+  AUTH_LOGOUT,
+  AUTH_SUCCESS,
+  AUTH_FAILURE,
+} from '../actions/auth';
 
 const authInitialState = {
   isMobileWidth: window.innerWidth <= 992,
@@ -14,6 +19,8 @@ const reducer = (state = authInitialState, action) => {
       return { ...state, authLoading: true };
     case AUTH_SUCCESS:
       return { ...state, user: action.payload, authLoading: false };
+    case AUTH_FAILURE:
+      return { ...state, user: null, authLoading: false };
     default:
       return state;
   }

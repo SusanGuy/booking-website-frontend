@@ -10,7 +10,7 @@ import './query.css';
 // Components
 import WrapperContainer from './WrapperContainer';
 
-const Query = ({ match }) => {
+const Query = React.memo(({ match }) => {
   const query = match.params.region.split('--');
   const [location] = query;
 
@@ -26,6 +26,6 @@ const Query = ({ match }) => {
       </CustomBackgroundLayout>
     </ContentLayout>
   );
-};
+});
 
 export default Query;

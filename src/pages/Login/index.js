@@ -68,7 +68,6 @@ const NAVLink = styled(NavLink)`
 const Login = ({ loginWithGoogleToken, setFixedBarOpened, user }) => {
   const googleResponse = response => {
     loginWithGoogleToken(response.accessToken).catch(res => {
-      console.log('res', res);
       setFixedBarOpened({ opened: true, message: res });
     });
   };

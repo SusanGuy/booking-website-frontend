@@ -36,6 +36,10 @@ export const login = () => {
         });
         resolve();
       } catch (err) {
+        dispatch({
+          type: AUTH_FAILURE,
+          payload: errorMessage(err),
+        });
         reject(errorMessage(err));
       }
     });
@@ -57,9 +61,17 @@ export const loginWithGoogleToken = accessToken => {
           localStorage.storeUserCredentials(token);
           resolve();
         } else {
+          dispatch({
+            type: AUTH_FAILURE,
+            payload: errorMessage(result.err),
+          });
           reject(errorMessage(result.err));
         }
       } catch (err) {
+        dispatch({
+          type: AUTH_FAILURE,
+          payload: errorMessage(err),
+        });
         reject(errorMessage(err));
       }
     });

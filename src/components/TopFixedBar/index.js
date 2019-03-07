@@ -13,13 +13,11 @@ import * as menuSelectors from '../../reducers/menu';
 const TopFixedBar = ({ fixedBar, setFixedBarOpened }) => {
   const { opened, message } = fixedBar;
 
-  /* useEffect(() => {
+  useEffect(() => {
     setTimeout(() => {
       setFixedBarOpened(false);
-    }, 10000);
-  }); */
-
-  console.log('opened', opened);
+    }, 15000);
+  });
 
   return (
     <div className={['TopFixedBar', opened ? 'content' : ''].join(' ')}>
@@ -30,7 +28,7 @@ const TopFixedBar = ({ fixedBar, setFixedBarOpened }) => {
             className="TopFixedBar--icon"
             onClick={() => setFixedBarOpened({ opened: false, message: '' })}
           >
-            <i class="material-icons">close</i>
+            <i className="material-icons">close</i>
           </div>
         </React.Fragment>
       )}
