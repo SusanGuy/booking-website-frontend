@@ -1,4 +1,5 @@
-import React, { useGlobal } from 'reactn';
+import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import Form from 'react-bootstrap/Form';
@@ -9,9 +10,10 @@ import { Redirect } from 'react-router-dom';
 
 // Actions
 import * as authActions from '../../actions/auth';
+import * as menuActions from '../../actions/menu';
 
-// Reducers
-import reducers from '../../reducers';
+// Selectors
+import * as authSelectors from '../../reducers/auth';
 
 // Layout
 import ContentLayout from '../../layout/Content';
@@ -63,13 +65,11 @@ const NAVLink = styled(NavLink)`
   padding: 10px;
 `;
 
-const Login = () => {
-  const [state, dispatch] = useGlobal(reducers);
-
+const Login = ({ loginWithGoogleToken, setFixedBarOpened, user }) => {
   const googleResponse = response => {
-    authActions.loginWithGoogleToken({
-      dispatch,
-      accessToken: response.accessToken,
+    loginWithGoogleToken(response.accessToken).catch(res => {
+      console.log('res', res);
+      setFixedBarOpened({ opened: true, message: res });
     });
   };
 
@@ -77,7 +77,7 @@ const Login = () => {
     console.log(response);
   };
 
-  if (state.user) {
+  if (user) {
     return <Redirect to="/" />;
   }
 
@@ -131,4 +131,18 @@ const Login = () => {
   );
 };
 
-export default Login;
+function mapStateToProps(state) {
+  return {
+    user: authSelectors.getUser(state),
+  };
+}
+
+const actionCreators = {
+  loginWithGoogleToken: authActions.loginWithGoogleToken,
+  setFixedBarOpened: menuActions.setFixedBarOpened,
+};
+
+export default connect(
+  mapStateToProps,
+  actionCreators
+)(Login);

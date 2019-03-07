@@ -1,5 +1,7 @@
-import React, { useGlobal, useState, useEffect } from 'reactn';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { BeatLoader, BounceLoader } from 'react-spinners';
 
 // Styles
 import './navbar.css';
@@ -11,8 +13,10 @@ import icons from '../../shared/icons';
 import * as authActions from '../../actions/auth';
 import * as menuActions from '../../actions/menu';
 
-// Reducer
-import reducers from '../../reducers';
+// Selectors
+import * as authSelectors from '../../reducers/auth';
+import * as menuSelectors from '../../reducers/menu';
+import * as themeSelectors from '../../reducers/theme';
 
 const NavBarLink = ({ to, onClick, title }) => {
   return (
@@ -24,38 +28,48 @@ const NavBarLink = ({ to, onClick, title }) => {
   );
 };
 
-const NavBar = () => {
-  const [profileMenu, setProfileMenu] = useState(false);
-  let dropdownMenuRef = React.createRef();
-  const [state, dispatch] = useGlobal(reducers);
+const NavBar = ({
+  authLoading,
+  isMobileWidth,
+  mobileMenuExpanded,
+  profileMenuExpanded,
+  user,
+  theme,
+  setProfileMenuExpanded,
+  setMobileMenuExpanded,
+  logout,
+}) => {
+  const isWhiteTheme = theme === 'white';
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickIcon);
-    console.log('NavBar mousedown created');
+
     return () => {
-      console.log('NavBar mousedown cleaned up');
       document.removeEventListener('mousedown', handleClickIcon);
     };
   }, []);
 
   const handleClickIcon = event => {
-    console.log('dropdownMenuRef', dropdownMenuRef);
+    console.log('event.target', event.target);
     console.log('event.target.className', event.target.className);
-    if (event.target.innerHTML === 'Log Out') {
+
+    if (event.target.className === 'NavBar--profileMenu--dropdown-item') {
+      return;
     }
 
-    if (
-      ![
-        dropdownMenuRef,
-        dropdownMenuRef && dropdownMenuRef.nextSibling,
-      ].includes(event.target)
-    ) {
-      setProfileMenu(!profileMenu);
+    console.log('authLoading', authLoading);
+
+    if (!event.target.className) {
+      setProfileMenuExpanded(true);
+    } else {
+      setProfileMenuExpanded(false);
     }
   };
 
-  const { isMobileWidth, mobileMenuExpanded, user, theme } = state;
-  const isWhiteTheme = theme === 'white';
+  const logoutUser = () => {
+    logout();
+    setProfileMenuExpanded(false);
+  };
 
   return (
     <nav className="NavBar">
@@ -65,9 +79,7 @@ const NavBar = () => {
         <React.Fragment>
           {isMobileWidth ? (
             <div
-              onClick={() =>
-                menuActions.setMobileMenuExpanded(!mobileMenuExpanded)
-              }
+              onClick={() => setMobileMenuExpanded(!mobileMenuExpanded)}
               className="NavBar--logo"
             >
               <img src={icons.ecoHome} alt="logo-eco" />
@@ -103,30 +115,33 @@ const NavBar = () => {
               to="/host/wildlife"
               title="Host Wildlife"
               onClick={() =>
-                isMobileWidth &&
-                menuActions.setMobileMenuExpanded(!mobileMenuExpanded)
+                isMobileWidth && setMobileMenuExpanded(!mobileMenuExpanded)
               }
             />
             <NavBarLink
               to="/about"
               title="About"
               onClick={() =>
-                isMobileWidth &&
-                menuActions.setMobileMenuExpanded(!mobileMenuExpanded)
+                isMobileWidth && setMobileMenuExpanded(!mobileMenuExpanded)
               }
             />
             {user ? (
               <li>
-                <Link to="#" onClick={() => setProfileMenu(!profileMenu)}>
-                  <img
-                    ref={dropdownMenu => (dropdownMenuRef = dropdownMenu)}
-                    src={user.profile_pic ? user.profile_pic : icons.user}
-                    alt="profile-img"
-                    className="NavBar--menu--profile-image"
-                  />
-                  <div>{`${user.first_name} ${user.last_name}`}</div>
+                <Link to="#">
+                  {authLoading ? (
+                    <BeatLoader size={15} color="var(--theme-main)" />
+                  ) : (
+                    <React.Fragment>
+                      <img
+                        src={user.profile_pic ? user.profile_pic : icons.user}
+                        alt="profile-img"
+                        className="NavBar--menu--profile-image"
+                      />
+                      <div>{`${user.first_name} ${user.last_name}`}</div>
+                    </React.Fragment>
+                  )}
                 </Link>
-                {profileMenu && (
+                {profileMenuExpanded && (
                   <div className="NavBar--profileMenu--dropdown">
                     <div className="NavBar--profileMenu--dropdown-item">
                       Edit Profile
@@ -141,7 +156,7 @@ const NavBar = () => {
                       Account Settings
                     </div>
                     <div
-                      onClick={() => authActions.logout(dispatch)}
+                      onClick={() => logoutUser()}
                       className="NavBar--profileMenu--dropdown-item"
                     >
                       Log Out
@@ -149,13 +164,16 @@ const NavBar = () => {
                   </div>
                 )}
               </li>
+            ) : authLoading ? (
+              <li>
+                <BeatLoader size={15} color="var(--theme-main)" />
+              </li>
             ) : (
               <NavBarLink
                 to="/login"
                 title="Login"
                 onClick={() =>
-                  isMobileWidth &&
-                  menuActions.setMobileMenuExpanded(!mobileMenuExpanded)
+                  isMobileWidth && setMobileMenuExpanded(!mobileMenuExpanded)
                 }
               />
             )}
@@ -166,4 +184,24 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+function mapStateToProps(state) {
+  return {
+    authLoading: authSelectors.authLoading(state),
+    isMobileWidth: authSelectors.isMobileWidth(state),
+    mobileMenuExpanded: menuSelectors.mobileMenuExpanded(state),
+    profileMenuExpanded: menuSelectors.profileMenuExpanded(state),
+    user: authSelectors.getUser(state),
+    theme: themeSelectors.getTheme(state),
+  };
+}
+
+const actionCreators = {
+  setProfileMenuExpanded: menuActions.setProfileMenuExpanded,
+  setMobileMenuExpanded: menuActions.setMobileMenuExpanded,
+  logout: authActions.logout,
+};
+
+export default connect(
+  mapStateToProps,
+  actionCreators
+)(NavBar);

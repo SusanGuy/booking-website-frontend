@@ -1,0 +1,34 @@
+.TopFixedBar {
+    align-items: center;
+    background-color: var(--theme-red);
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65);
+    color: var(--theme-white);
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    margin: auto;
+    justify-content: space-between;
+    text-align: center;
+    left: 0;
+    max-height: 80px;
+    max-width: 400px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translateY(-100%);
+    width: 100%;
+    z-index: 5;
+    transition: transform 500ms ease-in-out;
+}
+
+.TopFixedBar.content {
+    transform: translateY(0);
+}
+
+.TopFixedBar--icon {
+    padding: 20px;
+}
+
+.TopFixedBar--icon:hover {
+    cursor: pointer;
+}

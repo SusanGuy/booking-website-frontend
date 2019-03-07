@@ -1,4 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+// Selectors
+import * as authSelectors from '../../reducers/auth';
 
 // Styles
 import './menuContent.css';
@@ -8,31 +12,30 @@ import backgrounds from '../../shared/backgrounds';
 
 // Components
 import NavBar from '../../components/NavBar';
+import TopFixedBar from '../../components/TopFixedBar';
 
-// ContextAPI
-import ConfigContext from '../../context/ConfigProvider';
-
-const MenuContent = ({ children }) => {
+const MenuContent = ({ children, user }) => {
   return (
-    <ConfigContext.Consumer>
-      {({ authenticated }) => (
-        <div className="MenuContent">
-          <div
-            className="MenuContent-bg"
-            style={{
-              backgroundImage: authenticated
-                ? 'var(--theme-white)'
-                : `url(${backgrounds.landscape})`,
-            }}
-          />
-          <div className="MenuContent--hover" />
+    <div className="MenuContent">
+      <div
+        className="MenuContent-bg"
+        style={{
+          backgroundImage: `url(${backgrounds.landscape})`,
+        }}
+      />
+      <div className="MenuContent--hover" />
 
-          <NavBar />
-          {children}
-        </div>
-      )}
-    </ConfigContext.Consumer>
+      <NavBar />
+      <TopFixedBar />
+      {children}
+    </div>
   );
 };
 
-export default MenuContent;
+function mapStateToProps(state) {
+  return {
+    user: authSelectors.getUser(state),
+  };
+}
+
+export default connect(mapStateToProps)(MenuContent);

@@ -1,28 +1,29 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-// Context API
-import AuthProvider from '../../context/AuthProvider';
+// Selectors
+import * as authSelectors from '../../reducers/auth';
 
 // Page
 import HostWildLife from '../Host/Wildlife';
 
-const AuthenticatedPages = () => {
-  return (
-    <AuthProvider.Consumer>
-      {({ user }) => {
-        if (!user) {
-          return <Redirect to="/login" />;
-        }
+const AuthenticatedPages = ({ user }) => {
+  if (!user) {
+    return <Redirect to="/login" />;
+  }
 
-        return (
-          <Switch>
-            <Route to="/host/wildlife" component={HostWildLife} />
-          </Switch>
-        );
-      }}
-    </AuthProvider.Consumer>
+  return (
+    <Switch>
+      <Route to="/host/wildlife" component={HostWildLife} />
+    </Switch>
   );
 };
 
-export default AuthenticatedPages;
+function mapStateToProps(state) {
+  return {
+    user: authSelectors.getUser(state),
+  };
+}
+
+export default connect(mapStateToProps)(AuthenticatedPages);

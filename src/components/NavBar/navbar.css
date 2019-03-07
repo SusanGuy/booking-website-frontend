@@ -79,7 +79,35 @@
 }
 
 .NavBar--menu li {
+    display: flex;
+    justify-content: center;
     padding: 0 10px;
+}
+
+.NavBar--menu li:last-child {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: inherit;
+}
+
+.NavBar--menu li:last-child .css-0 {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    animation: fadeIn 500ms ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .NavBar--menu a {

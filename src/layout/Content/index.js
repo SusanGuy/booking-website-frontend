@@ -1,4 +1,5 @@
-import React, { useGlobal } from 'reactn';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
 // Styles
 import './content.css';
@@ -6,17 +7,11 @@ import './content.css';
 // Actions
 import * as themeActions from '../../actions/theme';
 
-// Reducer
-import reducers from '../../reducers';
-import { useEffect } from 'react';
-
-const Content = ({ children, theme }) => {
-  const [, dispatch] = useGlobal(reducers);
-
+const Content = ({ children, theme, setTheme }) => {
   useEffect(() => {
     setTimeout(() => {
-      themeActions.setTheme(theme, dispatch);
-    }, 500);
+      setTheme(theme);
+    }, 1000);
   });
 
   return (
@@ -30,4 +25,11 @@ Content.defaultProps = {
   theme: 'main',
 };
 
-export default Content;
+const actionCreators = {
+  setTheme: themeActions.setTheme,
+};
+
+export default connect(
+  null,
+  actionCreators
+)(Content);
