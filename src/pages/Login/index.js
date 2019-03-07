@@ -77,8 +77,6 @@ const Login = () => {
     console.log(response);
   };
 
-  console.log('state', state.user);
-
   if (state.user) {
     return <Redirect to="/" />;
   }

@@ -1,30 +1,28 @@
-import React from 'react';
+import React, { useGlobal } from 'reactn';
 
 // Styles
 import './content.css';
 
-// ContextAPI
-import ConfigProvider from '../../context/ConfigProvider';
+// Actions
+import * as themeActions from '../../actions/theme';
+
+// Reducer
+import reducers from '../../reducers';
+import { useEffect } from 'react';
 
 const Content = ({ children, theme }) => {
-  return (
-    <ConfigProvider>
-      {({ setTheme }) => {
-        setTimeout(() => {
-          setTheme(theme);
-        }, 1000);
+  const [state, dispatch] = useGlobal(reducers);
 
-        return (
-          <div
-            className={['Content', theme === 'white' ? '' : 'inverted'].join(
-              ' '
-            )}
-          >
-            {children}
-          </div>
-        );
-      }}
-    </ConfigProvider>
+  useEffect(() => {
+    setTimeout(() => {
+      themeActions.setTheme(theme, dispatch);
+    }, 500);
+  });
+
+  return (
+    <div className={['Content', theme === 'white' ? '' : 'inverted'].join(' ')}>
+      {children}
+    </div>
   );
 };
 

@@ -10,6 +10,7 @@ import * as authActions from '../../actions/auth';
 // ContextAPI
 const AuthContext = createContext();
 
+// Global state
 setGlobal({
   ...authInitialState,
   mobileMenuExpanded: false,

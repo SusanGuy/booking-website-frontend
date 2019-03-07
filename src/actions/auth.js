@@ -41,15 +41,16 @@ export const loginWithGoogleToken = async ({ dispatch, accessToken }) => {
   try {
     const response = await authenticateWithGoogle(accessToken);
     const token = await response.headers.get('x-auth-token');
-    const user = await response.json();
+    const result = await response.json();
 
-    console.log('user', user);
-
-    if (token) {
-      dispatch({ type: AUTH_SUCCESS, payload: user });
+    if (!result.err) {
+      dispatch({ type: AUTH_SUCCESS, payload: result });
       storeUserCredentials(token);
     } else {
-      dispatch({ type: AUTH_FAILURE, payload: 'Failed to authenticate' });
+      dispatch({
+        type: AUTH_FAILURE,
+        payload: 'Failed to authenticate. ' + result.err,
+      });
     }
   } catch (err) {
     dispatch({ type: AUTH_FAILURE, payload: 'Failed to authenticate. ' + err });
