@@ -25,6 +25,10 @@
     transform: translateY(0);
 }
 
+.TopFixedBar--message {
+    padding-left: 25px;
+}
+
 .TopFixedBar--icon {
     padding: 20px;
 }
