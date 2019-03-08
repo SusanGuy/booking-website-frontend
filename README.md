@@ -2,6 +2,18 @@
 
 Front End portion of the booking website. This is an attempt to develop a MVP (Minimum viable product) prototype for the Gillespie Business Plan Competition pitch event on May 2019 at the University of Mississippi.
 
+# Development URL
+
+http://giwoolee.s3-website.us-east-2.amazonaws.com
+
+# Screenshots
+
+#### [Home Page]
+<img src="https://user-images.githubusercontent.com/16644017/54009136-4b0e2f80-412f-11e9-8213-eccf29f98865.png" width="400" />
+
+#### [Query Result Page]
+<img src="https://user-images.githubusercontent.com/16644017/54009165-6e38df00-412f-11e9-8323-db12a4b9593d.png" width="400" />
+
 # Project Structure
 
 ```js
