@@ -1,0 +1,32 @@
+.BecomeAHostLayout-bg {
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    height: 40%;
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+}
+
+@media (min-width: 442px) {
+    .BecomeAHostLayout-bg {
+        background-position: 50%;
+        height: 100vh;
+    }
+}
+
+.BecomeAHostLayout--hover {
+    background-image: linear-gradient(to bottom, var(--theme-black), var(--theme-white));
+    height: 40%;
+    opacity: 0.4;
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+}
+
+@media (min-width: 442px) {
+    .BecomeAHostLayout--hover {
+        background-image: linear-gradient(to bottom, var(--theme-black), #f06d06);
+        height: 100vh;
+    }
+}

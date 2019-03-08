@@ -2,25 +2,19 @@ import React from 'react';
 
 // Layout
 import ContentLayout from '../../layout/Content';
-import CustomBackgroundLayout from '../../layout/CustomBackground';
+import ThemeLayout from '../../layout/Theme';
 
 // Components
 import ExperienceItem from './ExperienceItem';
 import ExperienceFooter from './ExperienceFooter';
 
-const Experiences = ({ match, experience }) => {
-  console.log('match', match);
-
+const Experiences = ({ experience }) => {
   return (
     <ContentLayout theme="white">
-      <CustomBackgroundLayout
-        theme="white"
-        paddingHorizontal={48}
-        paddingVertical={10}
-      >
+      <ThemeLayout theme="white" paddingHorizontal={48} paddingVertical={10}>
         <ExperienceItem {...experience} />
         <ExperienceFooter {...experience} />
-      </CustomBackgroundLayout>
+      </ThemeLayout>
     </ContentLayout>
   );
 };

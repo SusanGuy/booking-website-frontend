@@ -139,14 +139,14 @@ const NavBar = ({
                       List your land
                     </Link>
                     <div>Earn up to $6000 a month hosting in University</div>
-                    <Link to="#">Learn about hosting land</Link>
+                    <Link to="/host/wildlife">Learn about hosting land</Link>
                   </DropdownMenuItem>
 
                   <DropdownMenuItem
                     title="EXPERIENCES"
                     iconUrl={icons.mountainPeak}
                   >
-                    <Link to="#">Host an experience</Link>
+                    <Link to="/host/experiences">Host an experience</Link>
                     <div>Earn money leading poeple on activities you love</div>
                   </DropdownMenuItem>
                 </div>

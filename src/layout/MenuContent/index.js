@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
 
 // Selectors
 import * as authSelectors from '../../reducers/auth';
@@ -14,21 +15,26 @@ import backgrounds from '../../shared/backgrounds';
 import NavBar from '../../components/NavBar';
 import TopFixedBar from '../../components/TopFixedBar';
 
-const MenuContent = ({ children, user }) => {
+const MenuContent = ({ component: Component, ...rest }) => {
   return (
-    <div className="MenuContent">
-      <div
-        className="MenuContent-bg"
-        style={{
-          backgroundImage: `url(${backgrounds.landscape})`,
-        }}
-      />
-      <div className="MenuContent--hover" />
+    <Route
+      {...rest}
+      render={matchProps => (
+        <div className="MenuContent">
+          <div
+            className="MenuContent-bg"
+            style={{
+              backgroundImage: `url(${backgrounds.landscape})`,
+            }}
+          />
+          <div className="MenuContent--hover" />
 
-      <NavBar />
-      <TopFixedBar />
-      {children}
-    </div>
+          <NavBar />
+          <TopFixedBar />
+          <Component {...matchProps} />
+        </div>
+      )}
+    />
   );
 };
 

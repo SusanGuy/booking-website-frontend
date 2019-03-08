@@ -2,7 +2,7 @@ import React from 'react';
 
 // Layout
 import ContentLayout from '../../layout/Content';
-import CustomBackgroundLayout from '../../layout/CustomBackground';
+import ThemeLayout from '../../layout/Theme';
 
 // Styles
 import './query.css';
@@ -16,14 +16,14 @@ const Query = ({ match }) => {
 
   return (
     <ContentLayout theme="white">
-      <CustomBackgroundLayout theme="white">
+      <ThemeLayout theme="white">
         <WrapperContainer
           title={`Explore ${location}`}
           subtitle="Book activities led by local hosts on your next trip"
         />
         <WrapperContainer endpoint="property" title="Popular experiences" />
         <WrapperContainer endpoint="property" title="Where to fish" />
-      </CustomBackgroundLayout>
+      </ThemeLayout>
     </ContentLayout>
   );
 };

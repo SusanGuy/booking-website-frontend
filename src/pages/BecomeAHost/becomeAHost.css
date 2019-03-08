@@ -1,0 +1,136 @@
+.BecomeAHost {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    position: relative;
+    margin-left: -300px;
+    height: 100%;
+}
+
+@media (min-width: 992px) {
+    .BecomeAHost {
+        width: 500px !important;
+    }
+}
+
+.BecomeAHost--form-box--error {
+    align-items: center;
+    border: 1px solid var(--theme-border);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    height: 62px;
+    animation: fadeIn 500ms ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.BecomeAHost--form-box--fields-item-error-message {
+    color: var(--theme-red);
+    font-weight: bold;
+}
+
+.BecomeAHost--form-box--error-info {
+    background-color: var(--theme-red);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    color: var(--theme-white);
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 40px;
+}
+
+.BecomeAHost--form-box--error-message {
+    margin-left: 10px;
+}
+
+.BecomeAHost--form-box--error-cancel-btn {
+    align-items: center;
+    color: var(--theme-text-placeholder-color);
+    cursor: pointer;
+    display: flex;
+    font-size: 30px;
+    height: 100%;
+    justify-content: center;
+    margin-left: 15px;
+    width: 40px;
+}
+
+.BecomeAHost--form-box {
+    animation-name: fadeInSlideDown;
+    animation-duration: 500ms;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    background-color: var(--theme-white);
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    height: calc(100% - 30px);
+    padding: 20px;
+    width: 100%;
+}
+
+.BecomeAHost--form-box--title {
+    color: var(--theme-text-placeholder-color);
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0px;
+}
+
+.BecomeAHost--form-box--fields {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 0px;
+}
+
+.BecomeAHost--form-box--fields-item {
+    margin: 20px 0;
+}
+
+.BecomeAHost--form-box--fields-item-title {
+    color: var(--theme-text-placeholder-color);
+    font-size: 18px;
+}
+
+.BecomeAHost--form-box--fields-item-dropdown {
+    background-color: var(--theme-border);
+    display: block;
+    padding: 11px 40px 11px 11px;
+    width: 60%;
+}
+
+.BecomeAHost--form-box--fields-item-dropdown.error {
+    border-color: var(--theme-red);
+}
+
+.BecomeAHost--form-box--footer {
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    justify-content: space-between;
+    left: 0;
+    padding: 5px 20px;
+    position: absolute;
+    right: 0;
+    width: 100%;
+}
+
+.BecomeAHost--form-box--footer-item {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+}

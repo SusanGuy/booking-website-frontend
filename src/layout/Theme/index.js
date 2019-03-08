@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './CustomBackgroundLayout.css';
+import './theme.css';
 
-const CustomBackgroundLayout = ({
+const ThemeLayout = ({
   children,
   theme,
   paddingHorizontal,
@@ -10,7 +10,7 @@ const CustomBackgroundLayout = ({
 }) => {
   return (
     <div
-      className="CustomBackgroundLayout"
+      className="ThemeLayout"
       style={{
         backgroundColor: theme,
         paddingLeft: paddingHorizontal,
@@ -24,10 +24,10 @@ const CustomBackgroundLayout = ({
   );
 };
 
-CustomBackgroundLayout.defaultProps = {
+ThemeLayout.defaultProps = {
   theme: 'main',
   paddingHorizontal: 80,
   paddingVertical: 10,
 };
 
-export default CustomBackgroundLayout;
+export default ThemeLayout;

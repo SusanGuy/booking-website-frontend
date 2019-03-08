@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 // Actions
 import * as authActions from './actions/auth';
 import * as menuActions from './actions/menu';
 
 // Components
-import MainRoutes from './routes/Main';
-import BecomeAHostRoutes from './routes/BecomeAHost';
+import Routes from './routes';
 
 const App = ({ login, setFixedBarOpened }) => {
   useEffect(() => {
@@ -21,10 +20,7 @@ const App = ({ login, setFixedBarOpened }) => {
 
   return (
     <Router>
-      <Switch>
-        <MainRoutes />
-        <BecomeAHostRoutes />
-      </Switch>
+      <Routes />
     </Router>
   );
 };
