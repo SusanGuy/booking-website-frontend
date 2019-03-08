@@ -1,6 +1,6 @@
-# Booking Website: BackEnd
+# Booking Website: FrontEnd
 
-Front End portion of the booking website. This is an attempt to develop a MVP (Minimum viable product) prototype for the Business School pitch event on May 2019 at the University of Mississippi.
+Front End portion of the booking website. This is an attempt to develop a MVP (Minimum viable product) prototype for the Gillespie Business Plan Competition pitch event on May 2019 at the University of Mississippi.
 
 # Project Structure
 
