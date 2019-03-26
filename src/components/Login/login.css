@@ -1,0 +1,120 @@
+.Login {
+    background-color: var(--theme-white);
+    font-size: var(--font-form-element-size);
+    height: 100%;
+    line-height: var(--font-form-element-height);
+    letter-spacing: var(--font-form-element-letter-spacing);
+    padding-bottom: 20px;
+    width: 100%;
+}
+
+@media (min-width: 484px) {
+    .Login {
+        height: initial;
+        margin-bottom: 50px;
+        max-width: 568px;
+    }
+}
+
+.Login-header {
+    display: flex;
+    justify-content: flex-start;
+    padding: 30px 20px 20px;
+}
+
+@media (min-width: 991px) {
+    .Login-header {
+        padding: 20px 20px 10px;
+    }
+}
+
+.Login-header-item {
+    cursor: pointer;
+}
+
+.Login-header-item i {
+    color: var(--theme-text-placeholder-color);
+    font-size: 32px;
+}
+
+.Login-body {
+    background-color: var(--theme-white);
+    padding: 0px 30px;
+}
+
+.Login-body > button {
+    align-items: center !important;
+    border: 1px solid var(--theme-black) !important;
+    border-radius: 5px !important;
+    box-shadow: none !important;
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+.Login-body input {
+    border: 1px solid var(--theme-border);
+    border-radius: 5px;
+}
+
+.Login-HR-wrap {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 16px 0;
+    width: 100%;
+}
+
+.Login-HR-div {
+    border-bottom-color: var(--theme-border);
+    border-bottom-width: 1px;
+    width: 100%;
+}
+
+.Login-HR-div hr {
+    margin: 0;
+}
+
+.Login-HR-text {
+    color: var(--theme-border);
+    padding: 0px 10px;
+}
+
+.Login-input-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.Login-input-group input {
+    border: 1px solid var(--theme-border) !important;
+    padding: 0 10px !important;
+}
+
+.Login-input-item {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (min-width: 991px) {
+    .Login-input-item {
+        flex-direction: row;
+    }
+}
+
+.Login-input-link {
+    color: var(--link-color);
+    cursor: pointer;
+}
+
+.Login-input-link:hover {
+    text-decoration: underline;
+}
+
+.Login-footer {
+    height: 40px;
+}

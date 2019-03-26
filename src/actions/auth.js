@@ -1,3 +1,4 @@
+export const AUTH_SET_LOGIN_MODAL = 'auth/AUTH_SET_LOGIN_MODAL';
 export const AUTH_LOGIN = 'auth/AUTH_LOGIN';
 export const AUTH_LOGOUT = 'auth/AUTH_LOGOUT';
 export const AUTH_SUCCESS = 'auth/AUTH_SUCCESS';
@@ -12,7 +13,7 @@ const delay = (time = 1500) => {
 };
 
 const errorMessage = message => {
-  return `Failed to authenticate. ${message}`;
+  return `Failed to authenticate. ${JSON.stringify(message)}`;
 };
 
 /**
@@ -43,6 +44,12 @@ export const login = () => {
         reject(errorMessage(err));
       }
     });
+  };
+};
+
+export const setLoginModal = isloginModalOpen => {
+  return dispatch => {
+    dispatch({ type: AUTH_SET_LOGIN_MODAL, payload: isloginModalOpen });
   };
 };
 

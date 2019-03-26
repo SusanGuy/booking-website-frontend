@@ -18,10 +18,10 @@
     transform: translateY(-120%);
     width: 100%;
     z-index: 5;
-    transition: transform 500ms ease-in-out;
 }
 
 .TopFixedBar.content {
+  transition: transform 500ms ease-in-out;
     transform: translateY(0);
 }
 

@@ -1,0 +1,32 @@
+.Modal {
+    background-color: rgba(0, 0, 0, 0.75);
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    overflow-y: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2000;
+}
+
+.Modal-content {
+    height: 100%;
+}
+
+@media (min-width: 484px) {
+    .Modal-content {
+        align-items: flex-start;
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        margin-top: 50px;
+    }
+}
+
+@media (min-width: 991px) {
+    .Modal-content {
+        margin-top: 60px;
+    }
+}

@@ -34,9 +34,11 @@ const NavBarLink = ({ to, onClick, title }) => {
 const NavBar = ({
   authLoading,
   isMobileWidth,
+  isOpen,
   mobileMenuExpanded,
   user,
   theme,
+  setLoginModal,
   setMobileMenuExpanded,
   logout,
 }) => {
@@ -54,6 +56,10 @@ const NavBar = ({
 
   const handleClickIcon = event => {
     if (event.target.className) {
+      if (event.target.className === 'NavBar--profileMenu--dropdown-item') {
+        return;
+      }
+
       setProfileMenuExpanded(false);
       setWildLifeExpanded(false);
     }
@@ -80,7 +86,10 @@ const NavBar = ({
   };
 
   const handleLogin = () => {
+    console.log('isMobileWidth', isMobileWidth);
     isMobileWidth && setMobileMenuExpanded(!mobileMenuExpanded);
+
+    setLoginModal(!isOpen);
   };
 
   const logoutUser = () => {
@@ -200,7 +209,11 @@ const NavBar = ({
                 <BeatLoader size={15} color="var(--theme-main)" />
               </li>
             ) : (
-              <NavBarLink to="/login" title="Login" onClick={handleLogin} />
+              <li>
+                <div className="NavBar--menu-link" onClick={handleLogin}>
+                  <div>Login</div>
+                </div>
+              </li>
             )}
           </ul>
         </React.Fragment>
@@ -220,6 +233,7 @@ function mapStateToProps(state) {
 }
 
 const actionCreators = {
+  setLoginModal: authActions.setLoginModal,
   setMobileMenuExpanded: menuActions.setMobileMenuExpanded,
   logout: authActions.logout,
 };

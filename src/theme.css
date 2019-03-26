@@ -3,10 +3,15 @@
     --theme-white: #fff;
     --theme-black: #000;
     --theme-red: #FF5A5F;
-    --theme-border: #ebebeb;
-    --theme-text-placeholder-color: #484848;
+    --theme-border: rgba(0,0,0,0.65);
+    --theme-text-placeholder-color: rgb(118, 118, 118);
     --theme-font-family: 'Roboto', 'Open Sans', sans-serif;
     --theme-font-size-header: 50px;
     --theme-font-size: 16px;
     --theme-font-desktop-size: 14px;
+    --link-color: #008489;
+    --font-form-element-size: 16px;
+    --font-form-element-height: 24px;
+    --font-form-element-letter-spacing: normal;
+    --spacing-form-element-horizontal: 11px;
 }

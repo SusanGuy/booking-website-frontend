@@ -1,10 +1,16 @@
 .Content {
     align-items: center;
     display: flex;
-    height: calc(100vh - 81px);
+    height: 100vh;
     justify-content: center;
     margin-top: 81px;
     width: 100%;
+}
+
+@media (min-width: 992px) {
+    .Content {
+        height: calc(100vh - 81px);
+    }
 }
 
 .Content.inverted {

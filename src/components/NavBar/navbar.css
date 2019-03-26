@@ -164,13 +164,13 @@
     right: 0;
     top: 0;
     width: 100%;
-    transition-duration: 0.2s !important;
-    transition-property: -ms-transform, -webkit-transform, transform !important;
-    transition-timing-function: ease-out !important;
     transform: translateY(-100%);
 }
 
 .NavBar--menu--mobile-bg.expanded {
+  transition-duration: 0.2s !important;
+    transition-property: -ms-transform, -webkit-transform, transform !important;
+    transition-timing-function: ease-out !important;
     transform: translateY(0px) !important;
 }
 

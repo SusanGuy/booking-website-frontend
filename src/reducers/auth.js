@@ -1,4 +1,5 @@
 import {
+  AUTH_SET_LOGIN_MODAL,
   AUTH_LOGIN,
   AUTH_LOGOUT,
   AUTH_SUCCESS,
@@ -9,10 +10,13 @@ const authInitialState = {
   isMobileWidth: window.innerWidth <= 992,
   authLoading: false,
   user: null,
+  isOpen: false,
 };
 
 const reducer = (state = authInitialState, action) => {
   switch (action.type) {
+    case AUTH_SET_LOGIN_MODAL:
+      return { ...state, isOpen: action.payload };
     case AUTH_LOGIN:
       return { ...state, authLoading: true };
     case AUTH_LOGOUT:
@@ -32,6 +36,10 @@ function select(state) {
 
 export function isMobileWidth(state) {
   return select(state).isMobileWidth;
+}
+
+export function isOpen(state) {
+  return select(state).isOpen;
 }
 
 export function authLoading(state) {
