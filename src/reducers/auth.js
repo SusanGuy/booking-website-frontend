@@ -8,6 +8,7 @@ import {
 
 const authInitialState = {
   isMobileWidth: window.innerWidth <= 992,
+  isMobileHeight: window.innerHeight <= 750,
   authLoading: false,
   user: null,
   isOpen: false,
@@ -36,6 +37,10 @@ function select(state) {
 
 export function isMobileWidth(state) {
   return select(state).isMobileWidth;
+}
+
+export function isMobileHeight(state) {
+  return select(state).isMobileHeight;
 }
 
 export function isOpen(state) {

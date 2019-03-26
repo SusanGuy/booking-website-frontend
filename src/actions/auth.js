@@ -4,6 +4,10 @@ export const AUTH_LOGOUT = 'auth/AUTH_LOGOUT';
 export const AUTH_SUCCESS = 'auth/AUTH_SUCCESS';
 export const AUTH_FAILURE = 'auth/AUTH_FAILURE';
 
+export const AUTH_SIGNUP = 'auth/AUTH_SIGNUP';
+export const AUTH_SIGNUP_SUCCESS = 'auth/AUTH_SIGNUP_SUCCESS';
+export const AUTH_SIGNUP_FAILURE = 'auth/AUTH_SIGNUP_FAILURE';
+
 const delay = (time = 1500) => {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -14,6 +18,26 @@ const delay = (time = 1500) => {
 
 const errorMessage = message => {
   return `Failed to authenticate. ${JSON.stringify(message)}`;
+};
+
+/**
+ * Signup
+ */
+export const signup = params => {
+  return async (dispatch, getState, { api }) => {
+    return new Promise(async (resolve, reject) => {
+      dispatch({ type: AUTH_SIGNUP });
+
+      try {
+        const response = await api.signup(params);
+        const { data } = await response.json();
+
+        resolve(data);
+      } catch (err) {
+        reject(errorMessage(err));
+      }
+    });
+  };
 };
 
 /**
@@ -32,7 +56,6 @@ export const login = e => {
       try {
         const response = await api.login(email, password);
         const { data } = await response.json();
-        console.log('data', data);
 
         dispatch({
           type: AUTH_SUCCESS,

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 // Styles
 import './login.css';
@@ -6,26 +7,52 @@ import './login.css';
 // Components
 import HRWrap from './HRWrap';
 
-const handleSubmit = e => {
+// Actions
+import * as authActions from '../../actions/auth';
+import * as menuActions from '../../actions/menu';
+
+const handleSubmit = (e, signup, setLoginModal, setFixedBarOpened) => {
   e.preventDefault();
-  console.log('Submit form');
+
+  const email = e.target.email.value;
+  const first_name = e.target.email.first_name;
+  const last_name = e.target.email.last_name;
+  const password = e.target.email.password;
+
+  signup({ email, first_name, last_name, password }).then(res => {
+    setLoginModal(false);
+    setFixedBarOpened({ opened: true, message: res });
+  });
 };
 
-const SignupWithEmail = ({ setSignup }) => {
+const SignupWithEmail = ({
+  setSignup,
+  setLoginModal,
+  setFixedBarOpened,
+  signup,
+}) => {
   return (
     <React.Fragment>
-      <form onSubmit={e => handleSubmit(e)}>
+      <form
+        onSubmit={e =>
+          handleSubmit(e, signup, setLoginModal, setFixedBarOpened)
+        }
+      >
         <div className="Login-input-group">
-          <input type="email" placeholder="Email address" />
+          <input type="email" name="email" placeholder="Email address" />
         </div>
         <div className="Login-input-group">
-          <input type="text" placeholder="First Name" />
+          <input type="text" name="first_name" placeholder="First Name" />
         </div>
         <div className="Login-input-group">
-          <input type="text" placeholder="Last Name" />
+          <input type="text" name="last_name" placeholder="Last Name" />
         </div>
         <div className="Login-input-group">
-          <input type="password" placeholder="Create a Password" />
+          <input
+            type="password"
+            name="password"
+            placeholder="Create a Password"
+          />
         </div>
         <div className="Login-input-group">
           We’ll send you marketing promotions, special offers, inspiration, and
@@ -55,4 +82,13 @@ const SignupWithEmail = ({ setSignup }) => {
   );
 };
 
-export default SignupWithEmail;
+const actionCreators = {
+  setFixedBarOpened: menuActions.setFixedBarOpened,
+  setLoginModal: authActions.setLoginModal,
+  signup: authActions.signup,
+};
+
+export default connect(
+  null,
+  actionCreators
+)(SignupWithEmail);

@@ -4,6 +4,8 @@
     padding: 0px;
     position: relative;
     margin-top: -30px;
+    translate: transform 1s linear;
+    transform: translateY(0%);
 }
 
 @media (min-width: 1128px) {
@@ -11,6 +13,10 @@
         margin: auto !important;
         width: 980px !important;
     }
+}
+
+.Home.mobile-height {
+    transform: translateY(-50%);
 }
 
 .Home h1 {

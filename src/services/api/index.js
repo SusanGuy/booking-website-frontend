@@ -19,7 +19,21 @@ export function request(endpoint, options) {
 
 /**
  *
- * @param {*} token
+ * @param {*} email
+ * @param {*} password
+ */
+export function signup(params) {
+  const options = {
+    body: JSON.stringify(params),
+  };
+
+  return request(`/api/signup`, options);
+}
+
+/**
+ *
+ * @param {String} email
+ * @param {String} password
  */
 export function login(email, password) {
   const options = {

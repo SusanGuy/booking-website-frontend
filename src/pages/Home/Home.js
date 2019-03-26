@@ -65,7 +65,7 @@ class Home extends React.PureComponent {
     //        Find a better way to update the state
     if (className === dropdownItemClassName) {
       let where = event.target.querySelector('div').innerHTML;
-      console.log('where', where);
+
       this.setState({
         where,
       });
@@ -182,11 +182,16 @@ class Home extends React.PureComponent {
       guestsCount,
       fieldFocusedInput: { location, date, guests },
     } = this.state;
-    const { places, isMobileWidth } = this.props;
+    const { places, isMobileHeight, isMobileWidth } = this.props;
 
     return (
       <ContentLayout>
-        <div className="Home">
+        <div
+          className={[
+            'Home',
+            date && isMobileHeight ? 'mobile-height' : '',
+          ].join(' ')}
+        >
           <h1>
             Plan your next{' '}
             <span style={{ color: 'var(--theme-main)' }}>wildlife</span>{' '}
@@ -348,6 +353,7 @@ class Home extends React.PureComponent {
 
 function mapStateToProps(state) {
   return {
+    isMobileHeight: authSelectors.isMobileHeight(state),
     isMobileWidth: authSelectors.isMobileWidth(state),
   };
 }
