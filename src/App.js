@@ -9,11 +9,13 @@ import * as menuActions from './actions/menu';
 // Components
 import Routes from './routes';
 
-const App = ({ login, setFixedBarOpened }) => {
+const App = ({ loginOnLoad, setFixedBarOpened }) => {
   useEffect(() => {
     setTimeout(
       () =>
-        login().catch(err => setFixedBarOpened({ opened: true, message: err })),
+        loginOnLoad().catch(err =>
+          setFixedBarOpened({ opened: true, message: err })
+        ),
       1000
     );
   });
@@ -26,7 +28,7 @@ const App = ({ login, setFixedBarOpened }) => {
 };
 
 const actionCreators = {
-  login: authActions.login,
+  loginOnLoad: authActions.loginOnLoad,
   setFixedBarOpened: menuActions.setFixedBarOpened,
 };
 

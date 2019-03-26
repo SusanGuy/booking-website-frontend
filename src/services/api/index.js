@@ -17,6 +17,18 @@ export function request(endpoint, options) {
   });
 }
 
+/**
+ *
+ * @param {*} token
+ */
+export function login(email, password) {
+  const options = {
+    body: JSON.stringify({ email, password }),
+  };
+
+  return request(`/api/login`, options);
+}
+
 export function validateToken(token) {
   const options = {
     body: JSON.stringify({ token }),

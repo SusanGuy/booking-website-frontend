@@ -17,14 +17,46 @@ const errorMessage = message => {
 };
 
 /**
+ * Login
+ */
+export const login = e => {
+  return async (dispatch, getState, { api }) => {
+    return new Promise(async (resolve, reject) => {
+      e.preventDefault();
+
+      dispatch({ type: AUTH_LOGIN });
+
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+
+      try {
+        const response = await api.login(email, password);
+        const { data } = await response.json();
+        console.log('data', data);
+
+        dispatch({
+          type: AUTH_SUCCESS,
+          payload: data,
+        });
+        resolve();
+      } catch (err) {
+        dispatch({
+          type: AUTH_FAILURE,
+          payload: errorMessage(err),
+        });
+        reject(errorMessage(err));
+      }
+    });
+  };
+};
+
+/**
  * Login attempt on page load
  */
-export const login = () => {
+export const loginOnLoad = () => {
   return async (dispatch, getState, { api, localStorage }) => {
     return new Promise(async (resolve, reject) => {
       dispatch({ type: AUTH_LOGIN });
-
-      await delay(1500);
 
       try {
         const token = await localStorage.validateUserAuthenticationToken();

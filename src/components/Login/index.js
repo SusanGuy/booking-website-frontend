@@ -21,17 +21,18 @@ import ModalLayout from '../../layout/Modal';
 import HRWrap from './HRWrap';
 import SignupWithEmail from './SignUpWithEmail';
 
-const LoginBody = ({ showPassword, setShowPassword, setSignup }) => {
+const LoginBody = ({ login, showPassword, setShowPassword, setSignup }) => {
   return (
     <React.Fragment>
-      <form>
+      <form onSubmit={e => login(e)} method="POST">
         <HRWrap />
         <div className="Login-input-group">
-          <input type="email" placeholder="Enter Email" />
+          <input type="email" name="email" placeholder="Enter Email" />
         </div>
         <div className="Login-input-group">
           <input
             type={showPassword ? 'text' : 'password'}
+            name="password"
             placeholder="Password"
           />
         </div>
@@ -50,12 +51,12 @@ const LoginBody = ({ showPassword, setShowPassword, setSignup }) => {
           </div>
         </div>
         <div className="Login-input-group">
-          <button
+          <input
+            type="submit"
             className="waves-effect waves-light btn-large"
             style={{ width: '100%' }}
-          >
-            Login
-          </button>
+            value="Login"
+          />
         </div>
       </form>
       <div className="Login-input-item">
@@ -114,6 +115,7 @@ const SignupBody = ({ setSignup, signupWithEmail, setSignupWithEmail }) => {
 };
 
 const Login = ({
+  login,
   loginWithGoogleToken,
   setFixedBarOpened,
   user,
@@ -168,6 +170,7 @@ const Login = ({
               showPassword={showPassword}
               setShowPassword={setShowPassword}
               setSignup={setSignup}
+              login={e => login(e)}
             />
           )}
         </div>
@@ -184,6 +187,7 @@ function mapStateToProps(state) {
 }
 
 const actionCreators = {
+  login: authActions.login,
   setLoginModal: authActions.setLoginModal,
   loginWithGoogleToken: authActions.loginWithGoogleToken,
   setFixedBarOpened: menuActions.setFixedBarOpened,
