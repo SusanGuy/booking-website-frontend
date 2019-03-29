@@ -7,7 +7,7 @@
     width: 100%;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 451px) {
     .Content {
         height: calc(100vh - 81px);
     }

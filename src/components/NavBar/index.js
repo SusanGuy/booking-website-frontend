@@ -86,7 +86,6 @@ const NavBar = ({
   };
 
   const handleLogin = () => {
-    console.log('isMobileWidth', isMobileWidth);
     isMobileWidth && setMobileMenuExpanded(!mobileMenuExpanded);
 
     setLoginModal(!isOpen);

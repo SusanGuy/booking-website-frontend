@@ -3,12 +3,13 @@
     flex-direction: column;
     padding: 0px;
     position: relative;
-    margin-left: -300px;
     height: 100%;
+    width: 100%;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 991px) {
     .BecomeAHost {
+        margin-left: -300px;
         width: 500px !important;
     }
 }
@@ -75,10 +76,16 @@
     background-color: var(--theme-white);
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
-    height: calc(100% - 30px);
+    height: 100%;
     padding: 20px;
     width: 100%;
+}
+
+@media (min-width: 991px) {
+    .BecomeAHost--form-box {
+        margin-top: 30px;
+        height: calc(100% - 30px);
+    }
 }
 
 .BecomeAHost--form-box--title {
@@ -105,7 +112,7 @@
 }
 
 .BecomeAHost--form-box--fields-item-dropdown {
-    background-color: var(--theme-border);
+    background-color: var(--theme-white);
     display: block;
     padding: 11px 40px 11px 11px;
     width: 60%;

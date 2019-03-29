@@ -8,7 +8,7 @@
 
 .StepBar-wrapper {
     align-items: flex-start;
-    background-color: var(--theme-border);
+    background-color: var(--theme-white);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
