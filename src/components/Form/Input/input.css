@@ -1,0 +1,10 @@
+.Input {
+    display: flex;
+}
+
+.Input label {
+    font-size: 14px;
+    align-items: center;
+    display: flex;
+    width: 150px;
+}

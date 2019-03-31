@@ -9,7 +9,6 @@ import './login.css';
 
 // Actions
 import * as authActions from '../../actions/auth';
-import * as menuActions from '../../actions/menu';
 
 // Selectors
 import * as authSelectors from '../../reducers/auth';
@@ -117,7 +116,6 @@ const SignupBody = ({ setSignup, signupWithEmail, setSignupWithEmail }) => {
 const Login = ({
   login,
   loginWithGoogleToken,
-  setFixedBarOpened,
   user,
   isOpen,
   setLoginModal,
@@ -128,7 +126,7 @@ const Login = ({
 
   const googleResponse = response => {
     loginWithGoogleToken(response.accessToken).catch(res => {
-      setFixedBarOpened({ opened: true, message: res });
+      console.log('loginWithGoogleToken err', res);
     });
   };
 
@@ -179,18 +177,17 @@ const Login = ({
   );
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   return {
     user: authSelectors.getUser(state),
     isOpen: authSelectors.isOpen(state),
   };
-}
+};
 
 const actionCreators = {
   login: authActions.login,
   setLoginModal: authActions.setLoginModal,
   loginWithGoogleToken: authActions.loginWithGoogleToken,
-  setFixedBarOpened: menuActions.setFixedBarOpened,
 };
 
 export default connect(

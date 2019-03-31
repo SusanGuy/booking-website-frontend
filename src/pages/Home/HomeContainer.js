@@ -1,10 +1,12 @@
 import React from 'react';
 
+// Actions
+
 // Components
 import Home from './Home.js';
 
 // Services
-import { fetchGooglePlaces } from '../../services/api';
+import { fetchGooglePlaces } from '../../actions/google';
 
 class HomeContainer extends React.Component {
   state = {

@@ -11,7 +11,7 @@ const Content = ({ children, theme, setTheme }) => {
   useEffect(() => {
     setTimeout(() => {
       setTheme(theme);
-    }, 1000);
+    }, 100);
   });
 
   return (

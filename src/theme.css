@@ -4,6 +4,7 @@
     --theme-black: #000;
     --theme-red: #FF5A5F;
     --theme-border: rgba(0,0,0,0.65);
+    --theme-border-light: rgb(242, 242, 242);
     --theme-text-placeholder-color: rgb(118, 118, 118);
     --theme-font-family: 'Roboto', 'Open Sans', sans-serif;
     --theme-font-size-header: 50px;

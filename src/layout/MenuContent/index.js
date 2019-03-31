@@ -13,7 +13,6 @@ import backgrounds from '../../shared/backgrounds';
 
 // Components
 import NavBar from '../../components/NavBar';
-import TopFixedBar from '../../components/TopFixedBar';
 
 const MenuContent = ({ component: Component, ...rest }) => {
   return (
@@ -30,7 +29,6 @@ const MenuContent = ({ component: Component, ...rest }) => {
           <div className="MenuContent--hover" />
 
           <NavBar />
-          <TopFixedBar />
           <Component {...matchProps} />
         </div>
       )}

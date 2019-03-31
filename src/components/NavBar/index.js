@@ -181,26 +181,29 @@ const NavBar = ({
                   )}
                 </div>
                 {profileMenuExpanded && (
-                  <div className="NavBar--profileMenu--dropdown">
-                    <div className="NavBar--profileMenu--dropdown-item">
-                      Edit Profile
-                    </div>
-                    <div className="NavBar--profileMenu--dropdown-item">
+                  <ul className="NavBar--profileMenu--dropdown">
+                    <Link
+                      to="/users/edit"
+                      className="NavBar--profileMenu--dropdown-item"
+                    >
+                      Profile
+                    </Link>
+                    <li className="NavBar--profileMenu--dropdown-item">
                       Invite Friends
-                    </div>
-                    <div className="NavBar--profileMenu--dropdown-item">
+                    </li>
+                    <li className="NavBar--profileMenu--dropdown-item">
                       Refer Hosts
-                    </div>
-                    <div className="NavBar--profileMenu--dropdown-item">
+                    </li>
+                    <li className="NavBar--profileMenu--dropdown-item">
                       Account Settings
-                    </div>
-                    <div
+                    </li>
+                    <li
                       onClick={() => logoutUser()}
                       className="NavBar--profileMenu--dropdown-item"
                     >
                       Log Out
-                    </div>
-                  </div>
+                    </li>
+                  </ul>
                 )}
               </li>
             ) : authLoading ? (

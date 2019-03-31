@@ -1,0 +1,41 @@
+.Edit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+.EditContent {
+    border: 1px solid var(--theme-border-light);
+    display: flex;
+    flex: 3;
+    flex-direction: column;
+}
+
+.EditContent--header {
+    background-color: var(--theme-border-light);
+    padding: 10px;
+}
+
+.EditContent--content {
+    padding: 15px;
+}
+
+.EditContent--content div {
+    margin-bottom: 20px;
+}
+
+.EditSideBar {
+    flex: 1;
+}
+
+.EditSideBar li {
+    color: var(--theme-text-placeholder-color);
+    cursor: pointer;
+    padding: 10px;
+}
+
+.EditSideBar li.selected {
+    color: var(--theme-border);
+    font-weight: bold;
+}

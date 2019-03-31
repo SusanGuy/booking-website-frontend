@@ -80,8 +80,8 @@
 
 .NavBar--menu li {
     display: flex;
-    justify-content: center;
-    padding: 0 10px;
+    justify-content: flex-start;
+    padding: 0 20px;
     position: relative;
 }
 
@@ -168,7 +168,7 @@
 }
 
 .NavBar--menu--mobile-bg.expanded {
-  transition-duration: 0.2s !important;
+    transition-duration: 0.2s !important;
     transition-property: -ms-transform, -webkit-transform, transform !important;
     transition-timing-function: ease-out !important;
     transform: translateY(0px) !important;
@@ -184,6 +184,8 @@
 .NavBar--profileMenu--dropdown {
     background: var(--theme-white);
     box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65);
+    display: flex;
+    flex-direction: column;
     top: 81px;
     position: absolute;
     right: 0;
@@ -192,7 +194,7 @@
 }
 
 .NavBar--profileMenu--dropdown-item {
-    border-bottom: 1px solid var(--theme-border);
+    border-bottom: 1px solid var(--theme-border-light);
     color: var(--theme-black);
     cursor: pointer;
     height: 55px;
@@ -202,7 +204,7 @@
 }
 
 .NavBar--profileMenu--dropdown-item:hover {
-    background-color: var(--theme-border);
+    border-bottom: 1px solid var(--theme-border);
 }
 
 /****************************************

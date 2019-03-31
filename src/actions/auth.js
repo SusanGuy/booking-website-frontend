@@ -29,7 +29,7 @@ export const signup = params => {
       dispatch({ type: AUTH_SIGNUP });
 
       try {
-        const response = await api.signup(params);
+        const response = await api.auth.signup(params);
         const { data } = await response.json();
 
         resolve(data);
@@ -54,7 +54,7 @@ export const login = e => {
       const password = e.target.password.value;
 
       try {
-        const response = await api.login(email, password);
+        const response = await api.auth.login(email, password);
         const { data } = await response.json();
 
         dispatch({
@@ -83,14 +83,14 @@ export const loginOnLoad = () => {
 
       try {
         const token = await localStorage.validateUserAuthenticationToken();
-        const response = await api.validateToken(token);
+        const response = await api.auth.validateToken(token);
         const { data } = await response.json();
 
         dispatch({
           type: AUTH_SUCCESS,
           payload: data.length > 0 ? data[0] : null,
         });
-        resolve();
+        resolve(data);
       } catch (err) {
         dispatch({
           type: AUTH_FAILURE,
@@ -114,14 +114,14 @@ export const loginWithGoogleToken = accessToken => {
       dispatch({ type: AUTH_LOGIN });
 
       try {
-        const response = await api.authenticateWithGoogle(accessToken);
+        const response = await api.auth.authenticateWithGoogle(accessToken);
         const token = await response.headers.get('x-auth-token');
         const result = await response.json();
 
         if (!result.err) {
           dispatch({ type: AUTH_SUCCESS, payload: result });
           localStorage.storeUserCredentials(token);
-          resolve();
+          resolve(result);
         } else {
           dispatch({
             type: AUTH_FAILURE,
@@ -132,9 +132,9 @@ export const loginWithGoogleToken = accessToken => {
       } catch (err) {
         dispatch({
           type: AUTH_FAILURE,
-          payload: errorMessage(err),
+          payload: errorMessage(err.message),
         });
-        reject(errorMessage(err));
+        reject(errorMessage(err.message));
       }
     });
   };
@@ -143,7 +143,6 @@ export const loginWithGoogleToken = accessToken => {
 export const logout = () => {
   return async (dispatch, getState, { localStorage }) => {
     dispatch({ type: AUTH_LOGOUT });
-    await delay(2000);
     await localStorage.storeUserCredentials(null);
     dispatch({ type: AUTH_SUCCESS, payload: null });
   };

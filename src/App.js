@@ -4,20 +4,13 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 // Actions
 import * as authActions from './actions/auth';
-import * as menuActions from './actions/menu';
 
 // Components
 import Routes from './routes';
 
-const App = ({ loginOnLoad, setFixedBarOpened }) => {
+const App = ({ loginOnLoad }) => {
   useEffect(() => {
-    setTimeout(
-      () =>
-        loginOnLoad().catch(err =>
-          setFixedBarOpened({ opened: true, message: err })
-        ),
-      1000
-    );
+    setTimeout(() => loginOnLoad().catch(err => console.log('err', err), 100));
   });
 
   return (
@@ -29,7 +22,6 @@ const App = ({ loginOnLoad, setFixedBarOpened }) => {
 
 const actionCreators = {
   loginOnLoad: authActions.loginOnLoad,
-  setFixedBarOpened: menuActions.setFixedBarOpened,
 };
 
 export default connect(
