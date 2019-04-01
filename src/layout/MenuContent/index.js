@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 
 // Selectors
-import * as authSelectors from '../../reducers/auth';
+import * as userSelectors from '../../reducers/user';
 
 // Styles
 import './menuContent.css';
@@ -38,7 +38,7 @@ const MenuContent = ({ component: Component, ...rest }) => {
 
 function mapStateToProps(state) {
   return {
-    user: authSelectors.getUser(state),
+    user: userSelectors.getUser(state),
   };
 }
 

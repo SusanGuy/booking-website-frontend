@@ -30,6 +30,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 2,
@@ -43,6 +44,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 3,
@@ -56,6 +58,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 4,
@@ -69,6 +72,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 5,
@@ -82,6 +86,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 6,
@@ -95,6 +100,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 7,
@@ -108,6 +114,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 8,
@@ -121,6 +128,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 9,
@@ -134,6 +142,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 10,
@@ -147,6 +156,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 11,
@@ -160,6 +170,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 12,
@@ -173,6 +184,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 13,
@@ -186,6 +198,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 14,
@@ -199,6 +212,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 15,
@@ -212,6 +226,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 16,
@@ -225,6 +240,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 17,
@@ -238,6 +254,7 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
   {
     id: 18,
@@ -251,5 +268,6 @@ export default [
     duration: '2 days',
     equipment: 'Included',
     language: 'Offered in English',
+    paypal_id: '8dw6a89d6aw96da9',
   },
 ];

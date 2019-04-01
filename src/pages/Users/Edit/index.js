@@ -25,7 +25,7 @@ const SIDEBARMENU = {
 const EditSideBar = ({ sideBarSelectedItem, setSideBarSelectedItem }) => {
   return (
     <div className="EditSideBar">
-      <ul>
+      <ul className="EditSideBar--list">
         <li
           onClick={() => setSideBarSelectedItem(SIDEBARMENU.EDITPROFILE)}
           className={

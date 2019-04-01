@@ -21,12 +21,11 @@
         display: flex;
         flex: 1;
         justify-content: center;
-        margin-top: 50px;
     }
 }
 
-@media (min-width: 991px) {
+/* @media (min-width: 991px) {
     .Modal-content {
         margin-top: 60px;
     }
-}
+} */

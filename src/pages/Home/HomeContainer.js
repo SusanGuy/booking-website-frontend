@@ -1,19 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 // Actions
+import { fetchGooglePlaces } from '../../actions/google';
 
 // Components
 import Home from './Home.js';
 
-// Services
-import { fetchGooglePlaces } from '../../actions/google';
+const HomeContainer = ({ fetchGooglePlaces }) => {
+  const [places, setPlaces] = useState([]);
 
-class HomeContainer extends React.Component {
-  state = {
-    places: [],
-  };
-
-  fetchAutoComplete = input => {
+  const fetchAutoComplete = input => {
     fetchGooglePlaces('autocomplete', input)
       .then(response => response.json())
       .then(({ predictions, status }) => {
@@ -26,24 +23,19 @@ class HomeContainer extends React.Component {
             });
           });
 
-          this.setState({
-            places,
-          });
+          setPlaces(places);
         }
-      })
-      .catch(err => {
-        console.log('err', err);
       });
   };
 
-  render() {
-    return (
-      <Home
-        places={this.state.places}
-        fetchAutoComplete={this.fetchAutoComplete}
-      />
-    );
-  }
-}
+  return <Home places={places} fetchAutoComplete={fetchAutoComplete} />;
+};
 
-export default HomeContainer;
+const actionCreators = {
+  fetchGooglePlaces,
+};
+
+export default connect(
+  null,
+  actionCreators
+)(HomeContainer);

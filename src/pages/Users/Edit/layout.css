@@ -1,0 +1,19 @@
+.EditLayout {
+    border: 1px solid var(--theme-border-light);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.EditLayout--header {
+    background-color: var(--theme-border-light);
+    padding: 10px;
+}
+
+.EditLayout--content {
+    padding: 15px;
+}
+
+.EditLayout--content div {
+    margin-bottom: 20px;
+}

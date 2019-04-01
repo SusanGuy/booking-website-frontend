@@ -12,6 +12,7 @@ import * as authActions from '../../actions/auth';
 
 // Selectors
 import * as authSelectors from '../../reducers/auth';
+import * as userSelectors from '../../reducers/user';
 
 // Layout
 import ModalLayout from '../../layout/Modal';
@@ -125,9 +126,7 @@ const Login = ({
   const [signupWithEmail, setSignupWithEmail] = useState(false);
 
   const googleResponse = response => {
-    loginWithGoogleToken(response.accessToken).catch(res => {
-      console.log('loginWithGoogleToken err', res);
-    });
+    loginWithGoogleToken(response.accessToken);
   };
 
   const onFailure = response => {
@@ -179,7 +178,7 @@ const Login = ({
 
 const mapStateToProps = state => {
   return {
-    user: authSelectors.getUser(state),
+    user: userSelectors.getUser(state),
     isOpen: authSelectors.isOpen(state),
   };
 };

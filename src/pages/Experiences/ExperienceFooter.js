@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 // Styles
 import './experienceFooter.css';
@@ -6,7 +7,16 @@ import './experienceFooter.css';
 // Assets
 import icons from '../../shared/icons';
 
-const ExperienceFooter = ({ userProfilePic, category, rating, reviews }) => {
+// Actions
+import * as experiencesActions from '../../actions/experiences';
+
+const ExperienceFooter = ({
+  userProfilePic,
+  category,
+  rating,
+  reviews,
+  setBookingDatesModal,
+}) => {
   return (
     <div className="ExperienceFooter">
       <div className="ExperienceFooter--profile">
@@ -42,7 +52,10 @@ const ExperienceFooter = ({ userProfilePic, category, rating, reviews }) => {
         <div className="ExperienceFooter--callToAction--price">
           $63 per person
         </div>
-        <div className="ExperienceFooter--callToAction--button waves-effect waves-light btn-large red">
+        <div
+          onClick={() => setBookingDatesModal(true)}
+          className="ExperienceFooter--callToAction--button waves-effect waves-light btn-large red"
+        >
           See Dates
         </div>
       </div>
@@ -50,4 +63,11 @@ const ExperienceFooter = ({ userProfilePic, category, rating, reviews }) => {
   );
 };
 
-export default ExperienceFooter;
+const actionCreators = {
+  setBookingDatesModal: experiencesActions.setBookingDatesModal,
+};
+
+export default connect(
+  null,
+  actionCreators
+)(ExperienceFooter);

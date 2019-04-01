@@ -1,7 +1,6 @@
 import request from './request';
 
 /**
- *
  * @param {*} email
  * @param {*} password
  */
@@ -14,7 +13,6 @@ export function signup(params) {
 }
 
 /**
- *
  * @param {String} email
  * @param {String} password
  */

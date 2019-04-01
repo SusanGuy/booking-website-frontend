@@ -10,7 +10,7 @@ import Routes from './routes';
 
 const App = ({ loginOnLoad }) => {
   useEffect(() => {
-    setTimeout(() => loginOnLoad().catch(err => console.log('err', err), 100));
+    setTimeout(() => loginOnLoad(), 100);
   });
 
   return (

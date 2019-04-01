@@ -11,7 +11,7 @@
 @media (min-width: 484px) {
     .Login {
         height: initial;
-        margin-bottom: 50px;
+        margin: auto 0;
         max-width: 568px;
     }
 }

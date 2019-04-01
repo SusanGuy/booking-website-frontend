@@ -6,27 +6,36 @@
 }
 
 .EditContent {
-    border: 1px solid var(--theme-border-light);
     display: flex;
     flex: 3;
     flex-direction: column;
 }
 
-.EditContent--header {
-    background-color: var(--theme-border-light);
-    padding: 10px;
-}
-
-.EditContent--content {
-    padding: 15px;
-}
-
-.EditContent--content div {
+.EditContent--update {
+    color: var(--theme-border);
     margin-bottom: 20px;
+    opacity: 0;
+    padding: 10px 20px;
+    transition: all 500ms ease-in-out;
+}
+
+.EditContent--update.error {
+    background-color: var(--theme-red);
+    opacity: 1;
+}
+
+.EditContent--update.success {
+    background-color: var(--theme-main);
+    opacity: 1;
 }
 
 .EditSideBar {
     flex: 1;
+    position: relative;
+}
+
+.EditSideBar--list {
+    position: fixed;
 }
 
 .EditSideBar li {

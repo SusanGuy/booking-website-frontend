@@ -6,6 +6,6 @@ export const fetchGooglePlaces = (endpoint, input) => {
   return (dispatch, getState, { api }) => {
     dispatch({ type: GOOGLE_FETCH_PLACES_INIT });
 
-    return api.fetchGooglePlaces(endpoint, input);
+    return api.google.fetchGooglePlaces(endpoint, input);
   };
 };

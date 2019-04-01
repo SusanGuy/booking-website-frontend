@@ -86,7 +86,6 @@
 }
 
 .NavBar--menu li:last-child {
-    max-width: 160px;
     text-overflow: ellipsis;
     white-space: nowrap;
     width: inherit;
@@ -194,7 +193,7 @@
 }
 
 .NavBar--profileMenu--dropdown-item {
-    border-bottom: 1px solid var(--theme-border-light);
+    border-bottom: 1px solid var(--theme-border-light) !important;
     color: var(--theme-black);
     cursor: pointer;
     height: 55px;
@@ -204,7 +203,7 @@
 }
 
 .NavBar--profileMenu--dropdown-item:hover {
-    border-bottom: 1px solid var(--theme-border);
+    border-bottom: 1px solid var(--theme-border) !important;
 }
 
 /****************************************

@@ -15,6 +15,7 @@ import * as menuActions from '../../actions/menu';
 
 // Selectors
 import * as authSelectors from '../../reducers/auth';
+import * as userSelectors from '../../reducers/user';
 import * as menuSelectors from '../../reducers/menu';
 import * as themeSelectors from '../../reducers/theme';
 
@@ -32,7 +33,6 @@ const NavBarLink = ({ to, onClick, title }) => {
 };
 
 const NavBar = ({
-  authLoading,
   isMobileWidth,
   isOpen,
   mobileMenuExpanded,
@@ -167,18 +167,12 @@ const NavBar = ({
             {user ? (
               <li>
                 <div className="NavBar--menu-link" onClick={handleProfileMenu}>
-                  {authLoading ? (
-                    <BeatLoader size={15} color="var(--theme-main)" />
-                  ) : (
-                    <React.Fragment>
-                      <img
-                        src={user.profile_pic ? user.profile_pic : icons.user}
-                        alt="profile-img"
-                        className="NavBar--menu--profile-image"
-                      />
-                      <div>{`${user.first_name} ${user.last_name}`}</div>
-                    </React.Fragment>
-                  )}
+                  <img
+                    src={user.profile_pic ? user.profile_pic : icons.user}
+                    alt="profile-img"
+                    className="NavBar--menu--profile-image"
+                  />
+                  <div>{`${user.first_name} ${user.last_name}`}</div>
                 </div>
                 {profileMenuExpanded && (
                   <ul className="NavBar--profileMenu--dropdown">
@@ -206,10 +200,6 @@ const NavBar = ({
                   </ul>
                 )}
               </li>
-            ) : authLoading ? (
-              <li>
-                <BeatLoader size={15} color="var(--theme-main)" />
-              </li>
             ) : (
               <li>
                 <div className="NavBar--menu-link" onClick={handleLogin}>
@@ -226,10 +216,9 @@ const NavBar = ({
 
 function mapStateToProps(state) {
   return {
-    authLoading: authSelectors.authLoading(state),
     isMobileWidth: authSelectors.isMobileWidth(state),
     mobileMenuExpanded: menuSelectors.mobileMenuExpanded(state),
-    user: authSelectors.getUser(state),
+    user: userSelectors.getUser(state),
     theme: themeSelectors.getTheme(state),
   };
 }

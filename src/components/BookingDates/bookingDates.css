@@ -1,0 +1,104 @@
+.BookingDates {
+    background-color: var(--theme-white);
+    display: flex;
+    flex-direction: column;
+    font-size: var(--font-form-element-size);
+    height: 100%;
+    line-height: var(--font-form-element-height);
+    letter-spacing: var(--font-form-element-letter-spacing);
+    position: relative;
+    width: 100%;
+}
+
+.BookingDates--header {
+    background-color: var(--theme-white);
+    border-bottom: 1px solid var(--theme-border);
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+}
+
+.BookingDates--header i {
+    border: 1px solid var(--theme-border-light);
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+.BookingDates--content {
+    display: flex;
+    flex-direction: row;
+    height: calc(100% - 52px);
+    margin-top: 52px;
+}
+
+.BookingDates__dates-wrapper {
+    flex: 4;
+    padding: 40px 20px 20px;
+}
+
+.BookingDates__dates-availability {
+    flex: 2;
+    font-size: 14px;
+    padding: 0px 20px;
+    position: relative;
+    overflow-y: auto;
+}
+
+.BookingDates__dates-availability--header {
+    background: var(--theme-white);
+    display: flex;
+    flex-direction: column;
+    padding: 40px 10px 0px;
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+}
+
+.BookingDates__dates-availability--header-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.BookingDates__dates-availability--header-subtitle {
+    font-size: var(--theme-font-size);
+    margin-bottom: 10px;
+}
+
+.BookingDates__dates-availability--content {
+    display: flex;
+    flex-direction: column;
+    margin: 108px 0px 50px;
+}
+
+.BookingDatesItem {
+    display: flex;
+    flex-direction: column;
+}
+
+.BookingDatesItem__date {
+    border-bottom: 1px solid var(--theme-text-placeholder-color);
+    color: var(--theme-text-placeholder-color);
+    padding: 30px 10px 10px;
+}
+
+.BookingDatesItem__content {
+    border-bottom: 1px solid var(--theme-text-placeholder-color);
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+}
+
+.BookingDatesItem__content-details {
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.BookingDatesItem__content-select-btn {
+    flex: 1;
+    text-align: right;
+}

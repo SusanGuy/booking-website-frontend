@@ -1,0 +1,73 @@
+.ExperiencesPayment {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.ExperiencesPayment__details {
+    border: 1px solid rgba(0, 0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    flex: 4;
+    height: 100%;
+    padding: 15px 20px;
+}
+
+.ExperiencesPayment__details--header {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.ExperiencesPayment__details--content {
+    display: flex;
+    flex-direction: column;
+}
+
+.ExperiencesPayment__details--content button {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.ExperiencesPayment__summary {
+    border: 1px solid var(--theme-border-light);
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    height: 100%;
+    padding: 15px 20px;
+}
+
+.ExperiencesPayment__summary--header {
+    display: flex;
+    flex-direction: row;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.ExperiencePaymentItem {
+    display: flex;
+    flex-direction: column;
+}
+
+.ExperiencePaymentItem__title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.ExperiencePaymentItem__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.ExperiencePaymentItem__content-label {
+    display: flex;
+    flex-direction: row;
+}
+
+.ExperiencePaymentItem__content--item {
+    display: flex;
+    flex-direction: row;
+}

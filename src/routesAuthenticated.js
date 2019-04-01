@@ -4,12 +4,13 @@ import { Switch, Redirect } from 'react-router';
 
 // Pages
 import UsersEdit from './pages/Users/Edit';
+import ExperiencesPayment from './pages/ExperiencesPayment';
 
 // Layout
 import MenuContentLayout from './layout/MenuContent';
 
 // Selectors
-import * as authSelectors from './reducers/auth';
+import * as userSelectors from './reducers/user';
 
 // Actions
 import * as authActions from './actions/auth';
@@ -24,13 +25,17 @@ const Routes = ({ user, setLoginModal }) => {
   return (
     <Switch>
       <MenuContentLayout path="/users/edit" component={UsersEdit} />
+      <MenuContentLayout
+        path="/book/:experienceId"
+        component={ExperiencesPayment}
+      />
     </Switch>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    user: authSelectors.getUser(state),
+    user: userSelectors.getUser(state),
   };
 };
 

@@ -1,20 +1,12 @@
+import { USER_FETCH_FAILURE, USER_FETCH_SUCCESS } from './user';
+
 export const AUTH_SET_LOGIN_MODAL = 'auth/AUTH_SET_LOGIN_MODAL';
 export const AUTH_LOGIN = 'auth/AUTH_LOGIN';
 export const AUTH_LOGOUT = 'auth/AUTH_LOGOUT';
-export const AUTH_SUCCESS = 'auth/AUTH_SUCCESS';
-export const AUTH_FAILURE = 'auth/AUTH_FAILURE';
 
 export const AUTH_SIGNUP = 'auth/AUTH_SIGNUP';
 export const AUTH_SIGNUP_SUCCESS = 'auth/AUTH_SIGNUP_SUCCESS';
 export const AUTH_SIGNUP_FAILURE = 'auth/AUTH_SIGNUP_FAILURE';
-
-const delay = (time = 1500) => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(time);
-    }, time);
-  });
-};
 
 const errorMessage = message => {
   return `Failed to authenticate. ${JSON.stringify(message)}`;
@@ -58,16 +50,16 @@ export const login = e => {
         const { data } = await response.json();
 
         dispatch({
-          type: AUTH_SUCCESS,
+          type: USER_FETCH_SUCCESS,
           payload: data,
         });
         resolve();
       } catch (err) {
         dispatch({
-          type: AUTH_FAILURE,
-          payload: errorMessage(err),
+          type: USER_FETCH_FAILURE,
+          payload: errorMessage(err.message),
         });
-        reject(errorMessage(err));
+        reject(errorMessage(err.message));
       }
     });
   };
@@ -78,27 +70,23 @@ export const login = e => {
  */
 export const loginOnLoad = () => {
   return async (dispatch, getState, { api, localStorage }) => {
-    return new Promise(async (resolve, reject) => {
-      dispatch({ type: AUTH_LOGIN });
+    dispatch({ type: AUTH_LOGIN });
 
-      try {
-        const token = await localStorage.validateUserAuthenticationToken();
-        const response = await api.auth.validateToken(token);
-        const { data } = await response.json();
+    try {
+      const token = await localStorage.validateUserAuthenticationToken();
+      const response = await api.auth.validateToken(token);
+      const { data } = await response.json();
 
-        dispatch({
-          type: AUTH_SUCCESS,
-          payload: data.length > 0 ? data[0] : null,
-        });
-        resolve(data);
-      } catch (err) {
-        dispatch({
-          type: AUTH_FAILURE,
-          payload: errorMessage(err),
-        });
-        reject(errorMessage(err));
-      }
-    });
+      return dispatch({
+        type: USER_FETCH_SUCCESS,
+        payload: data.length > 0 ? data[0] : null,
+      });
+    } catch (err) {
+      return dispatch({
+        type: USER_FETCH_FAILURE,
+        payload: errorMessage(err.message),
+      });
+    }
   };
 };
 
@@ -119,19 +107,19 @@ export const loginWithGoogleToken = accessToken => {
         const result = await response.json();
 
         if (!result.err) {
-          dispatch({ type: AUTH_SUCCESS, payload: result });
+          dispatch({ type: USER_FETCH_SUCCESS, payload: result });
           localStorage.storeUserCredentials(token);
           resolve(result);
         } else {
           dispatch({
-            type: AUTH_FAILURE,
+            type: USER_FETCH_FAILURE,
             payload: errorMessage(result.err),
           });
           reject(errorMessage(result.err));
         }
       } catch (err) {
         dispatch({
-          type: AUTH_FAILURE,
+          type: USER_FETCH_FAILURE,
           payload: errorMessage(err.message),
         });
         reject(errorMessage(err.message));
@@ -144,6 +132,6 @@ export const logout = () => {
   return async (dispatch, getState, { localStorage }) => {
     dispatch({ type: AUTH_LOGOUT });
     await localStorage.storeUserCredentials(null);
-    dispatch({ type: AUTH_SUCCESS, payload: null });
+    dispatch({ type: USER_FETCH_SUCCESS, payload: null });
   };
 };

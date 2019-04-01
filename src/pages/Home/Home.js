@@ -155,15 +155,11 @@ class Home extends React.PureComponent {
 
   increaseGuestsCount = e => {
     e.preventDefault();
-    this.setState(
-      prevState => {
-        return {
-          guestsCount:
-            prevState.guestsCount <= 0 ? 0 : prevState.guestsCount + 1,
-        };
-      },
-      () => console.log(this.state.guestsCount)
-    );
+    this.setState(prevState => {
+      return {
+        guestsCount: prevState.guestsCount <= 0 ? 0 : prevState.guestsCount + 1,
+      };
+    });
   };
 
   renderQuery = () => {

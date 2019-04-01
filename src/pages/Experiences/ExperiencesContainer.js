@@ -1,31 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Components
+import BookingDates from '../../components/BookingDates';
+
+// Pages
 import Experiences from './Experiences';
 
 // MockData
 import mockExperiences from '../../data/experiences';
 
-class ExperiencesContainer extends React.Component {
-  state = {
-    experience: {},
-  };
+const ExperiencesContainer = ({ match }) => {
+  const [experienceId, setExperienceId] = useState(null);
+  const [experience, setExperience] = useState({});
 
-  componentDidMount() {
-    let id = this.props.match.params.id;
+  useEffect(() => {
+    let id = match.params.id;
 
     let experience = mockExperiences.filter(experience => {
       return parseInt(experience.id) === parseInt(id);
     });
 
-    this.setState({
-      experience: experience.length > 0 ? experience[0] : mockExperiences[0],
-    });
-  }
+    setExperienceId(id);
+    setExperience(experience.length > 0 ? experience[0] : mockExperiences[0]);
+  });
 
-  render() {
-    return <Experiences {...this.state} />;
-  }
-}
+  return (
+    <React.Fragment>
+      <Experiences experience={experience} />
+      <BookingDates experienceId={experienceId} />
+    </React.Fragment>
+  );
+};
 
 export default ExperiencesContainer;
