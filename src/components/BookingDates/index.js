@@ -29,7 +29,7 @@ const BookingDatesItem = ({ experienceId, availalbleDate }) => {
           </div>
         </div>
         <div className="BookingDatesItem__content-select-btn">
-          <Link to={`/book/${experienceId}`}>
+          <Link to={`/experiences/${experienceId}/book`}>
             <button className="waves-effect waves-light btn-large">
               Choose
             </button>

@@ -25,7 +25,11 @@ const Routes = () => {
         <MenuContentLayout exact path="/" component={Home} />
         <MenuContentLayout path="/about" component={About} />
         <MenuContentLayout path="/s/:region" component={Query} />
-        <MenuContentLayout path="/experiences/:id" component={Experiences} />
+        <MenuContentLayout
+          exact
+          path="/experiences/:id"
+          component={Experiences}
+        />
         <BecomeAHostLayout
           path="/become-a-host"
           step={1}

@@ -8,6 +8,7 @@ import ExperiencesPayment from './pages/ExperiencesPayment';
 
 // Layout
 import MenuContentLayout from './layout/MenuContent';
+import LoadingLayout from './layout/Loading';
 
 // Selectors
 import * as userSelectors from './reducers/user';
@@ -15,8 +16,14 @@ import * as userSelectors from './reducers/user';
 // Actions
 import * as authActions from './actions/auth';
 
-const Routes = ({ user, setLoginModal }) => {
+const Routes = ({ isLoading, user, setLoginModal }) => {
+  if (isLoading) {
+    console.log('isLoading routesAuthenticated');
+    return <LoadingLayout />;
+  }
+
   if (!user) {
+    console.log('Routes authenticated user: ', user);
     setLoginModal(true);
 
     return <Redirect to="/" />;
@@ -26,7 +33,8 @@ const Routes = ({ user, setLoginModal }) => {
     <Switch>
       <MenuContentLayout path="/users/edit" component={UsersEdit} />
       <MenuContentLayout
-        path="/book/:experienceId"
+        exact
+        path="/experiences/:experienceId/book"
         component={ExperiencesPayment}
       />
     </Switch>
@@ -35,6 +43,7 @@ const Routes = ({ user, setLoginModal }) => {
 
 const mapStateToProps = state => {
   return {
+    isLoading: userSelectors.isLoading(state),
     user: userSelectors.getUser(state),
   };
 };

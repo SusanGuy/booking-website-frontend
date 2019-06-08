@@ -40,6 +40,17 @@
     padding: 15px 20px;
 }
 
+.ExperiencesPayment__summary-item {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--theme-border-light);
+}
+
+.ExperiencesPayment__summary-item-title {
+    font-weight: bold;
+}
+
 .ExperiencesPayment__summary--header {
     display: flex;
     flex-direction: row;
@@ -50,6 +61,7 @@
 .ExperiencePaymentItem {
     display: flex;
     flex-direction: column;
+    margin: 10px 0px 15px;
 }
 
 .ExperiencePaymentItem__title {
@@ -63,11 +75,19 @@
 }
 
 .ExperiencePaymentItem__content-label {
+    align-items: center;
     display: flex;
     flex-direction: row;
+    font-size: 17px;
+    justify-content: space-between;
 }
 
 .ExperiencePaymentItem__content--item {
     display: flex;
     flex-direction: row;
+}
+
+.ExperiencePaymentItem__content--item input {
+    border: 1px solid !important;
+    padding: 0 15px !important;
 }

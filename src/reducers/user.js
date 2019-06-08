@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
     case USER_FETCH_SUCCESS:
       return {
         ...state,
-        isloading: false,
+        isLoading: false,
         user: action.payload,
       };
     case USER_FETCH_FAILURE:

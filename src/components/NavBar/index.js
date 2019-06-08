@@ -163,7 +163,6 @@ const NavBar = ({
               )}
             </li>
 
-            <NavBarLink to="/about" title="About" onClick={handleAboutMenu} />
             {user ? (
               <li>
                 <div className="NavBar--menu-link" onClick={handleProfileMenu}>

@@ -138,6 +138,7 @@ const Login = ({
   }
 
   if (!isOpen) {
+    if (signup) setSignup(false);
     return null;
   }
 
